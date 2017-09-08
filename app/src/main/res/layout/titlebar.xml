@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="50dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="#EE3B3B">
+
+    <ImageView android:id="@+id/iv_logo"
+        android:layout_width="50dp" android:src="@drawable/logo"
+        android:layout_height="wrap_content" android:layout_marginLeft="10dp"/>
+    <TextView android:id="@+id/tv_title" android:layout_centerVertical="true"
+        android:layout_width="wrap_content" android:text="@string/title_name"
+        android:layout_height="wrap_content" android:layout_toRightOf="@+id/iv_logo"
+        android:textColor="@color/colorWhite" android:layout_marginTop="20dp"
+        android:textSize="20sp" android:layout_marginLeft="5dp"/>
+
+    <LinearLayout android:orientation="horizontal" android:visibility="gone"
+        android:layout_width="match_parent" android:layout_toRightOf="@+id/tv_title"
+        android:layout_height="30dp" android:layout_marginLeft="20dp"
+        android:layout_marginRight="10dp" android:layout_centerVertical="true"
+        android:background="@drawable/edt_bg">
+        <ImageView android:src="@drawable/search"
+            android:layout_width="20dp" android:layout_centerVertical="true"
+            android:layout_height="20dp" android:layout_marginTop="5dp"
+            android:layout_marginLeft="7dp"/>
+        <EditText android:layout_centerVertical="true"
+            android:background="@null" android:layout_marginLeft="10dp"
+            android:layout_width="match_parent" android:hint="输入搜索内容"
+            android:textSize="10sp" android:id="@+id/edt_search"
+
+            android:layout_height="match_parent" android:textColor="#000000"/>
+    </LinearLayout>
+
+    <EditText android:visibility="gone"
+        android:layout_width="match_parent" android:layout_toRightOf="@+id/tv_title"
+        android:layout_height="30dp" android:layout_marginLeft="20dp"
+        android:layout_marginRight="10dp" android:drawableLeft="@drawable/search"
+        android:background="@drawable/edt_bg" android:hint="输入搜索内容"
+        android:textSize="10sp" android:layout_centerVertical="true"
+        android:paddingTop="5dp" android:focusable="true"
+        android:focusableInTouchMode="true">
+    </EditText>
+
+
+    <ImageView android:id="@+id/iv_search"
+        android:layout_width="match_parent" android:layout_toRightOf="@+id/tv_title"
+        android:layout_height="40dp" android:src="@mipmap/iv_search"
+        android:layout_marginLeft="20dp" android:scaleType="fitCenter"
+        android:layout_centerVertical="true" android:layout_marginRight="10dp"/>
+</RelativeLayout>

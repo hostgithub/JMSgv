@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.cn.gov.jms.ui.MainActivity">
+    <include layout="@layout/titlebar" />
+
+    <FrameLayout
+        android:id="@+id/main_frame"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
+
+    <com.ashokvarma.bottomnavigation.BottomNavigationBar
+        android:id="@+id/main_bottomBar" android:visibility="gone"
+        android:background="@color/vpi__background_holo_dark"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"/>
+
+    <RadioGroup
+        android:layout_width="match_parent"
+        android:layout_height="58dp" android:background="@color/vpi__bright_foreground_inverse_holo_dark"
+        android:orientation="horizontal" >
+        <RadioButton
+            android:id="@+id/fragment_bottom_home"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" android:padding="10dp"
+            android:background="@drawable/btn_bg"
+            android:button="@null"
+            android:drawableTop="@drawable/btn_1"
+            android:gravity="center"
+            android:text="首页"
+            android:textColor="#ffffff"
+            android:textSize="12sp" />
+
+        <RadioButton
+            android:id="@+id/fragment_bottom_lanmu"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" android:padding="10dp"
+            android:background="@drawable/btn_bg"
+            android:button="@null"
+            android:drawableTop="@drawable/btn_2"
+            android:gravity="center"
+            android:text="栏目"
+            android:textColor="#ffffff"
+            android:textSize="12sp"/>
+
+        <RadioButton
+            android:id="@+id/fragment_bottom_coll"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" android:padding="10dp"
+            android:background="@drawable/btn_bg"
+            android:button="@null"
+            android:drawableTop="@drawable/btn_3"
+            android:gravity="center"
+            android:text="收藏"
+            android:textColor="#ffffff"
+            android:textSize="12sp"/>
+        <RadioButton
+            android:id="@+id/fragment_bottom_mine"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" android:padding="10dp"
+            android:background="@drawable/btn_bg"
+            android:button="@null"
+            android:drawableTop="@drawable/btn_4"
+            android:gravity="center"
+            android:text="我的"
+            android:textColor="#ffffff"
+            android:textSize="12sp" />
+    </RadioGroup>
+</LinearLayout>

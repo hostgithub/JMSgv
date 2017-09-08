@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.cn.gov.jms.ui">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
+    <application
+        android:name="com.cn.gov.jms.MyApplication"
+        android:allowBackup="true"
+        android:icon="@mipmap/icon_logo"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <activity
+            android:name=".SpalshActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".MainActivity"
+            android:configChanges="orientation|keyboardHidden"
+            android:theme="@style/Theme.Design.Light.NoActionBar"
+            android:windowSoftInputMode="adjustPan|stateHidden"></activity>
+        <activity
+            android:name=".DetailActivity"
+            android:theme="@style/activityAnimation"></activity>
+        <activity
+            android:name=".AboutusActivity"
+            android:theme="@style/activityAnimation" />
+        <activity
+            android:name=".ContactusActivity"
+            android:theme="@style/activityAnimation" />
+        <activity
+            android:name=".WebViewActivity"
+            android:theme="@style/activityAnimation" />
+        <activity
+            android:name=".SearchActivity"
+            android:theme="@style/activityAnimation" />
+        <activity android:name=".SettingActivity" android:theme="@style/activityAnimation"></activity>
+    </application>
+
+</manifest>

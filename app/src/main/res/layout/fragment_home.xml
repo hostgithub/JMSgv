@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" android:orientation="vertical">
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="360dp" android:id="@+id/rl">
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/home_recycler"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"/>
+
+                <com.bartoszlipinski.recyclerviewheader.RecyclerViewHeader
+                    android:id="@+id/home_header"
+                    android:layout_width="match_parent"
+                    android:layout_height="150dp"
+                    android:layout_gravity="center_horizontal|top">
+
+                    <com.zanlabs.widget.infiniteviewpager.InfiniteViewPager
+                        android:id="@+id/home_viewpager"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"/>
+
+                    <com.zanlabs.widget.infiniteviewpager.indicator.CirclePageIndicator
+                        android:id="@+id/home_indicator"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentBottom="true"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginBottom="4dp"
+                        android:layout_marginRight="4dp"
+                        app:fillColor="#fafafa"
+                        app:pageColor="#aaaaaa"
+                        app:strokeWidth="0dp"/>
+                </com.bartoszlipinski.recyclerviewheader.RecyclerViewHeader>
+
+
+                <com.cn.gov.jms.utils.GrapeGridview
+                    android:layout_below="@+id/home_header"
+                    xmlns:android="http://schemas.android.com/apk/res/android"
+                    android:id="@+id/gridview"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:columnWidth="90dp"
+                    android:verticalSpacing="5dp"
+                    android:numColumns="4" android:paddingTop="5dp"
+                    android:paddingLeft="10dp" android:paddingRight="10dp"
+                    android:stretchMode="columnWidth"
+                    android:gravity="center" android:paddingBottom="10dp">
+                </com.cn.gov.jms.utils.GrapeGridview>
+
+                <ImageView android:layout_below="@+id/gridview"
+                    android:layout_width="wrap_content" android:src="@drawable/newcenter"
+                    android:layout_height="wrap_content" android:layout_marginLeft="15dp"
+                    android:layout_marginRight="15dp" android:id="@+id/iv_center_news"/>
+            </RelativeLayout>
+
+            <android.support.v4.widget.SwipeRefreshLayout
+                android:id="@+id/refreshLayout" android:layout_below="@+id/rl"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                >
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/recyerview" android:padding="5dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:scrollbars="vertical"/>
+            </android.support.v4.widget.SwipeRefreshLayout>
+    </LinearLayout>
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/floatBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_margin="36dp" android:visibility="gone"
+        android:src="@drawable/ic_arrow_upward"
+        app:backgroundTint="@color/colorPrimary"
+        app:fabSize="auto"
+        app:rippleColor="@color/colorAccent"/>
+</RelativeLayout>
