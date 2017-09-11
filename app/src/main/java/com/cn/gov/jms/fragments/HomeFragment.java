@@ -26,6 +26,7 @@ import com.cn.gov.jms.adapter.TopAdapter;
 import com.cn.gov.jms.base.BaseFragment;
 import com.cn.gov.jms.base.EndLessOnScrollListener;
 import com.cn.gov.jms.constract.INews;
+import com.cn.gov.jms.model.Banners;
 import com.cn.gov.jms.model.DataInfo;
 import com.cn.gov.jms.model.Datas;
 import com.cn.gov.jms.presenter.NewsPresenterImpl;
@@ -193,6 +194,8 @@ public class HomeFragment extends BaseFragment implements INews.Views,SwipeRefre
 //        });
         //广告窗体
         mHomeHeader.attachTo(mHomeRecycler,true);
+
+        initBannerData();
         TopAdapter adapter = new TopAdapter(getActivity(), banner_img,banner_url);
         mHomeViewpager.setAdapter(adapter);
         mHomeViewpager.setAutoScrollTime(3000);
@@ -275,6 +278,38 @@ public class HomeFragment extends BaseFragment implements INews.Views,SwipeRefre
             }
         });
     }
+
+
+
+    /**
+     *初始化 Banner数据
+     */
+    private void initBannerData() {
+        //使用retrofit配置api
+        Retrofit retrofit=new Retrofit.Builder()
+                .baseUrl(Config.BANNER_BASE_URL)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+        Api api =retrofit.create(Api.class);
+        Call<Banners> call=api.getBannerData();
+        call.enqueue(new Callback<Banners>() {
+            @Override
+            public void onResponse(Call<Banners> call, Response<Banners> response) {
+                Banners banners=response.body();
+                Log.e("++++++++++",banners.success);
+                List<Banners.ResultsBean> resultsBeanList=banners.getResults();
+                Log.e("++++++++++",resultsBeanList.get(0).get_id());
+                Log.e("++++++++++",resultsBeanList.get(0).getTitle());
+                Log.e("++++++++++",resultsBeanList.get(0).getUrl());
+            }
+
+            @Override
+            public void onFailure(Call<Banners> call, Throwable t) {
+
+            }
+        });
+    }
+
 
     /**
      * 图片瀑布流 初始化 网络请求第一页数据

@@ -3,11 +3,10 @@ package com.cn.gov.jms;
 import android.content.Context;
 import android.support.multidex.MultiDexApplication;
 
+import com.cn.gov.jms.utils.LogUtil;
 import com.facebook.drawee.backends.pipeline.Fresco;
 import com.squareup.leakcanary.LeakCanary;
 import com.squareup.leakcanary.RefWatcher;
-import com.tencent.bugly.crashreport.CrashReport;
-import com.cn.gov.jms.utils.LogUtil;
 
 /**
  * Created by Administrator on 2016/12/5.
@@ -36,7 +35,7 @@ public class MyApplication extends MultiDexApplication
         application = this;
         Fresco.initialize(this);
 
-        CrashReport.initCrashReport(getApplicationContext());
+        //CrashReport.initCrashReport(getApplicationContext());
         //检查内存泄漏
         refWatcher = LeakCanary.install(this);
         LogUtil.init();
