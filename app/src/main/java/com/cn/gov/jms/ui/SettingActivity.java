@@ -16,6 +16,8 @@ public class SettingActivity extends BaseActivity {
     ImageView imageView;
     @BindView(R.id.about_app)
     RelativeLayout about_app;
+    @BindView(R.id.clear)
+    RelativeLayout clear;
     @BindView(R.id.update)
     RelativeLayout update;
 
@@ -30,7 +32,7 @@ public class SettingActivity extends BaseActivity {
     }
 
 
-    @OnClick({ R.id.iv_back,R.id.about_app,R.id.update})
+    @OnClick({ R.id.iv_back,R.id.about_app,R.id.update,R.id.clear})
     public void onClick(View view) {
        switch (view.getId()){
            case R.id.iv_back:
@@ -38,6 +40,9 @@ public class SettingActivity extends BaseActivity {
                break;
            case R.id.about_app:
                Toast.makeText(this,"关于APP", Toast.LENGTH_SHORT).show();
+               break;
+           case R.id.clear:
+               Toast.makeText(this,"清除缓存成功", Toast.LENGTH_SHORT).show();
                break;
            case R.id.update:
                Toast.makeText(this,"已经是最新版本!", Toast.LENGTH_SHORT).show();

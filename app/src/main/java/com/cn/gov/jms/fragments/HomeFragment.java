@@ -4,7 +4,6 @@ import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.GridLayoutManager;
@@ -60,6 +59,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class HomeFragment extends BaseFragment implements INews.Views,SwipeRefreshLayout.OnRefreshListener {
 
     private static HomeFragment homeFragment;//单例模式
+    private List<Banners.ResultsBean> resultsBeanList;
     public static HomeFragment getInstance() {
         if(homeFragment==null){
             homeFragment = new HomeFragment();
@@ -81,8 +81,6 @@ public class HomeFragment extends BaseFragment implements INews.Views,SwipeRefre
     CirclePageIndicator mHomeIndicator;
     @BindView(R.id.home_header)
     RecyclerViewHeader mHomeHeader;
-//    @BindView(R.id.home_refresh)
-//    SwipeRefreshLayout mHomeRefresh;
 
     //照片墙
     @BindView(R.id.refreshLayout)
@@ -110,10 +108,10 @@ public class HomeFragment extends BaseFragment implements INews.Views,SwipeRefre
     private Unbinder mUnbinder;
     private BaseRecyclerAdapter<Datas.ResultBean.DataBean> mAdapter;
     private NewsPresenterImpl mPresenter;
-    private List<String> banner_img;
+    //private List<String> banner_img;
     private List<String> banner_url;
     private boolean connect = false;//判断网络是否连接正常
-    private Handler mHandler;
+    //private Handler mHandler;
 
     @Override
     public int getLayoutId()
@@ -128,11 +126,12 @@ public class HomeFragment extends BaseFragment implements INews.Views,SwipeRefre
 
         mPresenter = new NewsPresenterImpl(getActivity(), this);
 
-        banner_img = new ArrayList<>();
+        //banner_img = new ArrayList<>();
         banner_url = new ArrayList<>();
-        banner_img = Arrays.asList(Config.BANNER_IMGS);
+        //banner_img = Arrays.asList(Config.BANNER_IMGS);
+        resultsBeanList = new ArrayList<>();
         banner_url = Arrays.asList(Config.BANNER_URL);
-        mHandler = new Handler();
+        //mHandler = new Handler();
     }
 
     @Override
@@ -140,6 +139,7 @@ public class HomeFragment extends BaseFragment implements INews.Views,SwipeRefre
     {
         mUnbinder = ButterKnife.bind(this, view);
         mHomeRecycler.setLayoutManager(new LinearLayoutManager(getActivity()));
+
 //        mAdapter = new BaseRecyclerAdapter<Datas.ResultBean.DataBean>(getActivity(), null, R.layout.item)
 //        {
 //            @Override
@@ -192,16 +192,10 @@ public class HomeFragment extends BaseFragment implements INews.Views,SwipeRefre
 //                }, 1200);
 //            }
 //        });
-        //广告窗体
+
+        //初始化  广告窗体
         mHomeHeader.attachTo(mHomeRecycler,true);
-
         initBannerData();
-        TopAdapter adapter = new TopAdapter(getActivity(), banner_img,banner_url);
-        mHomeViewpager.setAdapter(adapter);
-        mHomeViewpager.setAutoScrollTime(3000);
-        mHomeViewpager.startAutoScroll();
-        mHomeIndicator.setViewPager(mHomeViewpager);
-
 
         //网格布局
         // 新建List
@@ -297,10 +291,18 @@ public class HomeFragment extends BaseFragment implements INews.Views,SwipeRefre
             public void onResponse(Call<Banners> call, Response<Banners> response) {
                 Banners banners=response.body();
                 Log.e("++++++++++",banners.success);
-                List<Banners.ResultsBean> resultsBeanList=banners.getResults();
+                resultsBeanList=banners.getResults();
                 Log.e("++++++++++",resultsBeanList.get(0).get_id());
                 Log.e("++++++++++",resultsBeanList.get(0).getTitle());
                 Log.e("++++++++++",resultsBeanList.get(0).getUrl());
+                Log.e("++++++++++",resultsBeanList.size()+"");
+
+                TopAdapter adapter = new TopAdapter(getActivity(), resultsBeanList,banner_url);
+
+                mHomeViewpager.setAdapter(adapter);
+                mHomeViewpager.setAutoScrollTime(3000);
+                mHomeViewpager.startAutoScroll();
+                mHomeIndicator.setViewPager(mHomeViewpager);
             }
 
             @Override

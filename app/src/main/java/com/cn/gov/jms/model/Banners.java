@@ -1,12 +1,13 @@
 package com.cn.gov.jms.model;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
  * Created by Administrator on 2016/12/5.
  */
 
-public class Banners
+public class Banners implements Serializable
 {
 
     /**

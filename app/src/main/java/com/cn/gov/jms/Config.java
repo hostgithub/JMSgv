@@ -10,8 +10,10 @@ public class Config
     //http://v.juhe.cn/toutiao/index?type=top&key=988e51c45bbe88a33e032f8da38a61dd
     public static final String NEWS = "news";
 
-    public static final String BANNER_BASE_URL = "http://192.168.0.110:8080";
+    public static final String BANNER_BASE_URL = "http://192.168.0.110:8080/";
     //http://192.168.0.110:8080/app/corNewsListImg.do   获取json
+
+    public static final String BANNER_KEY = "banner_key";
 
     /**
      *如果有什么问题可以联系我！！

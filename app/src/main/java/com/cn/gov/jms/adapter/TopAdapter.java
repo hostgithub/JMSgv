@@ -5,7 +5,9 @@ import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
+import com.cn.gov.jms.model.Banners;
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.cn.gov.jms.Config;
 import com.cn.gov.jms.ui.DetailActivity;
@@ -26,12 +28,13 @@ public class TopAdapter extends InfinitePagerAdapter
     private Context mContext;
     //    private List<Banners> mList;
     private List<String> banner_img;
+    private List<Banners.ResultsBean> resultsBeanList;
     private List<String> banner_url;
 
-    public TopAdapter(Context context, List<String> banner_img, List<String> banner_url)
+    public TopAdapter(Context context, List<Banners.ResultsBean> resultsBeanList, List<String> banner_url)
     {
         mContext = context;
-        this.banner_img = banner_img;
+        this.resultsBeanList = resultsBeanList;
         this.banner_url = banner_url;
     }
 
@@ -39,7 +42,7 @@ public class TopAdapter extends InfinitePagerAdapter
     public int getItemCount()
     {
 //        return mList == null ? 0 : mList.size();
-        return banner_img == null ? 0 : banner_img.size();
+        return resultsBeanList == null ? 0 : resultsBeanList.size();
     }
 
     @Override
@@ -57,7 +60,8 @@ public class TopAdapter extends InfinitePagerAdapter
             view = convertView;
             holder = (ViewsHolder) view.getTag();
         }
-        holder.mDraweeView.setImageURI(banner_img.get(position));
+        holder.mDraweeView.setImageURI(Config.BANNER_BASE_URL+resultsBeanList.get(position).getUrl());
+        holder.tv_title.setText(resultsBeanList.get(position).getTitle());
         view.setOnClickListener(new View.OnClickListener()
         {
             @Override
@@ -75,6 +79,8 @@ public class TopAdapter extends InfinitePagerAdapter
     {
         @BindView(R.id.top_image)
         SimpleDraweeView mDraweeView;
+        @BindView(R.id.tv_title)
+        TextView tv_title;
 
         public ViewsHolder(View view)
         {

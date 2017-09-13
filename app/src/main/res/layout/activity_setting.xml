@@ -48,6 +48,30 @@
             android:layout_width="match_parent"
             android:layout_height="20px"/>
 
+
+        <RelativeLayout
+            android:layout_width="match_parent" android:id="@+id/clear"
+            android:layout_height="80dp" android:background="#ffff">
+            <TextView
+                android:gravity="center_vertical|left"
+                android:textSize="20sp"
+                android:text="@string/clear" android:textColor="#000000"
+                android:layout_width="200dp" android:layout_marginLeft="25dp"
+                android:layout_height="match_parent"/>
+            <ImageView
+                android:src="@drawable/right"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:padding="10dp"
+                android:layout_marginRight="20dp"
+                android:layout_width="40dp"
+                android:layout_height="40dp"/>
+        </RelativeLayout>
+        <View
+            android:background="@color/colorWhite"
+            android:layout_width="match_parent"
+            android:layout_height="20px"/>
+
         <RelativeLayout
             android:layout_width="match_parent" android:id="@+id/update"
             android:layout_height="80dp" android:background="#ffff">

@@ -5,6 +5,7 @@
     <string name="about_us">关于我们</string>
     <string name="setting">设置</string>
     <string name="about_app">关于APP</string>
+    <string name="clear">清除缓存</string>
     <string name="update">检查更新</string>
     <string-array name="banner_image">
         <item>http://upload.jianshu.io/admin_banners/app_images/2542/5b04b8ccb01432425cb13dab1aed399da607b454.jpg</item>
