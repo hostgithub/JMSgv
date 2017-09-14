@@ -24,7 +24,6 @@ import com.cn.gov.jms.adapter.PicAdapter;
 import com.cn.gov.jms.adapter.TopAdapter;
 import com.cn.gov.jms.base.BaseFragment;
 import com.cn.gov.jms.base.EndLessOnScrollListener;
-import com.cn.gov.jms.constract.INews;
 import com.cn.gov.jms.model.Banners;
 import com.cn.gov.jms.model.DataInfo;
 import com.cn.gov.jms.model.Datas;
@@ -56,7 +55,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
  * Created by wangjiawei on 2017/7/19.
  */
 
-public class HomeFragment extends BaseFragment implements INews.Views,SwipeRefreshLayout.OnRefreshListener {
+public class HomeFragment extends BaseFragment implements SwipeRefreshLayout.OnRefreshListener {
 
     private static HomeFragment homeFragment;//单例模式
     private List<Banners.ResultsBean> resultsBeanList;
@@ -124,7 +123,7 @@ public class HomeFragment extends BaseFragment implements INews.Views,SwipeRefre
     public void initVariables()
     {
 
-        mPresenter = new NewsPresenterImpl(getActivity(), this);
+        //mPresenter = new NewsPresenterImpl(getActivity(), this);
 
         //banner_img = new ArrayList<>();
         banner_url = new ArrayList<>();
@@ -267,8 +266,8 @@ public class HomeFragment extends BaseFragment implements INews.Views,SwipeRefre
 
             @Override
             public void show() {
-                relativeLayout.animate().translationY(0).setInterpolator(new AccelerateDecelerateInterpolator());
-                relativeLayout.setVisibility(View.VISIBLE);
+//                relativeLayout.animate().translationY(0).setInterpolator(new AccelerateDecelerateInterpolator());
+//                relativeLayout.setVisibility(View.VISIBLE);
             }
         });
     }
@@ -367,13 +366,13 @@ public class HomeFragment extends BaseFragment implements INews.Views,SwipeRefre
     @Override
     public void initLoadData()
     {
-        if (connect)
-        {
-            mPresenter.loadingDatasFromNet();
-        }else
-        {
-            mPresenter.loadingDatasFromCache();
-        }
+//        if (connect)
+//        {
+//            mPresenter.loadingDatasFromNet();
+//        }else
+//        {
+//            mPresenter.loadingDatasFromCache();
+//        }
     }
 
     @Override
@@ -389,17 +388,17 @@ public class HomeFragment extends BaseFragment implements INews.Views,SwipeRefre
     }
 
 
-    @Override
-    public void showInfo(List<Datas.ResultBean.DataBean> news)
-    {
-        mAdapter.setData(news);
-    }
-
-    @Override
-    public void showError(String msg)
-    {
-        Log.e("info", "--------------------->" + msg);
-    }
+//    @Override
+//    public void showInfo(List<Datas.ResultBean.DataBean> news)
+//    {
+//        mAdapter.setData(news);
+//    }
+//
+//    @Override
+//    public void showError(String msg)
+//    {
+//        Log.e("info", "--------------------->" + msg);
+//    }
 
     @Override
     public void onRefresh() {

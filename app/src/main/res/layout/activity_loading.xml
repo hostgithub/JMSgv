@@ -8,18 +8,8 @@
 
     <ImageView
         android:id="@+id/loading_imageCenter"
-        android:layout_width="wrap_content"
-        android:padding="30dp"
-        android:paddingTop="70dp"
-        android:layout_height="wrap_content"
-        android:src="@drawable/loading_center"/>
-
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:padding="30dp"
-        android:scaleType="centerInside"
-        android:src="@drawable/newcenter"/>
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="fitXY"
+        android:src="@drawable/splash"/>
 </RelativeLayout>

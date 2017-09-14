@@ -1,7 +1,7 @@
 package com.cn.gov.jms;
 
 /**
- * Created by Administrator on 2016/12/2.
+ * Created by wangjiawei on 2017/7/25.
  */
 
 public class Config
@@ -12,13 +12,6 @@ public class Config
 
     public static final String BANNER_BASE_URL = "http://192.168.0.110:8080/";
     //http://192.168.0.110:8080/app/corNewsListImg.do   获取json
-
-    public static final String BANNER_KEY = "banner_key";
-
-    /**
-     *如果有什么问题可以联系我！！
-     */
-    public static final String TAG = "1070138445";
 
     public static final String[] BANNER_IMGS =
             {

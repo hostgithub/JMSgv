@@ -60,8 +60,18 @@ public class TopAdapter extends InfinitePagerAdapter
             view = convertView;
             holder = (ViewsHolder) view.getTag();
         }
-        holder.mDraweeView.setImageURI(Config.BANNER_BASE_URL+resultsBeanList.get(position).getUrl());
-        holder.tv_title.setText(resultsBeanList.get(position).getTitle());
+
+        if(resultsBeanList.get(position).getUrl().isEmpty()){
+            holder.mDraweeView.setImageResource(R.drawable.ic_empty_picture);
+        }else{
+            holder.mDraweeView.setImageURI(Config.BANNER_BASE_URL+resultsBeanList.get(position).getUrl());
+        }
+        if(resultsBeanList.get(position).getTitle().isEmpty()){
+            holder.tv_title.setText("");
+        }else{
+            holder.tv_title.setText(resultsBeanList.get(position).getTitle());
+        }
+
         view.setOnClickListener(new View.OnClickListener()
         {
             @Override
