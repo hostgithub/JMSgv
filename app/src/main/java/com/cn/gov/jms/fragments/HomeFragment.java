@@ -217,7 +217,6 @@ public class HomeFragment extends BaseFragment implements SwipeRefreshLayout.OnR
                         getActivity().startActivity(new Intent(getActivity(), ShiQingGaiKuangActivity.class));
                         break;
                 }
-                Toast.makeText(getActivity(),"点击了第"+i+"位置",Toast.LENGTH_SHORT).show();
             }
         });
 
