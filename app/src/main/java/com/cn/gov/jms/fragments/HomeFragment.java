@@ -32,6 +32,7 @@ import com.cn.gov.jms.presenter.NewsPresenterImpl;
 import com.cn.gov.jms.services.Api;
 import com.cn.gov.jms.ui.R;
 import com.cn.gov.jms.ui.ShiQingGaiKuangActivity;
+import com.cn.gov.jms.ui.ZhengWuGongKaiActivity;
 import com.cn.gov.jms.utils.RecyclerViewSpacesItemDecoration;
 import com.github.library.BaseRecyclerAdapter;
 import com.zanlabs.widget.infiniteviewpager.InfiniteViewPager;
@@ -215,6 +216,15 @@ public class HomeFragment extends BaseFragment implements SwipeRefreshLayout.OnR
                 switch (i){
                     case 0:
                         getActivity().startActivity(new Intent(getActivity(), ShiQingGaiKuangActivity.class));
+                        break;
+                    case 1:
+                        break;
+                    case 2:
+                        break;
+                    case 3:
+                        getActivity().startActivity(new Intent(getActivity(), ZhengWuGongKaiActivity.class));
+                        break;
+                    default:
                         break;
                 }
             }

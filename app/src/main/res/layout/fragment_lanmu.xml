@@ -63,11 +63,11 @@
                 android:layout_height="match_parent" android:layout_weight="1">
                 <ImageView android:id="@+id/situation" android:layout_marginTop="5dp"
                     android:layout_width="wrap_content" android:src="@drawable/icon_11"
-                    android:layout_height="0dp" android:scaleType="centerCrop"
+                    android:layout_height="0dp" android:scaleType="fitXY"
                     android:layout_weight="1"/>
                 <ImageView android:id="@+id/newcenter" android:layout_marginTop="5dp"
                     android:layout_width="wrap_content" android:src="@drawable/icon_12"
-                    android:layout_height="0dp" android:scaleType="centerCrop"
+                    android:layout_height="0dp" android:scaleType="fitXY"
                     android:layout_weight="1"/>
             </LinearLayout>
 
@@ -76,7 +76,7 @@
                 android:layout_height="match_parent" android:layout_marginLeft="5dp">
                 <ImageView android:id="@+id/gove_public" android:layout_marginTop="3dp"
                     android:layout_width="wrap_content" android:src="@drawable/icon_13"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content" android:scaleType="fitXY"/>
             </LinearLayout>
         </LinearLayout>
 
