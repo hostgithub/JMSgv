@@ -7,6 +7,16 @@
     <string name="about_app">关于APP</string>
     <string name="clear">清除缓存</string>
     <string name="update">检查更新</string>
+    <string name="sqgk">市情概况</string>
+    <string name="xwzx">新闻中心</string>
+    <string name="gggs">公告公示</string>
+    <string name="zwgk">政务公开</string>
+    <string name="zxfw">在线服务</string>
+    <string name="bmfw">便民服务</string>
+    <string name="zmhd">政民互动</string>
+    <string name="tzzn">投资指南</string>
+    <string name="detail">查看详情</string>
+    <string name="text">文本http://upload.jianshu.io/admin_banners/app_images/2542/5b04b8ccb01432425cb13dab1aed399da607b454.jpg</string>
     <string-array name="banner_image">
         <item>http://upload.jianshu.io/admin_banners/app_images/2542/5b04b8ccb01432425cb13dab1aed399da607b454.jpg</item>
         <item>http://upload.jianshu.io/admin_banners/app_images/2541/a665552696b860dad9783816b811af92d51e1892.jpg</item>

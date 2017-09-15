@@ -35,8 +35,9 @@ dependencies {
     //Gosn解析包
     //baserecycleradapter
     //jsoup网页解析
-    
 
+    //compile 'com.android.support:cardview-v7:24.3.0'
+    //最新版本
     compile 'com.android.support:appcompat-v7:24.2.1'
     compile 'com.android.support:design:24.2.1'
     compile 'com.ashokvarma.android:bottom-navigation-bar:1.2.0'
@@ -55,16 +56,15 @@ dependencies {
     compile 'com.tencent.bugly:nativecrashreport:latest.release'
     compile 'com.tencent.bugly:crashreport:latest.release'
     compile 'org.jsoup:jsoup:1.8.3'
-    //compile 'com.android.support:cardview-v7:24.3.0'
     compile 'org.sufficientlysecure:html-textview:1.3'
     compile 'pub.devrel:easypermissions:0.2.1'
     compile 'com.github.bumptech.glide:glide:3.7.0'
     compile 'jp.wasabeef:glide-transformations:2.0.1'
     compile 'com.android.support:multidex:1.0.0'
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
+    compile 'com.youth.banner:banner:1.4.9'
     testCompile 'junit:junit:4.12'
     apt 'com.jakewharton:butterknife-compiler:8.4.0'
     debugCompile 'com.squareup.leakcanary:leakcanary-android:1.5'
     releaseCompile 'com.squareup.leakcanary:leakcanary-android-no-op:1.5'
-    compile 'com.youth.banner:banner:1.4.9'  //最新版本
 }

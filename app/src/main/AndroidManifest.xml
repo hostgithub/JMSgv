@@ -25,10 +25,10 @@
             android:name=".MainActivity"
             android:configChanges="orientation|keyboardHidden"
             android:theme="@style/Theme.Design.Light.NoActionBar"
-            android:windowSoftInputMode="adjustPan|stateHidden"></activity>
+            android:windowSoftInputMode="adjustPan|stateHidden" />
         <activity
             android:name=".DetailActivity"
-            android:theme="@style/activityAnimation"></activity>
+            android:theme="@style/activityAnimation" />
         <activity
             android:name=".AboutusActivity"
             android:theme="@style/activityAnimation" />
@@ -41,7 +41,10 @@
         <activity
             android:name=".SearchActivity"
             android:theme="@style/activityAnimation" />
-        <activity android:name=".SettingActivity" android:theme="@style/activityAnimation"></activity>
+        <activity
+            android:name=".SettingActivity"
+            android:theme="@style/activityAnimation" />
+        <activity android:name=".ShiQingGaiKuangActivity"></activity>
     </application>
 
 </manifest>

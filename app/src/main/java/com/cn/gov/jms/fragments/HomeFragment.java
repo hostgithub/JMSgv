@@ -1,6 +1,7 @@
 package com.cn.gov.jms.fragments;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
@@ -30,6 +31,7 @@ import com.cn.gov.jms.model.Datas;
 import com.cn.gov.jms.presenter.NewsPresenterImpl;
 import com.cn.gov.jms.services.Api;
 import com.cn.gov.jms.ui.R;
+import com.cn.gov.jms.ui.ShiQingGaiKuangActivity;
 import com.cn.gov.jms.utils.RecyclerViewSpacesItemDecoration;
 import com.github.library.BaseRecyclerAdapter;
 import com.zanlabs.widget.infiniteviewpager.InfiniteViewPager;
@@ -210,6 +212,11 @@ public class HomeFragment extends BaseFragment implements SwipeRefreshLayout.OnR
         mGridview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                switch (i){
+                    case 0:
+                        getActivity().startActivity(new Intent(getActivity(), ShiQingGaiKuangActivity.class));
+                        break;
+                }
                 Toast.makeText(getActivity(),"点击了第"+i+"位置",Toast.LENGTH_SHORT).show();
             }
         });
@@ -245,7 +252,7 @@ public class HomeFragment extends BaseFragment implements SwipeRefreshLayout.OnR
         });
         mRecyclerView.setAdapter(picAdapter);
 
-        mRecyclerView.setAdapter(picAdapter);
+        //mRecyclerView.setAdapter(picAdapter);
         picAdapter.addFooterView(R.layout.view_footer);//添加脚布局
         mRecyclerView.addOnScrollListener(new EndLessOnScrollListener(linearLayoutManager) {//滑动到底部 加载更多
             //EndLessOnScrollListener 是自定义的监听器
