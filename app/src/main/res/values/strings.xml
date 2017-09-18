@@ -16,6 +16,9 @@
     <string name="zmhd">政民互动</string>
     <string name="tzzn">投资指南</string>
     <string name="detail">查看详情</string>
+    <string name="public_service">公共服务</string>
+    <string name="bmcx">便民查询</string>
+    <string name="bmjf">便民缴费</string>
     <string name="text">文本http://upload.jianshu.io/admin_banners/app_images/2542/5b04b8ccb01432425cb13dab1aed399da607b454.jpg</string>
     <string-array name="banner_image">
         <item>http://upload.jianshu.io/admin_banners/app_images/2542/5b04b8ccb01432425cb13dab1aed399da607b454.jpg</item>

@@ -30,6 +30,8 @@ import com.cn.gov.jms.model.DataInfo;
 import com.cn.gov.jms.model.Datas;
 import com.cn.gov.jms.presenter.NewsPresenterImpl;
 import com.cn.gov.jms.services.Api;
+import com.cn.gov.jms.ui.Convenience_ServicesActivity;
+import com.cn.gov.jms.ui.Online_servicesActivity;
 import com.cn.gov.jms.ui.R;
 import com.cn.gov.jms.ui.ShiQingGaiKuangActivity;
 import com.cn.gov.jms.ui.ZhengWuGongKaiActivity;
@@ -224,6 +226,18 @@ public class HomeFragment extends BaseFragment implements SwipeRefreshLayout.OnR
                     case 3:
                         getActivity().startActivity(new Intent(getActivity(), ZhengWuGongKaiActivity.class));
                         break;
+                    case 4:
+                        getActivity().startActivity(new Intent(getActivity(), Online_servicesActivity.class));
+                        break;
+                    case 5:
+                        getActivity().startActivity(new Intent(getActivity(), Convenience_ServicesActivity.class));
+                        break;
+                    case 6:
+                        getActivity().startActivity(new Intent(getActivity(), Online_servicesActivity.class));
+                        break;
+                    case 7:
+                        getActivity().startActivity(new Intent(getActivity(), Online_servicesActivity.class));
+                        break;
                     default:
                         break;
                 }
@@ -304,25 +318,29 @@ public class HomeFragment extends BaseFragment implements SwipeRefreshLayout.OnR
         call.enqueue(new Callback<Banners>() {
             @Override
             public void onResponse(Call<Banners> call, Response<Banners> response) {
-                Banners banners=response.body();
-                Log.e("++++++++++",banners.success);
-                resultsBeanList=banners.getResults();
-                Log.e("++++++++++",resultsBeanList.get(0).get_id());
-                Log.e("++++++++++",resultsBeanList.get(0).getTitle());
-                Log.e("++++++++++",resultsBeanList.get(0).getUrl());
-                Log.e("++++++++++",resultsBeanList.size()+"");
+                if(response!=null){
+                    Banners banners=response.body();
+                    Log.e("++++++++++",banners.success);
+                    resultsBeanList=banners.getResults();
+                    Log.e("++++++++++",resultsBeanList.get(0).get_id());
+                    Log.e("++++++++++",resultsBeanList.get(0).getTitle());
+                    Log.e("++++++++++",resultsBeanList.get(0).getUrl());
+                    Log.e("++++++++++",resultsBeanList.size()+"");
 
-                TopAdapter adapter = new TopAdapter(getActivity(), resultsBeanList,banner_url);
+                    TopAdapter adapter = new TopAdapter(getActivity(), resultsBeanList,banner_url);
 
-                mHomeViewpager.setAdapter(adapter);
-                mHomeViewpager.setAutoScrollTime(3000);
-                mHomeViewpager.startAutoScroll();
-                mHomeIndicator.setViewPager(mHomeViewpager);
+                    mHomeViewpager.setAdapter(adapter);
+                    mHomeViewpager.setAutoScrollTime(3000);
+                    mHomeViewpager.startAutoScroll();
+                    mHomeIndicator.setViewPager(mHomeViewpager);
+                }else{
+                    Toast.makeText(getActivity(),"数据为空!",Toast.LENGTH_SHORT).show();
+                }
             }
 
             @Override
             public void onFailure(Call<Banners> call, Throwable t) {
-
+                Toast.makeText(getActivity(),"请求失败!",Toast.LENGTH_SHORT).show();
             }
         });
     }

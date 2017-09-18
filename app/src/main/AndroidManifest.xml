@@ -47,8 +47,14 @@
         <activity
             android:name=".ShiQingGaiKuangActivity"
             android:theme="@style/activityAnimation" />
-        <activity android:name=".ZhengWuGongKaiActivity"
-            android:theme="@style/activityAnimation" ></activity>
+        <activity
+            android:name=".ZhengWuGongKaiActivity"
+            android:theme="@style/activityAnimation" />
+        <activity
+            android:name=".Online_servicesActivity"
+            android:theme="@style/activityAnimation" />
+        <activity android:name=".Convenience_ServicesActivity"
+            android:theme="@style/activityAnimation"></activity>
     </application>
 
 </manifest>

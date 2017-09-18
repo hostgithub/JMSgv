@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent" android:orientation="vertical"
+    android:layout_height="match_parent">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp" android:background="#EE3B3B">
+        <ImageView android:id="@+id/iv_back"
+            android:layout_width="50dp" android:src="@drawable/back"
+            android:layout_height="wrap_content" android:layout_marginLeft="10dp"/>
+        <TextView android:id="@+id/tv_title" android:layout_centerInParent="true"
+            android:layout_width="wrap_content" android:text="@string/zxfw"
+            android:layout_height="wrap_content"
+            android:textColor="@color/colorWhite" android:layout_marginTop="20dp"
+            android:textSize="20sp" android:layout_marginLeft="5dp"/>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" android:background="@color/colorWhite"
+        tools:context="com.cn.gov.jms.ui.ZhengWuGongKaiActivity" android:padding="10dp">
+
+        <LinearLayout
+            android:layout_width="match_parent" android:background="#ffff"
+            android:layout_height="match_parent" android:padding="10dp"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent" android:orientation="vertical"
+                android:layout_height="0dp" android:layout_weight="3">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+                    <ImageView android:id="@+id/personal_business"
+                        android:layout_width="60dp" android:src="@drawable/online_icon_03"
+                        android:layout_height="70dp" android:layout_centerVertical="true"
+                        android:layout_marginLeft="15dp"/>
+                    <ImageView android:id="@+id/zheng_people_interact"
+                        android:layout_width="60dp" android:src="@drawable/online_icon_01"
+                        android:layout_height="70dp" android:layout_toRightOf="@+id/personal_business"
+                        android:layout_marginTop="12dp"/>
+                    <ImageView android:id="@+id/query"
+                        android:layout_width="60dp" android:src="@drawable/online_icon_06"
+                        android:layout_height="70dp" android:layout_toRightOf="@+id/personal_business"
+                        android:layout_below="@+id/zheng_people_interact" android:layout_alignParentBottom="true"/>
+                    <ImageView android:id="@+id/enterprise_management"
+                        android:layout_width="60dp" android:src="@drawable/online_icon_04"
+                        android:layout_height="70dp" android:layout_centerVertical="true"
+                        android:layout_marginLeft="5dp" android:layout_toRightOf="@+id/query"/>
+                    <ImageView android:id="@+id/open_government"
+                        android:layout_width="60dp" android:src="@drawable/online_icon_02"
+                        android:layout_marginTop="12dp"
+                        android:layout_height="70dp" android:layout_toRightOf="@+id/enterprise_management"/>
+                    <ImageView android:id="@+id/public_service"
+                        android:layout_width="60dp" android:src="@drawable/online_icon_07"
+                        android:layout_height="70dp" android:layout_toRightOf="@+id/enterprise_management"
+                        android:layout_below="@+id/open_government" android:layout_alignParentBottom="true"/>
+                    <ImageView android:id="@+id/organisation"
+                        android:layout_width="60dp" android:src="@drawable/online_icon_05"
+                        android:layout_height="70dp" android:layout_centerVertical="true"
+                        android:layout_toRightOf="@+id/public_service"/>
+                </RelativeLayout>
+
+            </LinearLayout>
+            <ImageView
+                android:layout_width="match_parent" android:layout_weight="1"
+                android:layout_height="0dp" android:src="@drawable/icon_bmfw"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp" android:layout_weight="5">
+                <GridView
+                    android:id="@+id/gridview"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:numColumns="3" android:layout_marginLeft="10dp"
+                    ></GridView>
+            </LinearLayout>
+        </LinearLayout>
+
+    </RelativeLayout>
+</LinearLayout>

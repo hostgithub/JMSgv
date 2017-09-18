@@ -10,6 +10,7 @@ import android.text.style.ForegroundColorSpan;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.cn.gov.jms.base.BaseViewHolder;
 import com.cn.gov.jms.model.Banners;
@@ -85,7 +86,7 @@ public class SQGKAdapter extends RecyclerView.Adapter<BaseViewHolder> {
             holder.setText(R.id.tv_title, datas.get(position).getTitle());
             String content=datas.get(position).getUrl();
             String strSub=content.substring(0,15);
-            String str=strSub+"....查看详情";
+            String str=strSub+"....查看详情";   //http://blog.csdn.net/xuwenneng/article/details/51027625?locationNum=10&fps=1  还没有成功
 
             SpannableString spannableString = new SpannableString(str);
             Pattern p = Pattern.compile("查看详情");
