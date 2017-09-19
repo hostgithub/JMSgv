@@ -3,22 +3,19 @@ package com.cn.gov.jms.adapter;
 import android.content.Context;
 import android.graphics.Color;
 import android.support.v7.widget.RecyclerView;
-import android.text.SpannableString;
-import android.text.Spanned;
+import android.text.Spannable;
+import android.text.SpannableStringBuilder;
 import android.text.TextUtils;
 import android.text.style.ForegroundColorSpan;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import com.cn.gov.jms.base.BaseViewHolder;
 import com.cn.gov.jms.model.Banners;
 import com.cn.gov.jms.ui.R;
 
 import java.util.List;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 /**
  * Created by wangjiawei on 2017/9/15.
@@ -83,23 +80,14 @@ public class SQGKAdapter extends RecyclerView.Adapter<BaseViewHolder> {
 //                ImageLoaderUtils.loadingImg(mContext, (ImageView) holder.getView(R.id.image), item.url);
 //            }
             //CircleImageView avatar = holder.getView(R.id.avatar);
-            holder.setText(R.id.tv_title, datas.get(position).getTitle());
+            //holder.setText(R.id.tv_title, datas.get(position).getTitle());
+            holder.setText(R.id.tv_title, "佳木斯概况");
             String content=datas.get(position).getUrl();
-            String strSub=content.substring(0,15);
-            String str=strSub+"....查看详情";   //http://blog.csdn.net/xuwenneng/article/details/51027625?locationNum=10&fps=1  还没有成功
+            //String strSub=content.substring(0,15);//截取字符串
+            String str=content+"....查看详情";   //http://blog.csdn.net/xuwenneng/article/details/51027625?locationNum=10&fps=1  还没有成功
 
-            SpannableString spannableString = new SpannableString(str);
-            Pattern p = Pattern.compile("查看详情");
-
-            Matcher m = p.matcher(spannableString);
-
-            while (m.find()) {
-                int start = m.start();
-                int end = m.end();
-                spannableString.setSpan(new ForegroundColorSpan(Color.RED), start, end, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-            }
-            String s= String.valueOf(spannableString);
-            holder.setText(R.id.tv_content,s);
+            //setTVColor(str, '查', '情', Color.RED);
+            holder.setText(R.id.tv_content,setTVColor(str, '查', '情', Color.RED));
             //holder.setText(R.id.tv_content, datas.get(position).getUrl());
 
 //            holder.setText(R.id.author, item.getAuthor());
@@ -146,6 +134,15 @@ public class SQGKAdapter extends RecyclerView.Adapter<BaseViewHolder> {
         notifyItemInserted(getItemCount() - 1);
     }
 
+    //是字符串中特定字符变成红色
+    private SpannableStringBuilder setTVColor(String str , char ch1 , char ch2 , int color){
+        int a = str.indexOf(ch1); //从字符ch1的下标开始
+        int b = str.indexOf(ch2)+1; //到字符ch2的下标+1结束,因为SpannableStringBuilder的setSpan方法中区间为[ a,b )左闭右开
+        SpannableStringBuilder builder = new SpannableStringBuilder(str);
+        builder.setSpan(new ForegroundColorSpan(color), a, b, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+        //tv.setText(builder);
+        return builder;
+    }
     public void setFooterVisible(int visible) {
         footerView.setVisibility(visible);
     }
