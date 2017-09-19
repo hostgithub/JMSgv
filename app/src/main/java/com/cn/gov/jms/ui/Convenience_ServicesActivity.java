@@ -14,6 +14,7 @@ import java.util.List;
 import java.util.Map;
 
 import butterknife.BindView;
+import butterknife.OnClick;
 
 public class Convenience_ServicesActivity extends BaseActivity {
 
@@ -165,5 +166,9 @@ public class Convenience_ServicesActivity extends BaseActivity {
             data_list_bmjf.add(map);
         }
         return data_list_bmjf;
+    }
+
+    @OnClick({ R.id.iv_back})
+    public void onClick(View view) {finish();
     }
 }

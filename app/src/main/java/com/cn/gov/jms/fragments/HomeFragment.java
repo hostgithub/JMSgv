@@ -35,6 +35,7 @@ import com.cn.gov.jms.ui.Online_servicesActivity;
 import com.cn.gov.jms.ui.R;
 import com.cn.gov.jms.ui.ShiQingGaiKuangActivity;
 import com.cn.gov.jms.ui.ZhengWuGongKaiActivity;
+import com.cn.gov.jms.ui.ZhengminHudongActivity;
 import com.cn.gov.jms.utils.RecyclerViewSpacesItemDecoration;
 import com.github.library.BaseRecyclerAdapter;
 import com.zanlabs.widget.infiniteviewpager.InfiniteViewPager;
@@ -199,7 +200,7 @@ public class HomeFragment extends BaseFragment implements SwipeRefreshLayout.OnR
 
         //初始化  广告窗体
         mHomeHeader.attachTo(mHomeRecycler,true);
-        initBannerData();
+        //initBannerData(); //服务器 链接不上  网页404
 
         //网格布局
         // 新建List
@@ -233,7 +234,7 @@ public class HomeFragment extends BaseFragment implements SwipeRefreshLayout.OnR
                         getActivity().startActivity(new Intent(getActivity(), Convenience_ServicesActivity.class));
                         break;
                     case 6:
-                        getActivity().startActivity(new Intent(getActivity(), Online_servicesActivity.class));
+                        getActivity().startActivity(new Intent(getActivity(), ZhengminHudongActivity.class));
                         break;
                     case 7:
                         getActivity().startActivity(new Intent(getActivity(), Online_servicesActivity.class));

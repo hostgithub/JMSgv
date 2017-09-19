@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent" android:orientation="vertical"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp" android:background="#EE3B3B">
+        <ImageView android:id="@+id/iv_back"
+            android:layout_width="50dp" android:src="@drawable/back"
+            android:layout_height="wrap_content" android:layout_marginLeft="10dp"/>
+        <TextView android:id="@+id/tv_title" android:layout_centerInParent="true"
+            android:layout_width="wrap_content" android:text="@string/zmhd"
+            android:layout_height="wrap_content"
+            android:textColor="@color/colorWhite" android:layout_marginTop="20dp"
+            android:textSize="20sp" android:layout_marginLeft="5dp"/>
+    </RelativeLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" android:background="@color/colorWhite"
+        tools:context="com.cn.gov.jms.ui.ZhengWuGongKaiActivity" android:padding="10dp">
+
+        <LinearLayout
+            android:layout_width="match_parent" android:background="#ffff"
+            android:layout_height="match_parent" android:padding="10dp"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent" android:orientation="vertical"
+                android:layout_height="0dp" android:layout_weight="2">
+                <LinearLayout
+                    android:layout_width="match_parent" android:layout_weight="1"
+                    android:layout_height="0dp" android:orientation="horizontal">
+                    <ImageView android:id="@+id/system_of_government_information_publicity"
+                        android:layout_width="0dp" android:layout_weight="1"
+                        android:scaleType="fitXY"
+                        android:layout_height="wrap_content" android:src="@drawable/zmhd_icon_01"/>
+                    <ImageView android:id="@+id/government_information_public_directory"
+                        android:layout_width="0dp" android:layout_weight="1"
+                        android:layout_marginLeft="5dp"
+                        android:scaleType="fitXY"
+                        android:layout_height="wrap_content" android:src="@drawable/zmhd_icon_02"/>
+                </LinearLayout>
+
+                <LinearLayout android:layout_marginTop="5dp"
+                    android:layout_width="match_parent" android:layout_weight="1"
+                    android:layout_height="0dp" android:orientation="horizontal">
+                    <ImageView android:id="@+id/guide_to_government_information_disclosure"
+                        android:layout_width="0dp" android:layout_weight="1"
+                        android:scaleType="fitXY"
+                        android:layout_height="wrap_content" android:src="@drawable/zmhd_icon_03"/>
+                    <ImageView android:id="@+id/open_in_accordance_with_the_application"
+                        android:layout_width="0dp" android:layout_weight="1"
+                        android:layout_marginLeft="5dp" android:scaleType="fitXY"
+                        android:layout_height="wrap_content" android:src="@drawable/zmhd_icon_04"/>
+                </LinearLayout>
+
+                <LinearLayout android:layout_marginTop="5dp"
+                    android:layout_width="match_parent" android:layout_weight="1"
+                    android:layout_height="0dp" android:orientation="horizontal">
+                    <ImageView android:id="@+id/government_information_public_briefing"
+                        android:layout_width="0dp" android:layout_weight="1"
+                        android:scaleType="fitXY"
+                        android:layout_height="wrap_content" android:src="@drawable/zmhd_icon_05"/>
+                    <ImageView android:id="@+id/annual_report_on_government_information_work"
+                        android:layout_width="0dp" android:layout_weight="1"
+                        android:layout_marginLeft="5dp"
+                        android:scaleType="fitXY"
+                        android:layout_height="wrap_content" android:src="@drawable/zmhd_icon_06"/>
+                </LinearLayout>
+
+                <ImageView android:layout_marginTop="5dp"
+                    android:layout_width="match_parent" android:layout_weight="1"
+                    android:scaleType="fitXY" android:id="@+id/important_area"
+                    android:layout_height="0dp" android:src="@drawable/zmhd_icon_07"/>
+                <ImageView
+                    android:layout_width="match_parent" android:layout_weight="1"
+                    android:layout_height="0dp" android:src="@drawable/zmhd_title"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp" android:layout_weight="3">
+                <GridView
+                    android:id="@+id/gridview"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:numColumns="3"
+                    ></GridView>
+            </LinearLayout>
+        </LinearLayout>
+
+    </RelativeLayout>
+</LinearLayout>

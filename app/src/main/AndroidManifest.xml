@@ -53,7 +53,10 @@
         <activity
             android:name=".Online_servicesActivity"
             android:theme="@style/activityAnimation" />
-        <activity android:name=".Convenience_ServicesActivity"
+        <activity
+            android:name=".Convenience_ServicesActivity"
+            android:theme="@style/activityAnimation" />
+        <activity android:name=".ZhengminHudongActivity"
             android:theme="@style/activityAnimation"></activity>
     </application>
 
