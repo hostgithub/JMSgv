@@ -1,46 +1,25 @@
 package com.cn.gov.jms.ui;
 
 import android.content.Intent;
-import android.support.v7.app.ActionBar;
-import android.support.v7.widget.Toolbar;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.view.View;
+import android.text.Html;
+import android.webkit.WebSettings;
 import android.webkit.WebView;
-import android.widget.ImageView;
-import android.widget.Toast;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.cn.gov.jms.Config;
 import com.cn.gov.jms.base.BaseActivity;
+import com.cn.gov.jms.utils.NetWorkUtil;
 
 import butterknife.BindView;
 
 public class DetailActivity extends BaseActivity
 {
 
-    @BindView(R.id.detail_toolbar)
-    Toolbar mDetailToolbar;
     @BindView(R.id.detail_webView)
     WebView mDetailWebView;
-    @BindView(R.id.detail_info)
-    ImageView mDetailInfo;
-    @BindView(R.id.detail_like)
-    ImageView mDetailLike;
-    @BindView(R.id.detail_share)
-    ImageView mDetailShare;
-
-    boolean isLike = false;
-
-//    @Override
-//    protected void onCreate(Bundle savedInstanceState)
-//    {
-//        super.onCreate(savedInstanceState);
-//        setContentView(R.layout.activity_detail);
-//        ButterKnife.bind(this);
-//        initToolBar();
-//        initUrl();
-//        initImageClick();
-//    }
+    @BindView(R.id.tv_title)
+    TextView tv_title;
 
     @Override
     protected int getLayoutId() {
@@ -49,78 +28,42 @@ public class DetailActivity extends BaseActivity
 
     @Override
     protected void initView() {
-        //ButterKnife.bind(this);
-        initToolBar();
+
+        LinearLayout.LayoutParams mWebViewLP = new LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.FILL_PARENT,
+                LinearLayout.LayoutParams.FILL_PARENT);
+        mDetailWebView.setLayoutParams(mWebViewLP);
+        //mDetailWebView.setInitialScale(100);
+
+        WebSettings webSettings = mDetailWebView.getSettings();
+        webSettings.setJavaScriptEnabled(true);//支持js
+        webSettings.setJavaScriptCanOpenWindowsAutomatically(true);//允许js弹出alert
+        mDetailWebView.requestFocusFromTouch();//支持获取手势焦点，输入用户名、密码或其他
+        if (NetWorkUtil.isNetworkConnected(this)) {
+            webSettings.setCacheMode(WebSettings.LOAD_DEFAULT);//根据cache-control决定是否从网络上取数据
+        } else {
+            webSettings.setCacheMode(WebSettings.LOAD_CACHE_ELSE_NETWORK);//没网，则从本地获取，即离线加载
+        }
+        webSettings.setLayoutAlgorithm(WebSettings.LayoutAlgorithm.SINGLE_COLUMN);
+        webSettings.setUseWideViewPort(true);//将图片调整到适合webview的大小
+        webSettings.setLoadWithOverviewMode(true);// 缩放至屏幕的大小
+        webSettings.setSupportZoom(false);  //不支持缩放
+        webSettings.setAllowFileAccess(true);  //设置可以访问文件
+        webSettings.setLoadsImagesAutomatically(true);  //支持自动加载图片
+        webSettings.setDefaultTextEncodingName("utf-8");
+
+        webSettings.setDomStorageEnabled(true);
+        webSettings.setDatabaseEnabled(true);
+        webSettings.setAppCacheEnabled(true);
+        String appCachePath = getApplicationContext().getCacheDir().getAbsolutePath();
+        webSettings.setAppCachePath(appCachePath);
         initUrl();
-        initImageClick();
-    }
-
-    private void initImageClick()
-    {
-        mDetailLike.setOnClickListener(new View.OnClickListener()
-        {
-            @Override
-            public void onClick(View v)
-            {
-                if (!isLike)
-                {
-                    mDetailLike.setImageDrawable(getResources().getDrawable(R.drawable.icon_like_selected));
-                    isLike = true;
-                }else
-                {
-                    mDetailLike.setImageDrawable(getResources().getDrawable(R.drawable.hot_icon_like_night));
-                    isLike = false;
-                }
-            }
-        });
-        mDetailShare.setOnClickListener(new View.OnClickListener()
-        {
-            @Override
-            public void onClick(View v)
-            {
-                Toast.makeText(DetailActivity.this, "分享成功！", Toast.LENGTH_SHORT).show();
-            }
-        });
-
     }
 
     private void initUrl()
     {
         Intent it = getIntent();
-        mDetailWebView.loadUrl(it.getStringExtra(Config.NEWS));
-    }
-
-    private void initToolBar()
-    {
-        setSupportActionBar(mDetailToolbar);
-        ActionBar actionBar = getSupportActionBar();
-        if (actionBar != null)
-        {
-            actionBar.setDisplayHomeAsUpEnabled(true);
-        }
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item)
-    {
-        switch (item.getItemId())
-        {
-            case android.R.id.home:
-                this.finish();
-                break;
-            case R.id.detail_menu_info:
-                Toast.makeText(this, "如果您有什么好的建议或者不懂，请联系1070138445！~", Toast.LENGTH_SHORT).show();
-                break;
-            default:
-                break;
-        }
-        return true;
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu)
-    {
-        getMenuInflater().inflate(R.menu.detail_menu, menu);
-        return true;
+        //mDetailWebView.loadUrl(it.getStringExtra(Config.NEWS));
+        tv_title.setText(Html.fromHtml(it.getStringExtra(Config.NEWS)));
     }
 }

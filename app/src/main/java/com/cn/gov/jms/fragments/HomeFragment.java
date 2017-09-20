@@ -202,7 +202,7 @@ public class HomeFragment extends BaseFragment implements SwipeRefreshLayout.OnR
 
         //初始化  广告窗体
         mHomeHeader.attachTo(mHomeRecycler,true);
-        //initBannerData(); //服务器 链接不上  网页404
+        initBannerData(); //服务器 链接不上  网页404
 
         //网格布局
         // 新建List
@@ -348,7 +348,6 @@ public class HomeFragment extends BaseFragment implements SwipeRefreshLayout.OnR
             }
         });
     }
-
 
     /**
      * 图片瀑布流 初始化 网络请求第一页数据

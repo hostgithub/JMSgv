@@ -2,22 +2,31 @@ package com.cn.gov.jms.adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
-import com.cn.gov.jms.model.Banners;
-import com.facebook.drawee.view.SimpleDraweeView;
 import com.cn.gov.jms.Config;
+import com.cn.gov.jms.model.Banners;
+import com.cn.gov.jms.model.Detail;
+import com.cn.gov.jms.services.Api;
 import com.cn.gov.jms.ui.DetailActivity;
 import com.cn.gov.jms.ui.R;
+import com.facebook.drawee.view.SimpleDraweeView;
 import com.zanlabs.widget.infiniteviewpager.InfinitePagerAdapter;
 
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 /**
  * Created by Administrator on 2016/12/5.
@@ -77,12 +86,43 @@ public class TopAdapter extends InfinitePagerAdapter
             @Override
             public void onClick(View v)
             {
-                Intent intent = new Intent(mContext, DetailActivity.class);
-                intent.putExtra(Config.NEWS, banner_url.get(position));
-                mContext.startActivity(intent);
+                getData(Integer.parseInt(resultsBeanList.get(position).get_id()));
+//                Intent intent = new Intent(mContext, DetailActivity.class);
+//                intent.putExtra(Config.NEWS, banner_url.get(position));
+//                mContext.startActivity(intent);
             }
         });
         return view;
+    }
+
+    private void getData(int id){
+        //使用retrofit配置api
+        Retrofit retrofit=new Retrofit.Builder()
+                .baseUrl(Config.BANNER_BASE_URL)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+        Api api =retrofit.create(Api.class);
+        Call<Detail> call=api.getDetailData(id);
+        call.enqueue(new Callback<Detail>() {
+            @Override
+            public void onResponse(Call<Detail> call, Response<Detail> response) {
+                if(response!=null){
+                    Detail detail=response.body();
+                    Detail.ResultsBean resultsBean=detail.getResults().get(0);
+                    Intent intent = new Intent(mContext, DetailActivity.class);
+                    intent.putExtra(Config.NEWS,resultsBean.content);
+                    mContext.startActivity(intent);
+                    Log.e("xxxxxxx",resultsBean.content);
+                }else{
+                    Toast.makeText(mContext,"数据为空!",Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Detail> call, Throwable t) {
+                Toast.makeText(mContext,"请求失败!",Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     class ViewsHolder
