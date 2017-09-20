@@ -72,9 +72,13 @@
             android:name=".ZhengminHudongActivity"
             android:screenOrientation="portrait"
             android:theme="@style/activityAnimation" />
-        <activity android:name=".Investment_guideActivity"
+        <activity
+            android:name=".Investment_guideActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/activityAnimation"></activity>
+            android:theme="@style/activityAnimation" />
+        <activity android:name=".NewsCenterActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/activityAnimation" ></activity>
     </application>
 
 </manifest>

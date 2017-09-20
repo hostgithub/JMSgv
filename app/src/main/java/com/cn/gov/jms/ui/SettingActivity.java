@@ -3,9 +3,11 @@ package com.cn.gov.jms.ui;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.cn.gov.jms.base.BaseActivity;
+import com.cn.gov.jms.utils.DataCleanManagerUtils;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -20,6 +22,8 @@ public class SettingActivity extends BaseActivity {
     RelativeLayout clear;
     @BindView(R.id.update)
     RelativeLayout update;
+    @BindView(R.id.tv_size)
+    TextView tv_size;
 
     @Override
     protected int getLayoutId() {
@@ -28,7 +32,11 @@ public class SettingActivity extends BaseActivity {
 
     @Override
     protected void initView() {
-
+        try {
+            tv_size.setText(DataCleanManagerUtils.getTotalCacheSize(this));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
 
@@ -42,7 +50,13 @@ public class SettingActivity extends BaseActivity {
                Toast.makeText(this,"关于APP", Toast.LENGTH_SHORT).show();
                break;
            case R.id.clear:
-               Toast.makeText(this,"清除缓存成功", Toast.LENGTH_SHORT).show();
+               try {
+                   DataCleanManagerUtils.clearAllCache(this);
+                   tv_size.setText(DataCleanManagerUtils.getTotalCacheSize(this));
+                   Toast.makeText(this,"清除缓存成功!", Toast.LENGTH_SHORT).show();
+               } catch (Exception e) {
+                   e.printStackTrace();
+               }
                break;
            case R.id.update:
                Toast.makeText(this,"已经是最新版本!", Toast.LENGTH_SHORT).show();
