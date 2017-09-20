@@ -18,7 +18,7 @@ import java.util.ArrayList;
 
 import butterknife.OnClick;
 
-public class ZhengminHudongActivity extends BaseActivity {
+public class Investment_guideActivity extends BaseActivity {
 
     private ListView listview;
     private ArrayList<String> list;
@@ -26,12 +26,11 @@ public class ZhengminHudongActivity extends BaseActivity {
 
     @Override
     protected int getLayoutId() {
-        return R.layout.activity_zhengmin_hudong;
+        return R.layout.activity_investment_guide;
     }
 
     @Override
     protected void initView() {
-
         listview = (ListView) findViewById(R.id.listview);
         list = new ArrayList<>();
         for (int i = 0; i < 200; i++) {
@@ -39,32 +38,11 @@ public class ZhengminHudongActivity extends BaseActivity {
         }
         adapter = new MyAdapter();
         listview.setAdapter(adapter);
-
     }
-    @OnClick({ R.id.iv_back,R.id.system_of_government_information_publicity,R.id.government_information_public_directory,
-            R.id.guide_to_government_information_disclosure,R.id.open_in_accordance_with_the_application,R.id.government_information_public_briefing,
-            R.id.annual_report_on_government_information_work,R.id.important_area})
+
+    @OnClick({ R.id.iv_back})
     public void onClick(View view) {
-        switch (view.getId()){
-            case R.id.iv_back:
-                finish();
-            case R.id.system_of_government_information_publicity:finish();
-                break;
-            case R.id.government_information_public_directory:finish();
-                break;
-            case R.id.guide_to_government_information_disclosure:finish();
-                break;
-            case R.id.open_in_accordance_with_the_application:finish();
-                break;
-            case R.id.government_information_public_briefing:finish();
-                break;
-            case R.id.annual_report_on_government_information_work:finish();
-                break;
-            case R.id.important_area:finish();
-                break;
-            default:
-                break;
-        }
+       finish();
     }
 
     private MyAdapter adapter;
@@ -93,7 +71,7 @@ public class ZhengminHudongActivity extends BaseActivity {
         public View getView(final int position, View convertView, ViewGroup parent) {
             final MyViewHolder vh;
             if (convertView == null) {
-                convertView = View.inflate(ZhengminHudongActivity.this, R.layout.item_hide_show_all, null);
+                convertView = View.inflate(Investment_guideActivity.this, R.layout.item_hide_show_all, null);
                 vh = new MyViewHolder(convertView);
                 convertView.setTag(vh);
             } else {
@@ -142,14 +120,14 @@ public class ZhengminHudongActivity extends BaseActivity {
             for (int i = 0; i < 10; i++) {
                 sublist.add("我是第" + i + "个子条目");
             }
-            subAdapter = new SubAdapter(sublist,ZhengminHudongActivity.this);
+            subAdapter = new SubAdapter(sublist,Investment_guideActivity.this);
             vh.subListView.setAdapter(subAdapter);
             Utility.setListViewHeightBasedOnChildren(vh.subListView);
 
             vh.selectorImg.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Toast.makeText(ZhengminHudongActivity.this, "被点了", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(Investment_guideActivity.this, "被点了", Toast.LENGTH_SHORT).show();
                     clickPosition = position;//记录点击的position
                     notifyDataSetChanged();//刷新adapter重新填充条目。在重新填充的过程中，被记录的position会做展开或隐藏的动作，具体的判断看上面代码
                     //在此处需要明确的一点是，当adapter执行刷新操作时，整个getview方法会重新执行，也就是条目重新做一次初始化被填充数据。

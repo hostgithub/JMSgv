@@ -14,6 +14,7 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".SpalshActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -24,39 +25,55 @@
         <activity
             android:name=".MainActivity"
             android:configChanges="orientation|keyboardHidden"
+            android:screenOrientation="portrait"
             android:theme="@style/Theme.Design.Light.NoActionBar"
             android:windowSoftInputMode="adjustPan|stateHidden" />
         <activity
             android:name=".DetailActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/activityAnimation" />
         <activity
             android:name=".AboutusActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/activityAnimation" />
         <activity
             android:name=".ContactusActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/activityAnimation" />
         <activity
             android:name=".WebViewActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/activityAnimation" />
         <activity
             android:name=".SearchActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/activityAnimation" />
         <activity
             android:name=".SettingActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/activityAnimation" />
         <activity
             android:name=".ShiQingGaiKuangActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/activityAnimation" />
         <activity
             android:name=".ZhengWuGongKaiActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/activityAnimation" />
         <activity
             android:name=".Online_servicesActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/activityAnimation" />
         <activity
             android:name=".Convenience_ServicesActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/activityAnimation" />
-        <activity android:name=".ZhengminHudongActivity"
+        <activity
+            android:name=".ZhengminHudongActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/activityAnimation" />
+        <activity android:name=".Investment_guideActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/activityAnimation"></activity>
     </application>
 
