@@ -26,11 +26,13 @@ import com.cn.gov.jms.adapter.TopAdapter;
 import com.cn.gov.jms.base.BaseFragment;
 import com.cn.gov.jms.base.EndLessOnScrollListener;
 import com.cn.gov.jms.model.Banners;
-import com.cn.gov.jms.model.DataInfo;
 import com.cn.gov.jms.model.Datas;
+import com.cn.gov.jms.model.Detail;
+import com.cn.gov.jms.model.NewCenter;
 import com.cn.gov.jms.presenter.NewsPresenterImpl;
 import com.cn.gov.jms.services.Api;
 import com.cn.gov.jms.ui.Convenience_ServicesActivity;
+import com.cn.gov.jms.ui.DetailActivity;
 import com.cn.gov.jms.ui.Investment_guideActivity;
 import com.cn.gov.jms.ui.NewsCenterActivity;
 import com.cn.gov.jms.ui.Online_servicesActivity;
@@ -94,7 +96,8 @@ public class HomeFragment extends BaseFragment implements SwipeRefreshLayout.OnR
     SwipeRefreshLayout refreshLayout;
     @BindView(R.id.recyerview)
     RecyclerView mRecyclerView;
-    private ArrayList<DataInfo.Info> arrayList;
+    //private ArrayList<DataInfo.Info> arrayList;
+    private ArrayList<NewCenter.ResultsBean> list;
     private PicAdapter picAdapter;
     private GridLayoutManager linearLayoutManager;
     private int pages=1;
@@ -250,7 +253,7 @@ public class HomeFragment extends BaseFragment implements SwipeRefreshLayout.OnR
 
         //图文
         refreshLayout.setOnRefreshListener(this);
-        arrayList=new ArrayList();
+        list=new ArrayList();
         initData(1);
         linearLayoutManager=new GridLayoutManager(getActivity(), 2);
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
@@ -269,12 +272,13 @@ public class HomeFragment extends BaseFragment implements SwipeRefreshLayout.OnR
 
         mRecyclerView.addItemDecoration(new RecyclerViewSpacesItemDecoration(stringIntegerHashMap));
 
-        picAdapter=new PicAdapter(getActivity(),arrayList);
+        picAdapter=new PicAdapter(getActivity(),list);
         //条目点击事件
         picAdapter.setOnItemClickLitener(new PicAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(int position) {
-                Toast.makeText(getActivity(),"点击了"+position,Toast.LENGTH_SHORT).show();
+                getData(Integer.parseInt(list.get(position)._id));
+                //Toast.makeText(getActivity(),"点击了"+position,Toast.LENGTH_SHORT).show();
             }
         });
         mRecyclerView.setAdapter(picAdapter);
@@ -356,24 +360,56 @@ public class HomeFragment extends BaseFragment implements SwipeRefreshLayout.OnR
     private void initData(int pages) {
         //使用retrofit配置api
         Retrofit retrofit=new Retrofit.Builder()
-                .baseUrl("http://gank.io/")
+                .baseUrl(Config.BANNER_BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         Api api =retrofit.create(Api.class);
-        Call<DataInfo> call=api.getData(6,pages);
-        call.enqueue(new Callback<DataInfo>() {
+        Call<NewCenter> call=api.getNewCenterData("000100050007",pages);
+        call.enqueue(new Callback<NewCenter>() {
             @Override
-            public void onResponse(Call<DataInfo> call, Response<DataInfo> response) {
-
-                arrayList.addAll(response.body().results);
+            public void onResponse(Call<NewCenter> call, Response<NewCenter> response) {
+                list.addAll(response.body().results);
+                Log.e("xxxxxx",response.body().toString());
                 picAdapter.notifyDataSetChanged();
-                Log.i("aaaa", arrayList.size() + "");
                 refreshLayout.setRefreshing(false);
             }
 
             @Override
-            public void onFailure(Call<DataInfo> call, Throwable t) {
+            public void onFailure(Call<NewCenter> call, Throwable t) {
+                Toast.makeText(getActivity(),"请求失败!",Toast.LENGTH_SHORT).show();
                 refreshLayout.setRefreshing(false);
+            }
+        });
+    }
+
+
+    private void getData(int id){
+        //使用retrofit配置api
+        Retrofit retrofit=new Retrofit.Builder()
+                .baseUrl(Config.BANNER_BASE_URL)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+        Api api =retrofit.create(Api.class);
+        Call<Detail> call=api.getDetailData(id);
+        call.enqueue(new Callback<Detail>() {
+            @Override
+            public void onResponse(Call<Detail> call, Response<Detail> response) {
+                if(response!=null){
+                    Detail detail=response.body();
+                    Detail.ResultsBean resultsBean=detail.getResults().get(0);
+                    Intent intent = new Intent(getActivity(), DetailActivity.class);
+                    intent.putExtra(Config.NEWS,resultsBean);
+                    startActivity(intent);
+                    Log.e("xxxxxxx",resultsBean.content);
+                }else{
+                    Toast.makeText(getActivity(),"数据为空!",Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Detail> call, Throwable t) {
+                Toast.makeText(getActivity(),"请求失败!",Toast.LENGTH_SHORT).show();
+                Log.e("-------------",t.getMessage().toString());
             }
         });
     }
@@ -441,7 +477,7 @@ public class HomeFragment extends BaseFragment implements SwipeRefreshLayout.OnR
     public void onRefresh() {
         picAdapter.setFooterVisible(View.GONE);
         pages = 1;
-        arrayList.clear();
+        list.clear();
         initData(1);
     }
 

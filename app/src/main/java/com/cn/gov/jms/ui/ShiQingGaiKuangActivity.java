@@ -1,6 +1,7 @@
 package com.cn.gov.jms.ui;
 
 import android.content.Context;
+import android.content.res.AssetManager;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.support.v7.widget.LinearLayoutManager;
@@ -14,9 +15,13 @@ import com.cn.gov.jms.Config;
 import com.cn.gov.jms.adapter.SQGKAdapter;
 import com.cn.gov.jms.base.BaseActivity;
 import com.cn.gov.jms.model.Banners;
+import com.cn.gov.jms.model.LocalJsonFile;
 import com.cn.gov.jms.services.Api;
 import com.cn.gov.jms.utils.RecyclerViewSpacesItemDecoration;
+import com.google.gson.Gson;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -64,13 +69,50 @@ public class ShiQingGaiKuangActivity extends BaseActivity {
         //stringIntegerHashMap.put(RecyclerViewSpacesItemDecoration.RIGHT_DECORATION,10);//右间距
 
         mRecyclerView.addItemDecoration(new RecyclerViewSpacesItemDecoration(stringIntegerHashMap));
+
+        Gson gson=new Gson();
+        LocalJsonFile localJsonFile=gson.fromJson(getJson(this),LocalJsonFile.class);
+        Log.e("+++++++++++",localJsonFile.getDynamic().get(0).getContent());
+        sqgkAdapter = new SQGKAdapter(ShiQingGaiKuangActivity.this, localJsonFile.getDynamic());
+        mRecyclerView.setAdapter(sqgkAdapter);
+
         if(connect){
-            initBannerData();
+            //initBannerData();
         }else{
             Toast.makeText(this,"您还没有连接网络!",Toast.LENGTH_SHORT).show();
         }
     }
 
+    /**
+     * 获取Assets路径下的文件
+     *
+     * @param context
+     * @return
+     */
+    public static String getJson(Context context) {
+
+        String json = "";
+
+        try {
+
+            AssetManager s = context.getAssets();
+            try {
+                InputStream is = s.open("dynamic.json");
+                byte[] buffer = new byte[is.available()];
+                is.read(buffer);
+                json = new String(buffer, "utf-8");
+                is.close();
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        System.out.println(json);
+        return json;
+
+    }
 
     public void checkNet()//网络是否已经连接上
     {
@@ -101,7 +143,7 @@ public class ShiQingGaiKuangActivity extends BaseActivity {
                     Log.e("++++++++++",resultsBeanList.get(0).getUrl());
                     Log.e("++++++++++",resultsBeanList.size()+"");
 
-                    sqgkAdapter = new SQGKAdapter(ShiQingGaiKuangActivity.this, resultsBeanList);
+                    //sqgkAdapter = new SQGKAdapter(ShiQingGaiKuangActivity.this, resultsBeanList);
                     mRecyclerView.setAdapter(sqgkAdapter);
                 }else{
                     Toast.makeText(ShiQingGaiKuangActivity.this,"数据为空!",Toast.LENGTH_SHORT).show();

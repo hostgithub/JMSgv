@@ -121,6 +121,7 @@ public class TopAdapter extends InfinitePagerAdapter
             @Override
             public void onFailure(Call<Detail> call, Throwable t) {
                 Toast.makeText(mContext,"请求失败!",Toast.LENGTH_SHORT).show();
+                Log.e("-------------",t.getMessage().toString());
             }
         });
     }

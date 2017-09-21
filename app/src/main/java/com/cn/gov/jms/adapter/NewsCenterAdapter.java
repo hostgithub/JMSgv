@@ -8,8 +8,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
+import com.cn.gov.jms.Config;
 import com.cn.gov.jms.base.BaseViewHolder;
-import com.cn.gov.jms.model.DataInfo;
+import com.cn.gov.jms.model.NewCenter;
 import com.cn.gov.jms.ui.R;
 import com.cn.gov.jms.utils.ImageLoaderUtils;
 
@@ -26,18 +27,18 @@ public class NewsCenterAdapter extends RecyclerView.Adapter<BaseViewHolder> {
     private static final int ITEM_NOIMAGE = 1;
     private static final int ITEM_HASIMAGE = 2;
 
-    private ArrayList<DataInfo.Info> datas;
+    private ArrayList<NewCenter.ResultsBean> datas;
     private Context mContext;
     private int viewFooter;
     private View footerView;
     private OnItemClickListener mOnItemClickListener;
 
-    public NewsCenterAdapter(Context context, ArrayList<DataInfo.Info> datas) {
+    public NewsCenterAdapter(Context context, ArrayList<NewCenter.ResultsBean> datas) {
         this.datas = datas;
         this.mContext = context;
     }
 
-    public void replaceAll(List<DataInfo.Info> elements) {
+    public void replaceAll(List<NewCenter.ResultsBean> elements) {
         if (datas.size() > 0) {
             datas.clear();
         }
@@ -45,7 +46,7 @@ public class NewsCenterAdapter extends RecyclerView.Adapter<BaseViewHolder> {
         notifyDataSetChanged();
     }
 
-    public void addAll(List<DataInfo.Info> elements) {
+    public void addAll(List<NewCenter.ResultsBean> elements) {
         datas.addAll(elements);
         notifyDataSetChanged();
     }
@@ -74,13 +75,13 @@ public class NewsCenterAdapter extends RecyclerView.Adapter<BaseViewHolder> {
             }
 
             int type = getItemViewType(position);
-            final DataInfo.Info item = datas.get(position);
-            if (type == ITEM_HASIMAGE) {
-                ImageLoaderUtils.loadingImg(mContext, (ImageView) holder.getView(R.id.cover), item.url);
-            }
+            final NewCenter.ResultsBean item = datas.get(position);
+
+            ImageLoaderUtils.loadingImg(mContext, (ImageView) holder.getView(R.id.cover), Config.BANNER_BASE_URL+item.picNme);
+
             //CircleImageView avatar = holder.getView(R.id.avatar);
-            holder.setText(R.id.title, "this is item "+position);
-            holder.setText(R.id.content, "2017-9-15 15:15:0"+position);
+            holder.setText(R.id.title, item.title);
+            holder.setText(R.id.content, item.addTime);
 
 //            holder.setText(R.id.author, item.getAuthor());
 //            holder.setText(R.id.seeNum, item.getWatch());
@@ -113,7 +114,7 @@ public class NewsCenterAdapter extends RecyclerView.Adapter<BaseViewHolder> {
             type = TYPE_FOOTER;
             return type;
         }
-        if (TextUtils.isEmpty(datas.get(position).url)) {
+        if (TextUtils.isEmpty(datas.get(position)._id)) {
             type = ITEM_NOIMAGE;
         } else {
             type = ITEM_HASIMAGE;

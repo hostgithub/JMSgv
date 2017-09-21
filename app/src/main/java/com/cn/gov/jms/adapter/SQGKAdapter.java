@@ -12,7 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.cn.gov.jms.base.BaseViewHolder;
-import com.cn.gov.jms.model.Banners;
+import com.cn.gov.jms.model.LocalJsonFile;
 import com.cn.gov.jms.ui.R;
 
 import java.util.List;
@@ -27,13 +27,13 @@ public class SQGKAdapter extends RecyclerView.Adapter<BaseViewHolder> {
     private static final int ITEM_NOIMAGE = 1;
     private static final int ITEM_HASIMAGE = 2;
 
-    private List<Banners.ResultsBean> datas;
+    private List<LocalJsonFile.DynamicBean> datas;
     private Context mContext;
     private int viewFooter;
     private View footerView;
     private OnItemClickListener mOnItemClickListener;
 
-    public SQGKAdapter(Context context, List<Banners.ResultsBean> datas) {
+    public SQGKAdapter(Context context, List<LocalJsonFile.DynamicBean> datas) {
         this.datas = datas;
         this.mContext = context;
     }
@@ -75,16 +75,16 @@ public class SQGKAdapter extends RecyclerView.Adapter<BaseViewHolder> {
             }
 
             int type = getItemViewType(position);
-            final Banners.ResultsBean item = datas.get(position);
+            final LocalJsonFile.DynamicBean item = datas.get(position);
 //            if (type == ITEM_HASIMAGE) {
 //                ImageLoaderUtils.loadingImg(mContext, (ImageView) holder.getView(R.id.image), item.url);
 //            }
             //CircleImageView avatar = holder.getView(R.id.avatar);
             //holder.setText(R.id.tv_title, datas.get(position).getTitle());
-            holder.setText(R.id.tv_title, "佳木斯概况");
-            String content=datas.get(position).getUrl();
+            holder.setText(R.id.tv_title, datas.get(position).getUsername());
+            String content=datas.get(position).getContent();
             //String strSub=content.substring(0,15);//截取字符串
-            String str=content+"....查看详情";   //http://blog.csdn.net/xuwenneng/article/details/51027625?locationNum=10&fps=1  还没有成功
+            String str=content.substring(0,45)+"....查看详情";   //http://blog.csdn.net/xuwenneng/article/details/51027625?locationNum=10&fps=1  还没有成功
 
             //setTVColor(str, '查', '情', Color.RED);
             holder.setText(R.id.tv_content,setTVColor(str, '查', '情', Color.RED));
@@ -121,7 +121,7 @@ public class SQGKAdapter extends RecyclerView.Adapter<BaseViewHolder> {
             type = TYPE_FOOTER;
             return type;
         }
-        if (TextUtils.isEmpty(datas.get(position).get_id())) {
+        if (TextUtils.isEmpty(datas.get(position).getUsername())) {
             type = ITEM_NOIMAGE;
         } else {
             type = ITEM_HASIMAGE;

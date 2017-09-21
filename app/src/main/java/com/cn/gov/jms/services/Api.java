@@ -3,6 +3,7 @@ package com.cn.gov.jms.services;
 import com.cn.gov.jms.model.Banners;
 import com.cn.gov.jms.model.DataInfo;
 import com.cn.gov.jms.model.Detail;
+import com.cn.gov.jms.model.NewCenter;
 
 import retrofit2.Call;
 import retrofit2.http.GET;
@@ -26,4 +27,8 @@ public interface Api {    //retrofit方式
     //http://192.168.0.122:8080//app/corGetById.do?id=103558   获取json
     @GET("/app/corGetById.do")
     Call<Detail> getDetailData(@Query("id") int id);
+
+    //http://192.168.0.124:8080/app/corTabloid.do?id=000100050007   获取新闻中心列表json  固定ID
+    @GET("/app/corTabloid.do")
+    Call<NewCenter> getNewCenterData(@Query("id") String id,@Query("pages") int pages);
 }

@@ -6,6 +6,7 @@
     <color name="colorBG">#d96f5d</color>
     <color name="colorWhite">#eee</color>
     <color name="colorToolWhite">#7effffff</color>
+    <color name="WhiteSmoke">#F5F5F5</color>
     <color name="list_bg">#D6D6D6</color>
     <color name="app_primary_color">#80c3db</color>
 

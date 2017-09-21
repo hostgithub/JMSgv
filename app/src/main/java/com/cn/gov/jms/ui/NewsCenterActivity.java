@@ -1,5 +1,6 @@
 package com.cn.gov.jms.ui;
 
+import android.content.Intent;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -7,10 +8,12 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
+import com.cn.gov.jms.Config;
 import com.cn.gov.jms.adapter.NewsCenterAdapter;
 import com.cn.gov.jms.base.BaseActivity;
 import com.cn.gov.jms.base.EndLessOnScrollListener;
-import com.cn.gov.jms.model.DataInfo;
+import com.cn.gov.jms.model.Detail;
+import com.cn.gov.jms.model.NewCenter;
 import com.cn.gov.jms.services.Api;
 import com.cn.gov.jms.utils.RecyclerViewSpacesItemDecoration;
 
@@ -32,7 +35,7 @@ public class NewsCenterActivity extends BaseActivity implements SwipeRefreshLayo
     SwipeRefreshLayout refreshLayout;
     @BindView(R.id.recyerview)
     RecyclerView mRecyclerView;
-    private ArrayList<DataInfo.Info> arrayList;
+    private ArrayList<NewCenter.ResultsBean> list;
     private NewsCenterAdapter picAdapter;
     private LinearLayoutManager linearLayoutManager;
     private int pages=1;
@@ -47,8 +50,8 @@ public class NewsCenterActivity extends BaseActivity implements SwipeRefreshLayo
 
         //图文
         refreshLayout.setOnRefreshListener(this);
-        arrayList=new ArrayList();
-        initData(1);
+        list=new ArrayList();
+        initNewsData(1);
         linearLayoutManager=new LinearLayoutManager(this);
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         mRecyclerView.setLayoutManager(linearLayoutManager);
@@ -66,12 +69,13 @@ public class NewsCenterActivity extends BaseActivity implements SwipeRefreshLayo
 
         mRecyclerView.addItemDecoration(new RecyclerViewSpacesItemDecoration(stringIntegerHashMap));
 
-        picAdapter=new NewsCenterAdapter(this,arrayList);
+        picAdapter=new NewsCenterAdapter(this,list);
         //条目点击事件
         picAdapter.setOnItemClickLitener(new NewsCenterAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(int position) {
-                Toast.makeText(NewsCenterActivity.this,"点击了"+position,Toast.LENGTH_SHORT).show();
+                getData(Integer.parseInt(list.get(position)._id));
+                //Toast.makeText(NewsCenterActivity.this,"点击了"+position,Toast.LENGTH_SHORT).show();
             }
         });
         mRecyclerView.setAdapter(picAdapter);
@@ -84,7 +88,7 @@ public class NewsCenterActivity extends BaseActivity implements SwipeRefreshLayo
             public void onLoadMore() {
                 pages++;
                 picAdapter.setFooterVisible(View.VISIBLE);
-                initData(pages);
+                initNewsData(pages);
             }
 
             @Override
@@ -100,27 +104,58 @@ public class NewsCenterActivity extends BaseActivity implements SwipeRefreshLayo
      * 图片瀑布流 初始化 网络请求第一页数据
      * @param pages
      */
-    private void initData(int pages) {
+    private void initNewsData(int pages) {
         //使用retrofit配置api
         Retrofit retrofit=new Retrofit.Builder()
-                .baseUrl("http://gank.io/")
+                .baseUrl(Config.BANNER_BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         Api api =retrofit.create(Api.class);
-        Call<DataInfo> call=api.getData(6,pages);
-        call.enqueue(new Callback<DataInfo>() {
+        Call<NewCenter> call=api.getNewCenterData("000100050007",pages);
+        call.enqueue(new Callback<NewCenter>() {
             @Override
-            public void onResponse(Call<DataInfo> call, Response<DataInfo> response) {
-
-                arrayList.addAll(response.body().results);
+            public void onResponse(Call<NewCenter> call, Response<NewCenter> response) {
+                list.addAll(response.body().results);
+                Log.e("xxxxxx",response.body().toString());
                 picAdapter.notifyDataSetChanged();
-                Log.i("aaaa", arrayList.size() + "");
                 refreshLayout.setRefreshing(false);
             }
 
             @Override
-            public void onFailure(Call<DataInfo> call, Throwable t) {
-                refreshLayout.setRefreshing(false);
+            public void onFailure(Call<NewCenter> call, Throwable t) {
+                Toast.makeText(NewsCenterActivity.this,"请求失败!",Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+
+    private void getData(int id){
+        //使用retrofit配置api
+        Retrofit retrofit=new Retrofit.Builder()
+                .baseUrl(Config.BANNER_BASE_URL)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+        Api api =retrofit.create(Api.class);
+        Call<Detail> call=api.getDetailData(id);
+        call.enqueue(new Callback<Detail>() {
+            @Override
+            public void onResponse(Call<Detail> call, Response<Detail> response) {
+                if(response!=null){
+                    Detail detail=response.body();
+                    Detail.ResultsBean resultsBean=detail.getResults().get(0);
+                    Intent intent = new Intent(NewsCenterActivity.this, DetailActivity.class);
+                    intent.putExtra(Config.NEWS,resultsBean);
+                    startActivity(intent);
+                    Log.e("xxxxxxx",resultsBean.content);
+                }else{
+                    Toast.makeText(NewsCenterActivity.this,"数据为空!",Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Detail> call, Throwable t) {
+                Toast.makeText(NewsCenterActivity.this,"请求失败!",Toast.LENGTH_SHORT).show();
+                Log.e("-------------",t.getMessage().toString());
             }
         });
     }
@@ -134,7 +169,7 @@ public class NewsCenterActivity extends BaseActivity implements SwipeRefreshLayo
     public void onRefresh() {
         picAdapter.setFooterVisible(View.GONE);
         pages = 1;
-        arrayList.clear();
-        initData(1);
+        list.clear();
+        initNewsData(1);
     }
 }
