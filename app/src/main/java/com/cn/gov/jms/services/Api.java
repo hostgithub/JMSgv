@@ -4,6 +4,7 @@ import com.cn.gov.jms.model.Banners;
 import com.cn.gov.jms.model.DataInfo;
 import com.cn.gov.jms.model.Detail;
 import com.cn.gov.jms.model.NewCenter;
+import com.cn.gov.jms.model.PublicNotice;
 
 import retrofit2.Call;
 import retrofit2.http.GET;
@@ -31,4 +32,8 @@ public interface Api {    //retrofit方式
     //http://192.168.0.124:8080/app/corTabloid.do?id=000100050007   获取新闻中心列表json  固定ID
     @GET("/app/corTabloid.do")
     Call<NewCenter> getNewCenterData(@Query("id") String id,@Query("pages") int pages);
+
+    //http://192.168.0.124:8080/app/publicNotice.do?id=000100050009  获取公告公示列表json  固定ID
+    @GET("/app/publicNotice.do")
+    Call<PublicNotice> getPublicNoticeData(@Query("id") String id, @Query("pages") int pages);
 }
