@@ -110,7 +110,7 @@ public class TopAdapter extends InfinitePagerAdapter
                     Detail detail=response.body();
                     Detail.ResultsBean resultsBean=detail.getResults().get(0);
                     Intent intent = new Intent(mContext, DetailActivity.class);
-                    intent.putExtra(Config.NEWS,resultsBean.content);
+                    intent.putExtra(Config.NEWS,resultsBean);
                     mContext.startActivity(intent);
                     Log.e("xxxxxxx",resultsBean.content);
                 }else{

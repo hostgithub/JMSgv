@@ -1,12 +1,13 @@
 package com.cn.gov.jms.model;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
  * Created by wangjiawei on 2017-9-20.
  */
 
-public class Detail {
+public class Detail implements Serializable{
 
     private boolean success;
     private List<ResultsBean> results;
@@ -27,7 +28,7 @@ public class Detail {
         this.results = results;
     }
 
-    public static class ResultsBean {
+    public static class ResultsBean implements Serializable{
 
         public String title;
         public String source;

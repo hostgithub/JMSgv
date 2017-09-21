@@ -11,7 +11,7 @@ public class Config
     public static final String NEWS = "news";
 
     //public static final String BANNER_BASE_URL = "http://192.168.0.110:8080/";
-    public static final String BANNER_BASE_URL = "http://192.168.0.122:8080/";
+    public static final String BANNER_BASE_URL = "http://192.168.0.124:8080/";
     //http://192.168.0.110:8080/app/corNewsListImg.do   获取json
     public static final String BANNER_BASE_URL_HTML_INDEX = "http://192.168.0.122:8080/html/index/";
 
