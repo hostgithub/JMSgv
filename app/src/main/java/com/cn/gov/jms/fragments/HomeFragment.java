@@ -33,7 +33,6 @@ import com.cn.gov.jms.presenter.NewsPresenterImpl;
 import com.cn.gov.jms.services.Api;
 import com.cn.gov.jms.ui.Convenience_ServicesActivity;
 import com.cn.gov.jms.ui.DetailActivity;
-import com.cn.gov.jms.ui.Investment_guideActivity;
 import com.cn.gov.jms.ui.NewsCenterActivity;
 import com.cn.gov.jms.ui.Online_servicesActivity;
 import com.cn.gov.jms.ui.PublicNoticeActivity;
@@ -245,7 +244,8 @@ public class HomeFragment extends BaseFragment implements SwipeRefreshLayout.OnR
                         getActivity().startActivity(new Intent(getActivity(), ZhengminHudongActivity.class));
                         break;
                     case 7:
-                        getActivity().startActivity(new Intent(getActivity(), Investment_guideActivity.class));
+                        //getActivity().startActivity(new Intent(getActivity(), Investment_guideActivity.class));
+                        Toast.makeText(getActivity(),"投资指南待定",Toast.LENGTH_SHORT).show();
                         break;
                     default:
                         break;

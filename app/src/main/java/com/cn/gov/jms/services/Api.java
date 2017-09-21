@@ -21,11 +21,11 @@ public interface Api {    //retrofit方式
     Call<DataInfo> getData(@Path("pageCount") int pageCount,
                            @Path("pageIndex") int pageIndex);
 
-    //http://192.168.0.110:8080/app/corNewsListImg.do   获取json
+    //http://192.168.0.110:8080/app/corNewsListImg.do   获取轮播图json
     @POST("/app/corNewsListImg.do")
     Call<Banners> getBannerData();
 
-    //http://192.168.0.122:8080//app/corGetById.do?id=103558   获取json
+    //http://192.168.0.122:8080//app/corGetById.do?id=103558   获取轮播图详情json
     @GET("/app/corGetById.do")
     Call<Detail> getDetailData(@Query("id") int id);
 
@@ -36,4 +36,8 @@ public interface Api {    //retrofit方式
     //http://192.168.0.124:8080/app/publicNotice.do?id=000100050009  获取公告公示列表json  固定ID
     @GET("/app/publicNotice.do")
     Call<PublicNotice> getPublicNoticeData(@Query("id") String id, @Query("pages") int pages);
+
+    //http://192.168.0.122:8080/app/singlePageData.do?id=103558   获取市情概况json
+    //@GET("/app/singlePageData.do")
+    //Call<Detail> getDetailData(@Query("id") int id);
 }

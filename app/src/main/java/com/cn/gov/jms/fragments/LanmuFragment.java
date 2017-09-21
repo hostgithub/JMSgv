@@ -1,6 +1,7 @@
 package com.cn.gov.jms.fragments;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
@@ -18,7 +19,14 @@ import com.cn.gov.jms.adapter.TopAdapter;
 import com.cn.gov.jms.base.BaseFragment;
 import com.cn.gov.jms.model.Banners;
 import com.cn.gov.jms.services.Api;
+import com.cn.gov.jms.ui.Convenience_ServicesActivity;
+import com.cn.gov.jms.ui.NewsCenterActivity;
+import com.cn.gov.jms.ui.Online_servicesActivity;
+import com.cn.gov.jms.ui.PublicNoticeActivity;
 import com.cn.gov.jms.ui.R;
+import com.cn.gov.jms.ui.ShiQingGaiKuangActivity;
+import com.cn.gov.jms.ui.ZhengWuGongKaiActivity;
+import com.cn.gov.jms.ui.ZhengminHudongActivity;
 import com.zanlabs.widget.infiniteviewpager.InfiniteViewPager;
 import com.zanlabs.widget.infiniteviewpager.indicator.CirclePageIndicator;
 
@@ -172,28 +180,35 @@ public class LanmuFragment extends BaseFragment
     public void onClick(View view) {
         switch (view.getId()){
             case R.id.situation:
-                Toast.makeText(getActivity(),"市情概况",Toast.LENGTH_SHORT).show();
+                getActivity().startActivity(new Intent(getActivity(), ShiQingGaiKuangActivity.class));
+                //Toast.makeText(getActivity(),"市情概况",Toast.LENGTH_SHORT).show();
                 break;
             case R.id.newcenter:
-                Toast.makeText(getActivity(),"新闻中心",Toast.LENGTH_SHORT).show();
+                getActivity().startActivity(new Intent(getActivity(), NewsCenterActivity.class));
+                //Toast.makeText(getActivity(),"新闻中心",Toast.LENGTH_SHORT).show();
                 break;
             case R.id.gove_public:
-                Toast.makeText(getActivity(),"政务公开",Toast.LENGTH_SHORT).show();
+                getActivity().startActivity(new Intent(getActivity(), ZhengWuGongKaiActivity.class));
+                //Toast.makeText(getActivity(),"政务公开",Toast.LENGTH_SHORT).show();
                 break;
             case R.id.announcement:
-                Toast.makeText(getActivity(),"公告公示",Toast.LENGTH_SHORT).show();
+                getActivity().startActivity(new Intent(getActivity(), PublicNoticeActivity.class));
+                //Toast.makeText(getActivity(),"公告公示",Toast.LENGTH_SHORT).show();
                 break;
             case R.id.online_services:
-                Toast.makeText(getActivity(),"在线服务",Toast.LENGTH_SHORT).show();
+                getActivity().startActivity(new Intent(getActivity(), Online_servicesActivity.class));
+                //Toast.makeText(getActivity(),"在线服务",Toast.LENGTH_SHORT).show();
                 break;
             case R.id.convenience_services:
-                Toast.makeText(getActivity(),"便民服务",Toast.LENGTH_SHORT).show();
+                getActivity().startActivity(new Intent(getActivity(), Convenience_ServicesActivity.class));
+                //Toast.makeText(getActivity(),"便民服务",Toast.LENGTH_SHORT).show();
                 break;
             case R.id.interaction:
-                Toast.makeText(getActivity(),"政民互动",Toast.LENGTH_SHORT).show();
+                getActivity().startActivity(new Intent(getActivity(), ZhengminHudongActivity.class));
+                //Toast.makeText(getActivity(),"政民互动",Toast.LENGTH_SHORT).show();
                 break;
             case R.id.investment_guide:
-                Toast.makeText(getActivity(),"投资指南",Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(),"投资指南待定",Toast.LENGTH_SHORT).show();
                 break;
             default:
                 break;
