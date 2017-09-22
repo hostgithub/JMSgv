@@ -15,6 +15,7 @@ import android.widget.Toast;
 
 import com.cn.gov.jms.base.BaseActivity;
 import com.cn.gov.jms.fragments.CollectFragment;
+import com.cn.gov.jms.fragments.CopyFragment;
 import com.cn.gov.jms.fragments.HomeFragment;
 import com.cn.gov.jms.fragments.LanmuFragment;
 import com.cn.gov.jms.fragments.MineFragment;
@@ -52,6 +53,7 @@ public class MainActivity extends BaseActivity
     private LanmuFragment mLanmuFragment;
     private CollectFragment mCollectFragment;
     private MineFragment mMineFragment;
+    private CopyFragment copyFragment;
     private boolean isExit;
 
 //    @Override
@@ -193,13 +195,13 @@ public class MainActivity extends BaseActivity
                 }
                 break;
             case 2:
-                if (mCollectFragment != null)
+                if (copyFragment != null)
                 {
-                    ft.show(mCollectFragment);
+                    ft.show(copyFragment);
                 } else
                 {
-                    mCollectFragment = CollectFragment.getInstance();
-                    ft.add(R.id.main_frame, mCollectFragment);
+                    copyFragment = CopyFragment.getInstance();
+                    ft.add(R.id.main_frame, copyFragment);
                 }
                 break;
             case 3:
@@ -248,9 +250,9 @@ public class MainActivity extends BaseActivity
         {
             ft.hide(mLanmuFragment);
         }
-        if (mCollectFragment != null)
+        if (copyFragment != null)
         {
-            ft.hide(mCollectFragment);
+            ft.hide(copyFragment);
         }
         if (mMineFragment != null)
         {

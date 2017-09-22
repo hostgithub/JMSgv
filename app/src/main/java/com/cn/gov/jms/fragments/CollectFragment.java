@@ -123,7 +123,7 @@ public class CollectFragment extends BaseFragment implements GirlContract.View, 
         mRecyclerView.setHasFixedSize(true);
         //mRecyclerView.setItemAnimator(new DefaultItemAnimator());
         //mRecyclerView.addItemDecoration(new DefaultItemDecoration(getActivity()));
-        mAdapter = new GirlAdapter(jcodes, getActivity());
+        //mAdapter = new GirlAdapter(jcodes, getActivity());----------------------------------------------------------------------
         //条目点击事件
         mAdapter.setOnItemClickLitener(new GirlAdapter.OnItemClickListener() {
             @Override
@@ -254,10 +254,10 @@ public class CollectFragment extends BaseFragment implements GirlContract.View, 
     @Override
     public void returnData(List<JcodeEntity> datas) {
         if (pageIndex == 1) {
-            mAdapter.replaceAll(datas);
+            //mAdapter.replaceAll(datas);----------------------------------
             mRefreshLayout.setRefreshing(false);
         } else {
-            mAdapter.addAll(datas);
+            //mAdapter.addAll(datas);---------------------------------------------------
             mAdapter.setFooterVisible(View.GONE);
         }
     }

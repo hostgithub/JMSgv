@@ -8,8 +8,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
+import com.cn.gov.jms.Config;
 import com.cn.gov.jms.base.BaseViewHolder;
-import com.cn.gov.jms.entity.JcodeEntity;
+import com.cn.gov.jms.model.NewCenter;
 import com.cn.gov.jms.ui.R;
 import com.cn.gov.jms.utils.ImageLoaderUtils;
 
@@ -25,19 +26,19 @@ public class GirlAdapter extends RecyclerView.Adapter<BaseViewHolder> {
     private static final int ITEM_NOIMAGE = 1;
     private static final int ITEM_HASIMAGE = 2;
 
-    private List<JcodeEntity> datas;
+    private List<NewCenter.ResultsBean> datas;
     private Context mContext;
     private int viewFooter;
     private View footerView;
     private OnItemClickListener mOnItemClickListener;
     private static final String HOST = "http://www.jcodecraeer.com";
 
-    public GirlAdapter(List<JcodeEntity> datas, Context context) {
+    public GirlAdapter(List<NewCenter.ResultsBean> datas, Context context) {
         this.datas = datas;
         this.mContext = context;
     }
 
-    public void replaceAll(List<JcodeEntity> elements) {
+    public void replaceAll(List<NewCenter.ResultsBean> elements) {
         if (datas.size() > 0) {
             datas.clear();
         }
@@ -45,7 +46,7 @@ public class GirlAdapter extends RecyclerView.Adapter<BaseViewHolder> {
         notifyDataSetChanged();
     }
 
-    public void addAll(List<JcodeEntity> elements) {
+    public void addAll(List<NewCenter.ResultsBean> elements) {
         datas.addAll(elements);
         notifyDataSetChanged();
     }
@@ -74,13 +75,13 @@ public class GirlAdapter extends RecyclerView.Adapter<BaseViewHolder> {
             }
 
             int type = getItemViewType(position);
-            final JcodeEntity item = datas.get(position);
+            final NewCenter.ResultsBean item = datas.get(position);
             if (type == ITEM_HASIMAGE) {
-                ImageLoaderUtils.loadingImg(mContext, (ImageView) holder.getView(R.id.cover), HOST + item.getImgUrl());
+                ImageLoaderUtils.loadingImg(mContext, (ImageView) holder.getView(R.id.cover), Config.BANNER_BASE_URL + item.picNme);
             }
             //CircleImageView avatar = holder.getView(R.id.avatar);
-            holder.setText(R.id.title, item.getTitle());
-            holder.setText(R.id.content, item.getContent());
+            holder.setText(R.id.title, item.title);
+            holder.setText(R.id.content, item.text);
 
 //            holder.setText(R.id.author, item.getAuthor());
 //            holder.setText(R.id.seeNum, item.getWatch());
@@ -113,7 +114,7 @@ public class GirlAdapter extends RecyclerView.Adapter<BaseViewHolder> {
             type = TYPE_FOOTER;
             return type;
         }
-        if (TextUtils.isEmpty(datas.get(position).getImgUrl())) {
+        if (TextUtils.isEmpty(datas.get(position).picNme)) {
             type = ITEM_NOIMAGE;
         } else {
             type = ITEM_HASIMAGE;
