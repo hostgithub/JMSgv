@@ -5,6 +5,8 @@ import com.cn.gov.jms.model.DataInfo;
 import com.cn.gov.jms.model.Detail;
 import com.cn.gov.jms.model.NewCenter;
 import com.cn.gov.jms.model.PublicNotice;
+import com.cn.gov.jms.model.Sqgk;
+import com.cn.gov.jms.model.SqgkDetail;
 
 import retrofit2.Call;
 import retrofit2.http.GET;
@@ -37,12 +39,22 @@ public interface Api {    //retrofit方式
     @GET("/app/publicNotice.do")
     Call<PublicNotice> getPublicNoticeData(@Query("id") String id, @Query("pages") int pages);
 
-    //http://192.168.0.122:8080/app/singlePageData.do?id=103558   获取市情概况json
-    //@GET("/app/singlePageData.do")
-    //Call<Detail> getDetailData(@Query("id") int id);
 
     //http://192.168.0.124:8080/app/corGetzwgkData.do?id=000100020022&pages=1  获取政务公开列表json  固定ID
     @GET("/app/corGetzwgkData.do")
     Call<PublicNotice> getZhengwuPublicData(@Query("id") String id, @Query("pages") int pages);
+
+
+    //http://192.168.0.122:8080/app/singlePageData.do   获取市情概况json
+    @GET("/app/singlePageData.do")
+    Call<Sqgk> getSqgkData();
+
+    //http://192.168.0.130:8080/app/singlePageById.do?id=2  历史沿革
+    @GET("/app/singlePageById.do")
+    Call<SqgkDetail> getSqgkDetailData(@Query("id") int id);
+
+    //http://192.168.0.122:8080/app/singlePageManData.do  关于我们
+
+
 
 }

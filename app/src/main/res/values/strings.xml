@@ -20,7 +20,6 @@
     <string name="bmcx">便民查询</string>
     <string name="bmjf">便民缴费</string>
     <string name="zfxxgkzd">政府信息公开制度</string>
-    <string name="text">文本http://upload.jianshu.io/admin_banners/app_images/2542/5b04b8ccb01432425cb13dab1aed399da607b454.jpg</string>
     <string-array name="banner_image">
         <item>http://upload.jianshu.io/admin_banners/app_images/2542/5b04b8ccb01432425cb13dab1aed399da607b454.jpg</item>
         <item>http://upload.jianshu.io/admin_banners/app_images/2541/a665552696b860dad9783816b811af92d51e1892.jpg</item>

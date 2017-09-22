@@ -87,7 +87,8 @@ public class ZhengWuGongKaiActivity extends BaseActivity {
                 break;
             case R.id.government_information_public_directory:finish();
                 break;
-            case R.id.guide_to_government_information_disclosure:finish();
+            case R.id.guide_to_government_information_disclosure:
+                startActivity(new Intent(ZhengWuGongKaiActivity.this,ListGkznActivity.class));
                 break;
             case R.id.open_in_accordance_with_the_application:finish();
                 break;

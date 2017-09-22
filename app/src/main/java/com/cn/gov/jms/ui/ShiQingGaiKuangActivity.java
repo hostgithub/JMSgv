@@ -1,6 +1,7 @@
 package com.cn.gov.jms.ui;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.res.AssetManager;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
@@ -14,11 +15,11 @@ import android.widget.Toast;
 import com.cn.gov.jms.Config;
 import com.cn.gov.jms.adapter.SQGKAdapter;
 import com.cn.gov.jms.base.BaseActivity;
-import com.cn.gov.jms.model.Banners;
 import com.cn.gov.jms.model.LocalJsonFile;
+import com.cn.gov.jms.model.Sqgk;
+import com.cn.gov.jms.model.SqgkDetail;
 import com.cn.gov.jms.services.Api;
 import com.cn.gov.jms.utils.RecyclerViewSpacesItemDecoration;
-import com.google.gson.Gson;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -41,43 +42,43 @@ public class ShiQingGaiKuangActivity extends BaseActivity {
 
     @BindView(R.id.recyerview)
     RecyclerView mRecyclerView;
-    private List<Banners.ResultsBean> resultsBeanList;
+    private List<LocalJsonFile.DynamicBean> resultsBeanList;
+    private List<Sqgk.ResultsBean> list;
     private SQGKAdapter sqgkAdapter;
     LinearLayoutManager linearLayoutManager;
     private boolean connect = false;//判断网络是否连接正常
 
     @Override
     protected int getLayoutId() {
-        checkNet();
+
         return R.layout.activity_shi_qing_gai_kuang;
     }
 
     @Override
     protected void initView() {
+
         resultsBeanList = new ArrayList<>();
+        list = new ArrayList<>();
+        checkNet();
         linearLayoutManager=new LinearLayoutManager(this);
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         mRecyclerView.setLayoutManager(linearLayoutManager);
         mRecyclerView.setHasFixedSize(true);
         HashMap<String, Integer> stringIntegerHashMap = new HashMap<>();
         stringIntegerHashMap.put(RecyclerViewSpacesItemDecoration.TOP_DECORATION,10);//top间距
-
         stringIntegerHashMap.put(RecyclerViewSpacesItemDecoration.BOTTOM_DECORATION,10);//底部间距
-
         //stringIntegerHashMap.put(RecyclerViewSpacesItemDecoration.LEFT_DECORATION,10);//左间距
-
         //stringIntegerHashMap.put(RecyclerViewSpacesItemDecoration.RIGHT_DECORATION,10);//右间距
-
         mRecyclerView.addItemDecoration(new RecyclerViewSpacesItemDecoration(stringIntegerHashMap));
 
-        Gson gson=new Gson();
-        LocalJsonFile localJsonFile=gson.fromJson(getJson(this),LocalJsonFile.class);
-        Log.e("+++++++++++",localJsonFile.getDynamic().get(0).getContent());
-        sqgkAdapter = new SQGKAdapter(ShiQingGaiKuangActivity.this, localJsonFile.getDynamic());
-        mRecyclerView.setAdapter(sqgkAdapter);
+//        Gson gson=new Gson();
+//        LocalJsonFile localJsonFile=gson.fromJson(getJson(this),LocalJsonFile.class);
+//        Log.e("+++++++++++",localJsonFile.getDynamic().get(0).getContent());
+//        sqgkAdapter = new SQGKAdapter(ShiQingGaiKuangActivity.this, localJsonFile.getDynamic()); //加载本地json
+//        mRecyclerView.setAdapter(sqgkAdapter);
 
         if(connect){
-            //initBannerData();
+            initBannerData();
         }else{
             Toast.makeText(this,"您还没有连接网络!",Toast.LENGTH_SHORT).show();
         }
@@ -130,29 +131,63 @@ public class ShiQingGaiKuangActivity extends BaseActivity {
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         Api api =retrofit.create(Api.class);
-        Call<Banners> call=api.getBannerData();
-        call.enqueue(new Callback<Banners>() {
+        Call<Sqgk> call=api.getSqgkData();
+        call.enqueue(new Callback<Sqgk>() {
             @Override
-            public void onResponse(Call<Banners> call, Response<Banners> response) {
+            public void onResponse(Call<Sqgk> call, Response<Sqgk> response) {
                 if(response!=null){
-                    Banners banners=response.body();
-                    Log.e("++++++++++",banners.success);
-                    resultsBeanList=banners.getResults();
-                    Log.e("++++++++++",resultsBeanList.get(0).get_id());
-                    Log.e("++++++++++",resultsBeanList.get(0).getTitle());
-                    Log.e("++++++++++",resultsBeanList.get(0).getUrl());
-                    Log.e("++++++++++",resultsBeanList.size()+"");
-
+                    Sqgk banners=response.body();
+                    list=banners.getResults();
                     //sqgkAdapter = new SQGKAdapter(ShiQingGaiKuangActivity.this, resultsBeanList);
+                    sqgkAdapter = new SQGKAdapter(ShiQingGaiKuangActivity.this, list);
                     mRecyclerView.setAdapter(sqgkAdapter);
+
+                    sqgkAdapter.setOnItemClickLitener(new SQGKAdapter.OnItemClickListener() {
+                        @Override
+                        public void onItemClick(int position) {
+                            getData(Integer.parseInt(list.get(position).id));
+                        }
+                    });
                 }else{
                     Toast.makeText(ShiQingGaiKuangActivity.this,"数据为空!",Toast.LENGTH_SHORT).show();
                 }
             }
 
             @Override
-            public void onFailure(Call<Banners> call, Throwable t) {
+            public void onFailure(Call<Sqgk> call, Throwable t) {
                 Toast.makeText(ShiQingGaiKuangActivity.this,"请求失败!",Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+
+    private void getData(int id){
+        //使用retrofit配置api
+        Retrofit retrofit=new Retrofit.Builder()
+                .baseUrl(Config.BANNER_BASE_URL)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+        Api api =retrofit.create(Api.class);
+        Call<SqgkDetail> call=api.getSqgkDetailData(id);
+        call.enqueue(new Callback<SqgkDetail>() {
+            @Override
+            public void onResponse(Call<SqgkDetail> call, Response<SqgkDetail> response) {
+                if(response!=null){
+                    SqgkDetail detail=response.body();
+                    SqgkDetail.ResultsBean resultsBean=detail.getResults().get(0);
+                    Intent intent = new Intent(ShiQingGaiKuangActivity.this,ShiqinggaikuangListDetailActivity.class);
+                    intent.putExtra(Config.NEWS,resultsBean);
+                    startActivity(intent);
+                    Log.e("xxxxxxx",resultsBean.content);
+                }else{
+                    Toast.makeText(ShiQingGaiKuangActivity.this,"数据为空!",Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<SqgkDetail> call, Throwable t) {
+                Toast.makeText(ShiQingGaiKuangActivity.this,"请求失败!",Toast.LENGTH_SHORT).show();
+                Log.e("-------------",t.getMessage().toString());
             }
         });
     }

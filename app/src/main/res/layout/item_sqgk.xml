@@ -14,6 +14,11 @@
     <TextView
         android:layout_width="wrap_content" android:textSize="17sp"
         android:layout_height="wrap_content" android:maxLines="3"
-        android:textColor="#000" android:text="@string/text"
-        android:layout_marginTop="10dp" android:id="@+id/tv_content"/>
+        android:textColor="#000" android:text="佳木斯概况佳木斯概况佳木斯概况佳木斯概况佳木斯概况佳木斯概况佳木斯概况"
+        android:layout_marginTop="10dp" android:id="@+id/tv_content"
+        android:ellipsize="end"/>
+    <TextView
+        android:layout_width="wrap_content" android:textColor="#EE3B3B"
+        android:layout_height="wrap_content" android:text="查看详情"
+        android:layout_gravity="right" android:textSize="20sp" android:layout_marginRight="5dp"/>
 </LinearLayout>
