@@ -80,7 +80,15 @@
             android:name=".NewsCenterActivity"
             android:screenOrientation="portrait"
             android:theme="@style/activityAnimation" />
-        <activity android:name=".PublicNoticeActivity"
+        <activity
+            android:name=".PublicNoticeActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/activityAnimation" />
+        <activity
+            android:name=".PublicNoticeDetailActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/activityAnimation" />
+        <activity android:name=".ListZwgkActivity"
             android:screenOrientation="portrait"
             android:theme="@style/activityAnimation"></activity>
     </application>

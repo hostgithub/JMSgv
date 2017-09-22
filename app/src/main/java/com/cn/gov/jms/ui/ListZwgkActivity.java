@@ -9,11 +9,11 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.cn.gov.jms.Config;
-import com.cn.gov.jms.adapter.NewsCenterAdapter;
+import com.cn.gov.jms.adapter.PubliceNoticeAdapter;
 import com.cn.gov.jms.base.BaseActivity;
 import com.cn.gov.jms.base.EndLessOnScrollListener;
 import com.cn.gov.jms.model.Detail;
-import com.cn.gov.jms.model.NewCenter;
+import com.cn.gov.jms.model.PublicNotice;
 import com.cn.gov.jms.services.Api;
 import com.cn.gov.jms.utils.RecyclerViewSpacesItemDecoration;
 
@@ -28,21 +28,21 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class NewsCenterActivity extends BaseActivity implements SwipeRefreshLayout.OnRefreshListener {
+public class ListZwgkActivity extends BaseActivity implements SwipeRefreshLayout.OnRefreshListener {
 
     //照片墙
     @BindView(R.id.refreshLayout)
     SwipeRefreshLayout refreshLayout;
     @BindView(R.id.recyerview)
     RecyclerView mRecyclerView;
-    private ArrayList<NewCenter.ResultsBean> list;
-    private NewsCenterAdapter picAdapter;
+    private ArrayList<PublicNotice.ResultsBean> list;
+    private PubliceNoticeAdapter picAdapter;
     private LinearLayoutManager linearLayoutManager;
     private int pages=1;
 
     @Override
     protected int getLayoutId() {
-        return R.layout.activity_news_center;
+        return R.layout.activity_list_zwgk;
     }
 
     @Override
@@ -69,9 +69,11 @@ public class NewsCenterActivity extends BaseActivity implements SwipeRefreshLayo
 
         mRecyclerView.addItemDecoration(new RecyclerViewSpacesItemDecoration(stringIntegerHashMap));
 
-        picAdapter=new NewsCenterAdapter(this,list);
+        picAdapter=new PubliceNoticeAdapter(this,list);
+
+
         //条目点击事件
-        picAdapter.setOnItemClickLitener(new NewsCenterAdapter.OnItemClickListener() {
+        picAdapter.setOnItemClickLitener(new PubliceNoticeAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(int position) {
                 getData(Integer.parseInt(list.get(position)._id));
@@ -81,7 +83,10 @@ public class NewsCenterActivity extends BaseActivity implements SwipeRefreshLayo
         mRecyclerView.setAdapter(picAdapter);
 
         //mRecyclerView.setAdapter(picAdapter);
-        picAdapter.addFooterView(R.layout.view_footer);//添加脚布局
+        if(list.size()>6){
+            picAdapter.addFooterView(R.layout.view_footer);//添加脚布局
+        }
+
         mRecyclerView.addOnScrollListener(new EndLessOnScrollListener(linearLayoutManager) {//滑动到底部 加载更多
             //EndLessOnScrollListener 是自定义的监听器
             @Override
@@ -111,10 +116,10 @@ public class NewsCenterActivity extends BaseActivity implements SwipeRefreshLayo
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         Api api =retrofit.create(Api.class);
-        Call<NewCenter> call=api.getNewCenterData("000100050007",pages);
-        call.enqueue(new Callback<NewCenter>() {
+        Call<PublicNotice> call=api.getZhengwuPublicData("000100020022",pages);
+        call.enqueue(new Callback<PublicNotice>() {
             @Override
-            public void onResponse(Call<NewCenter> call, Response<NewCenter> response) {
+            public void onResponse(Call<PublicNotice> call, Response<PublicNotice> response) {
                 list.addAll(response.body().results);
                 Log.e("xxxxxx",response.body().toString());
                 picAdapter.notifyDataSetChanged();
@@ -122,8 +127,8 @@ public class NewsCenterActivity extends BaseActivity implements SwipeRefreshLayo
             }
 
             @Override
-            public void onFailure(Call<NewCenter> call, Throwable t) {
-                Toast.makeText(NewsCenterActivity.this,"请求失败!",Toast.LENGTH_SHORT).show();
+            public void onFailure(Call<PublicNotice> call, Throwable t) {
+                Toast.makeText(ListZwgkActivity.this,"请求失败!",Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -143,18 +148,18 @@ public class NewsCenterActivity extends BaseActivity implements SwipeRefreshLayo
                 if(response!=null){
                     Detail detail=response.body();
                     Detail.ResultsBean resultsBean=detail.getResults().get(0);
-                    Intent intent = new Intent(NewsCenterActivity.this,DetailActivity.class);
+                    Intent intent = new Intent(ListZwgkActivity.this,DetailActivity.class);
                     intent.putExtra(Config.NEWS,resultsBean);
                     startActivity(intent);
                     Log.e("xxxxxxx",resultsBean.content);
                 }else{
-                    Toast.makeText(NewsCenterActivity.this,"数据为空!",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(ListZwgkActivity.this,"数据为空!",Toast.LENGTH_SHORT).show();
                 }
             }
 
             @Override
             public void onFailure(Call<Detail> call, Throwable t) {
-                Toast.makeText(NewsCenterActivity.this,"请求失败!",Toast.LENGTH_SHORT).show();
+                Toast.makeText(ListZwgkActivity.this,"请求失败!",Toast.LENGTH_SHORT).show();
                 Log.e("-------------",t.getMessage().toString());
             }
         });

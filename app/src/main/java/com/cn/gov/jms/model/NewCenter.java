@@ -26,5 +26,6 @@ public class NewCenter implements Serializable{
         public String _id;
         public String picNme;
         public String addTime;
+        public String text;
     }
 }

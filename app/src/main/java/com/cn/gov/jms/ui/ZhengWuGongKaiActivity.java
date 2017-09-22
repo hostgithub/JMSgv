@@ -1,5 +1,6 @@
 package com.cn.gov.jms.ui;
 
+import android.content.Intent;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.GridView;
@@ -80,7 +81,9 @@ public class ZhengWuGongKaiActivity extends BaseActivity {
         switch (view.getId()){
             case R.id.iv_back:
                 finish();
-            case R.id.system_of_government_information_publicity:finish();
+                break;
+            case R.id.system_of_government_information_publicity:
+                startActivity(new Intent(ZhengWuGongKaiActivity.this,ListZwgkActivity.class));
                 break;
             case R.id.government_information_public_directory:finish();
                 break;
@@ -98,4 +101,7 @@ public class ZhengWuGongKaiActivity extends BaseActivity {
                 break;
         }
     }
+
+
+
 }

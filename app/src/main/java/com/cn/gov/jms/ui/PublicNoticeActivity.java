@@ -74,7 +74,7 @@ public class PublicNoticeActivity extends BaseActivity implements SwipeRefreshLa
         picAdapter.setOnItemClickLitener(new PubliceNoticeAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(int position) {
-                getData(Integer.parseInt(list.get(position)._id));
+                    getData(Integer.parseInt(list.get(position)._id));
                 //Toast.makeText(NewsCenterActivity.this,"点击了"+position,Toast.LENGTH_SHORT).show();
             }
         });
@@ -143,7 +143,7 @@ public class PublicNoticeActivity extends BaseActivity implements SwipeRefreshLa
                 if(response!=null){
                     Detail detail=response.body();
                     Detail.ResultsBean resultsBean=detail.getResults().get(0);
-                    Intent intent = new Intent(PublicNoticeActivity.this, DetailActivity.class);
+                    Intent intent = new Intent(PublicNoticeActivity.this,PublicNoticeDetailActivity.class);
                     intent.putExtra(Config.NEWS,resultsBean);
                     startActivity(intent);
                     Log.e("xxxxxxx",resultsBean.content);
