@@ -60,4 +60,16 @@ public interface Api {    //retrofit方式
     //http://192.168.0.122:8080/app/singlePageManData.do  关于我们与联系我们json
     @GET("/app/singlePageManData.do")
     Call<AboutAndContact> getAboutAndContactData();
+
+    //http://192.168.0.130:8080/app/fuzzyQuery.do?id=000100020004&pages=1   人事信息  法规公文
+    @GET("/app/fuzzyQuery.do")
+    Call<Gongzuonianbao> getPersonThingInfoData(@Query("id") String id, @Query("pages") int pages);
+
+    //http://192.168.0.130:8080/app/corGetzwgkData.do?id=000100020012&pages=1   民生工程  直属机构
+    @GET("/app/corGetzwgkData.do")
+    Call<Gongzuonianbao> getMinShengData(@Query("id") String id, @Query("pages") int pages);
+
+    //http://192.168.0.130:8080/app/keyAreas.do?pages=1   民生工程  直属机构
+    @GET("/app/keyAreas.do")
+    Call<Gongzuonianbao> getKeyAreasData(@Query("pages") int pages);
 }

@@ -53,7 +53,73 @@ public class ZhengWuGongKaiActivity extends BaseActivity {
         mGridview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                Toast.makeText(ZhengWuGongKaiActivity.this,"点击了第"+(i+1)+"个条目",Toast.LENGTH_SHORT).show();
+                switch (i){
+                    case 0://政府文件
+                        startActivity(new Intent(ZhengWuGongKaiActivity.this,GovFileActivity.class));
+                        break;
+                    case 1://政策解读
+                        startActivity(new Intent(ZhengWuGongKaiActivity.this,ZhengcejieduActivity.class));
+                        break;
+                    case 2://热点回应 没有
+                        Toast.makeText(ZhengWuGongKaiActivity.this,"热点回应暂定",Toast.LENGTH_SHORT).show();
+                        break;
+                    case 3://人事信息
+                        startActivity(new Intent(ZhengWuGongKaiActivity.this,PeronThingInfoActivity.class));
+                        break;
+                    case 4://民生工程
+                        startActivity(new Intent(ZhengWuGongKaiActivity.this,MinShengProjectActivity.class));
+                        break;
+                    case 5://法规公文
+                        startActivity(new Intent(ZhengWuGongKaiActivity.this,LawGuiwenActivity.class));
+                        break;
+                    case 6://领导之窗 没有
+                        Toast.makeText(ZhengWuGongKaiActivity.this,"暂无",Toast.LENGTH_SHORT).show();
+                        break;
+                    case 7://直属机构
+                        startActivity(new Intent(ZhengWuGongKaiActivity.this,ZhishujigouActivity.class));
+                        break;
+                    case 8://政府报告
+                        startActivity(new Intent(ZhengWuGongKaiActivity.this,GovReportActivity.class));
+                        break;
+                    case 9://领导讲话
+                        startActivity(new Intent(ZhengWuGongKaiActivity.this,LeaderSpeakingActivity.class));
+                        break;
+                    case 10://财经信息
+                        startActivity(new Intent(ZhengWuGongKaiActivity.this,MoneyInfoActivity.class));
+                        break;
+                    case 11://保障住房
+                        startActivity(new Intent(ZhengWuGongKaiActivity.this,BaoZhangZhuFangActivity.class));
+                        break;
+                    case 12://食药安全
+                        startActivity(new Intent(ZhengWuGongKaiActivity.this,ShiYaoAnQuanActivity.class));
+                        break;
+                    case 13://环境保护
+                        startActivity(new Intent(ZhengWuGongKaiActivity.this,EnviromentProtectActivity.class));
+                        break;
+                    case 14://安全生产
+                        startActivity(new Intent(ZhengWuGongKaiActivity.this,SafeProductActivity.class));
+                        break;
+                    case 15://政府采购
+                        Toast.makeText(ZhengWuGongKaiActivity.this,"暂无",Toast.LENGTH_SHORT).show();
+                        break;
+                    case 16://应急管理
+                        startActivity(new Intent(ZhengWuGongKaiActivity.this,YingjiGuanliActivity.class));
+                        break;
+                    case 17://拆迁征地
+                        startActivity(new Intent(ZhengWuGongKaiActivity.this,ChaiqianZhengdiActivity.class));
+                        break;
+                    case 18://公益救助
+                        startActivity(new Intent(ZhengWuGongKaiActivity.this,GongyiJiuzhuActivity.class));
+                        break;
+                    case 19://城乡建设
+                        startActivity(new Intent(ZhengWuGongKaiActivity.this,CityBuildActivity.class));
+                        break;
+                    case 20://监督检查
+                        startActivity(new Intent(ZhengWuGongKaiActivity.this,JianduCheckActivity.class));
+                        break;
+                    default:
+                        break;
+                }
             }
         });
 
@@ -92,12 +158,14 @@ public class ZhengWuGongKaiActivity extends BaseActivity {
                 break;
             case R.id.open_in_accordance_with_the_application:finish();//依申请公开
                 break;
-            case R.id.government_information_public_briefing:finish();//政府信息公开简报
+            case R.id.government_information_public_briefing:
+                startActivity(new Intent(ZhengWuGongKaiActivity.this,GongkaijianbaoActivity.class));//政府信息公开简报
                 break;
             case R.id.annual_report_on_government_information_work://政府信息工作年报
                 startActivity(new Intent(ZhengWuGongKaiActivity.this,ListGongkainianbaoActivity.class));
                 break;
-            case R.id.important_area:finish();//中点领域
+            case R.id.important_area:finish();//重点领域
+                startActivity(new Intent(ZhengWuGongKaiActivity.this,KeyAreaActivity.class));
                 break;
             default:
                 break;

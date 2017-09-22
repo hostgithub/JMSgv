@@ -70,17 +70,14 @@ public class MineFragment extends BaseFragment
     public void onClick(View view) {
         switch (view.getId()){
             case R.id.about_us:
-                Toast.makeText(getActivity(),"关于我们", Toast.LENGTH_SHORT).show();
                 getAboutData();
                 //getActivity().startActivity(new Intent(getActivity(), AboutusActivity.class));
                 break;
             case R.id.contact_us:
-                Toast.makeText(getActivity(),"联系我们", Toast.LENGTH_SHORT).show();
                 getContactData();
                 //getActivity().startActivity(new Intent(getActivity(), ContactusActivity.class));
                 break;
             case R.id.setting:
-                Toast.makeText(getActivity(),"设置", Toast.LENGTH_SHORT).show();
                 getActivity().startActivity(new Intent(getActivity(), SettingActivity.class));
                 break;
             default:
