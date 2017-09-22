@@ -9,7 +9,7 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.cn.gov.jms.Config;
-import com.cn.gov.jms.adapter.PubliceNoticeAdapter;
+import com.cn.gov.jms.adapter.GonggaogongshiAdapter;
 import com.cn.gov.jms.base.BaseActivity;
 import com.cn.gov.jms.base.EndLessOnScrollListener;
 import com.cn.gov.jms.model.Detail;
@@ -36,7 +36,7 @@ public class PublicNoticeActivity extends BaseActivity implements SwipeRefreshLa
     @BindView(R.id.recyerview)
     RecyclerView mRecyclerView;
     private ArrayList<PublicNotice.ResultsBean> list;
-    private PubliceNoticeAdapter picAdapter;
+    private GonggaogongshiAdapter picAdapter;
     private LinearLayoutManager linearLayoutManager;
     private int pages=1;
 
@@ -69,9 +69,9 @@ public class PublicNoticeActivity extends BaseActivity implements SwipeRefreshLa
 
         mRecyclerView.addItemDecoration(new RecyclerViewSpacesItemDecoration(stringIntegerHashMap));
 
-        picAdapter=new PubliceNoticeAdapter(this,list);
+        picAdapter=new GonggaogongshiAdapter(this,list);
         //条目点击事件
-        picAdapter.setOnItemClickLitener(new PubliceNoticeAdapter.OnItemClickListener() {
+        picAdapter.setOnItemClickLitener(new GonggaogongshiAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(int position) {
                     getData(Integer.parseInt(list.get(position)._id));

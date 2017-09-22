@@ -93,7 +93,7 @@
             android:screenOrientation="portrait"
             android:theme="@style/activityAnimation" />
         <activity
-            android:name=".ListGkznActivity"
+            android:name=".ListGongkainianbaoActivity"
             android:screenOrientation="portrait"
             android:theme="@style/activityAnimation" />
         <activity android:name=".ShiqinggaikuangListDetailActivity"

@@ -82,21 +82,22 @@ public class ZhengWuGongKaiActivity extends BaseActivity {
             case R.id.iv_back:
                 finish();
                 break;
-            case R.id.system_of_government_information_publicity:
+            case R.id.system_of_government_information_publicity://政府信息公开制度
                 startActivity(new Intent(ZhengWuGongKaiActivity.this,ListZwgkActivity.class));
                 break;
-            case R.id.government_information_public_directory:finish();
+            case R.id.government_information_public_directory:finish();//政府信息公开目录
                 break;
-            case R.id.guide_to_government_information_disclosure:
-                startActivity(new Intent(ZhengWuGongKaiActivity.this,ListGkznActivity.class));
+            case R.id.guide_to_government_information_disclosure://政府信息公开指南
+               finish();
                 break;
-            case R.id.open_in_accordance_with_the_application:finish();
+            case R.id.open_in_accordance_with_the_application:finish();//依申请公开
                 break;
-            case R.id.government_information_public_briefing:finish();
+            case R.id.government_information_public_briefing:finish();//政府信息公开简报
                 break;
-            case R.id.annual_report_on_government_information_work:finish();
+            case R.id.annual_report_on_government_information_work://政府信息工作年报
+                startActivity(new Intent(ZhengWuGongKaiActivity.this,ListGongkainianbaoActivity.class));
                 break;
-            case R.id.important_area:finish();
+            case R.id.important_area:finish();//中点领域
                 break;
             default:
                 break;

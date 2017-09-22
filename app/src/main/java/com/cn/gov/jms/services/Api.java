@@ -4,6 +4,7 @@ import com.cn.gov.jms.model.AboutAndContact;
 import com.cn.gov.jms.model.Banners;
 import com.cn.gov.jms.model.DataInfo;
 import com.cn.gov.jms.model.Detail;
+import com.cn.gov.jms.model.Gongzuonianbao;
 import com.cn.gov.jms.model.NewCenter;
 import com.cn.gov.jms.model.PublicNotice;
 import com.cn.gov.jms.model.Sqgk;
@@ -45,6 +46,8 @@ public interface Api {    //retrofit方式
     @GET("/app/corGetzwgkData.do")
     Call<PublicNotice> getZhengwuPublicData(@Query("id") String id, @Query("pages") int pages);
 
+    @GET("/app/corGetzwgkData.do")
+    Call<Gongzuonianbao> getGongzuonianbaoData(@Query("id") String id, @Query("pages") int pages);
 
     //http://192.168.0.122:8080/app/singlePageData.do   获取市情概况json
     @GET("/app/singlePageData.do")

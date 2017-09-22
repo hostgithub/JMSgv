@@ -9,11 +9,11 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.cn.gov.jms.Config;
-import com.cn.gov.jms.adapter.PubliceNoticeAdapter;
+import com.cn.gov.jms.adapter.GovInfoAdapter;
 import com.cn.gov.jms.base.BaseActivity;
 import com.cn.gov.jms.base.EndLessOnScrollListener;
 import com.cn.gov.jms.model.Detail;
-import com.cn.gov.jms.model.PublicNotice;
+import com.cn.gov.jms.model.Gongzuonianbao;
 import com.cn.gov.jms.services.Api;
 import com.cn.gov.jms.utils.RecyclerViewSpacesItemDecoration;
 
@@ -28,15 +28,19 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
+/**
+ * 政府信息公开制度 列表
+ */
 public class ListZwgkActivity extends BaseActivity implements SwipeRefreshLayout.OnRefreshListener {
+
 
     //照片墙
     @BindView(R.id.refreshLayout)
     SwipeRefreshLayout refreshLayout;
     @BindView(R.id.recyerview)
     RecyclerView mRecyclerView;
-    private ArrayList<PublicNotice.ResultsBean> list;
-    private PubliceNoticeAdapter picAdapter;
+    private ArrayList<Gongzuonianbao.ResultsBean> list;
+    private GovInfoAdapter picAdapter;
     private LinearLayoutManager linearLayoutManager;
     private int pages=1;
 
@@ -69,11 +73,11 @@ public class ListZwgkActivity extends BaseActivity implements SwipeRefreshLayout
 
         mRecyclerView.addItemDecoration(new RecyclerViewSpacesItemDecoration(stringIntegerHashMap));
 
-        picAdapter=new PubliceNoticeAdapter(this,list);
+        picAdapter=new GovInfoAdapter(this,list);
 
 
         //条目点击事件
-        picAdapter.setOnItemClickLitener(new PubliceNoticeAdapter.OnItemClickListener() {
+        picAdapter.setOnItemClickLitener(new GovInfoAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(int position) {
                 getData(Integer.parseInt(list.get(position)._id));
@@ -92,8 +96,10 @@ public class ListZwgkActivity extends BaseActivity implements SwipeRefreshLayout
             @Override
             public void onLoadMore() {
                 pages++;
-                picAdapter.setFooterVisible(View.VISIBLE);
                 initNewsData(pages);
+                if(list.size()>6){
+                    picAdapter.setFooterVisible(View.VISIBLE);
+                }
             }
 
             @Override
@@ -116,18 +122,23 @@ public class ListZwgkActivity extends BaseActivity implements SwipeRefreshLayout
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         Api api =retrofit.create(Api.class);
-        Call<PublicNotice> call=api.getZhengwuPublicData("000100020022",pages);
-        call.enqueue(new Callback<PublicNotice>() {
+        Call<Gongzuonianbao> call=api.getGongzuonianbaoData("000100020022",pages);
+        call.enqueue(new Callback<Gongzuonianbao>() {
             @Override
-            public void onResponse(Call<PublicNotice> call, Response<PublicNotice> response) {
-                list.addAll(response.body().results);
-                Log.e("xxxxxx",response.body().toString());
-                picAdapter.notifyDataSetChanged();
-                refreshLayout.setRefreshing(false);
+            public void onResponse(Call<Gongzuonianbao> call, Response<Gongzuonianbao> response) {
+                if(response.body().getResults().size()==0){
+                    Toast.makeText(ListZwgkActivity.this,"已经没有数据了!",Toast.LENGTH_SHORT).show();
+                }else{
+                    list.addAll(response.body().getResults());
+                    Log.e("xxxxxx请求数据集合大小", String.valueOf(list.size()));
+                    Log.e("xxxxxx请求数据response", String.valueOf(response.body().getResults().size()));
+                    picAdapter.notifyDataSetChanged();
+                    refreshLayout.setRefreshing(false);
+                }
             }
 
             @Override
-            public void onFailure(Call<PublicNotice> call, Throwable t) {
+            public void onFailure(Call<Gongzuonianbao> call, Throwable t) {
                 Toast.makeText(ListZwgkActivity.this,"请求失败!",Toast.LENGTH_SHORT).show();
             }
         });
@@ -172,7 +183,7 @@ public class ListZwgkActivity extends BaseActivity implements SwipeRefreshLayout
 
     @Override
     public void onRefresh() {
-        picAdapter.setFooterVisible(View.GONE);
+        //picAdapter.setFooterVisible(View.GONE);
         pages = 1;
         list.clear();
         initNewsData(1);

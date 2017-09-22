@@ -19,7 +19,7 @@ import java.util.List;
  * 发现的适配器，分为两种样式
  */
 
-public class PubliceNoticeAdapter extends RecyclerView.Adapter<BaseViewHolder> {
+public class GonggaogongshiAdapter extends RecyclerView.Adapter<BaseViewHolder> {
     private static final int TYPE_FOOTER = 0;
     private static final int ITEM_NOIMAGE = 1;
     private static final int ITEM_HASIMAGE = 2;
@@ -30,7 +30,7 @@ public class PubliceNoticeAdapter extends RecyclerView.Adapter<BaseViewHolder> {
     private View footerView;
     private OnItemClickListener mOnItemClickListener;
 
-    public PubliceNoticeAdapter(Context context, ArrayList<PublicNotice.ResultsBean> datas) {
+    public GonggaogongshiAdapter(Context context, ArrayList<PublicNotice.ResultsBean> datas) {
         this.datas = datas;
         this.mContext = context;
     }
