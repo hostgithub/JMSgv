@@ -1,5 +1,6 @@
 package com.cn.gov.jms.services;
 
+import com.cn.gov.jms.model.AboutAndContact;
 import com.cn.gov.jms.model.Banners;
 import com.cn.gov.jms.model.DataInfo;
 import com.cn.gov.jms.model.Detail;
@@ -49,12 +50,11 @@ public interface Api {    //retrofit方式
     @GET("/app/singlePageData.do")
     Call<Sqgk> getSqgkData();
 
-    //http://192.168.0.130:8080/app/singlePageById.do?id=2  历史沿革
+    //http://192.168.0.130:8080/app/singlePageById.do?id=2  市情概况里面每个模块的详情信息json   id=568    578 关于我们与联系我们 详情信息json
     @GET("/app/singlePageById.do")
     Call<SqgkDetail> getSqgkDetailData(@Query("id") int id);
 
-    //http://192.168.0.122:8080/app/singlePageManData.do  关于我们
-
-
-
+    //http://192.168.0.122:8080/app/singlePageManData.do  关于我们与联系我们json
+    @GET("/app/singlePageManData.do")
+    Call<AboutAndContact> getAboutAndContactData();
 }
