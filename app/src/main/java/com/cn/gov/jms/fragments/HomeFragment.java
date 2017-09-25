@@ -38,6 +38,7 @@ import com.cn.gov.jms.ui.Online_servicesActivity;
 import com.cn.gov.jms.ui.PublicNoticeActivity;
 import com.cn.gov.jms.ui.R;
 import com.cn.gov.jms.ui.ShiQingGaiKuangActivity;
+import com.cn.gov.jms.ui.Some_suggestionsActivity;
 import com.cn.gov.jms.ui.ZhengWuGongKaiActivity;
 import com.cn.gov.jms.ui.ZhengminHudongActivity;
 import com.cn.gov.jms.utils.CacheUtil;
@@ -184,8 +185,8 @@ public class HomeFragment extends BaseFragment implements SwipeRefreshLayout.OnR
                         getActivity().startActivity(new Intent(getActivity(), ZhengminHudongActivity.class));
                         break;
                     case 7:
-                        //getActivity().startActivity(new Intent(getActivity(), Investment_guideActivity.class));
-                        Toast.makeText(getActivity(),"投资指南待定",Toast.LENGTH_SHORT).show();
+                        getActivity().startActivity(new Intent(getActivity(), Some_suggestionsActivity.class));
+                        //Toast.makeText(getActivity(),"投资指南待定",Toast.LENGTH_SHORT).show();
                         break;
                     default:
                         break;
