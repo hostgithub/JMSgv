@@ -8,8 +8,8 @@
     <application
         android:name="com.cn.gov.jms.MyApplication"
         android:allowBackup="true"
-        android:icon="@drawable/icon_logo"
-        android:logo="@drawable/icon_logo"
+        android:icon="@drawable/jmslogo"
+        android:logo="@drawable/jmslogo"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity

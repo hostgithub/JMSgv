@@ -3,6 +3,8 @@ package com.cn.gov.jms.ui;
 import android.content.Intent;
 import android.text.Html;
 import android.view.View;
+import android.webkit.WebSettings;
+import android.webkit.WebView;
 import android.widget.TextView;
 
 import com.cn.gov.jms.Config;
@@ -16,8 +18,8 @@ public class ShiqinggaikuangListDetailActivity extends BaseActivity
 {
     @BindView(R.id.tv_title)
     TextView tv_title;
-    @BindView(R.id.tv_content)
-    TextView tv_content;
+    @BindView(R.id.webView)
+    WebView webView;
     @BindView(R.id.action_bar_title)
     TextView action_bar_title;
 
@@ -34,9 +36,11 @@ public class ShiqinggaikuangListDetailActivity extends BaseActivity
 //                LinearLayout.LayoutParams.FILL_PARENT);
         //mDetailWebView.setLayoutParams(mWebViewLP);
         //mDetailWebView.setInitialScale(100);
+        WebSettings webSettings = webView .getSettings();
+        webSettings.setLoadsImagesAutomatically(true);  //支持自动加载图片  用于加载网络 本地不适用
         Intent intent = getIntent();
         SqgkDetail.ResultsBean resultsBean= (SqgkDetail.ResultsBean) intent.getSerializableExtra(Config.NEWS);
-        tv_content.setText(Html.fromHtml(resultsBean.content));
+        webView.loadDataWithBaseURL(Config.BANNER_BASE_URL, resultsBean.content, "text/html", "utf-8", null);
         tv_title.setText(Html.fromHtml(resultsBean.title));
         action_bar_title.setText("新闻详情");
     }

@@ -39,7 +39,7 @@ public class AboutusActivity extends BaseActivity
 
     @Override
     protected void initView() {
-        processWebString();
+        //processWebString();
         Intent intent=getIntent();
         getData(Integer.parseInt(intent.getStringExtra(Config.NEWS)));
     }
@@ -70,7 +70,7 @@ public class AboutusActivity extends BaseActivity
                 if(response!=null){
                     SqgkDetail detail=response.body();
                     SqgkDetail.ResultsBean resultsBean=detail.getResults().get(0);
-                    webView.loadDataWithBaseURL(null, resultsBean.content, "text/html", "utf-8", null);
+                    webView.loadDataWithBaseURL(Config.BANNER_BASE_URL, resultsBean.content, "text/html", "utf-8", null);
                     Log.e("xxxxxxx",resultsBean.content);
                 }else{
                     Toast.makeText(AboutusActivity.this,"数据为空!",Toast.LENGTH_SHORT).show();

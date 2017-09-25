@@ -40,6 +40,7 @@ import com.cn.gov.jms.ui.R;
 import com.cn.gov.jms.ui.ShiQingGaiKuangActivity;
 import com.cn.gov.jms.ui.ZhengWuGongKaiActivity;
 import com.cn.gov.jms.ui.ZhengminHudongActivity;
+import com.cn.gov.jms.utils.CacheUtil;
 import com.cn.gov.jms.utils.RecyclerViewSpacesItemDecoration;
 import com.github.library.BaseRecyclerAdapter;
 import com.zanlabs.widget.infiniteviewpager.InfiniteViewPager;
@@ -121,7 +122,6 @@ public class HomeFragment extends BaseFragment implements SwipeRefreshLayout.OnR
     //private List<String> banner_img;
     private List<String> banner_url;
     private boolean connect = false;//判断网络是否连接正常
-    //private Handler mHandler;
 
     @Override
     public int getLayoutId()
@@ -133,15 +133,9 @@ public class HomeFragment extends BaseFragment implements SwipeRefreshLayout.OnR
     @Override
     public void initVariables()
     {
-
-        //mPresenter = new NewsPresenterImpl(getActivity(), this);
-
-        //banner_img = new ArrayList<>();
         banner_url = new ArrayList<>();
-        //banner_img = Arrays.asList(Config.BANNER_IMGS);
         resultsBeanList = new ArrayList<>();
         banner_url = Arrays.asList(Config.BANNER_URL);
-        //mHandler = new Handler();
     }
 
     @Override
@@ -149,60 +143,6 @@ public class HomeFragment extends BaseFragment implements SwipeRefreshLayout.OnR
     {
         mUnbinder = ButterKnife.bind(this, view);
         mHomeRecycler.setLayoutManager(new LinearLayoutManager(getActivity()));
-
-//        mAdapter = new BaseRecyclerAdapter<Datas.ResultBean.DataBean>(getActivity(), null, R.layout.item)
-//        {
-//            @Override
-//            protected void convert(BaseViewHolder helper, final Datas.ResultBean.DataBean item)
-//            {
-//                helper.setText(R.id.author_name, item.getAuthor_name());
-//                String title = item.getTitle();
-//                if (title.length() > 15)
-//                {
-//                    String s = title.substring(0, 15) + "...";
-//                    helper.setText(R.id.text_title, s);
-//                }else
-//                {
-//                    helper.setText(R.id.text_title, title);
-//                }
-//                helper.setText(R.id.realtype, item.getRealtype());
-//                helper.setText(R.id.date, item.getDate());
-//                SimpleDraweeView imageViews = (SimpleDraweeView) helper.getConvertView().findViewById(R.id.thumbnail);
-//                imageViews.setImageURI(item.getThumbnail_pic_s());
-//                RelativeLayout layout = (RelativeLayout) helper.getConvertView().findViewById(R.id.home_item);
-//                layout.setOnClickListener(new View.OnClickListener()
-//                {
-//                    @Override
-//                    public void onClick(View v)
-//                    {
-//                        Intent it = new Intent(getActivity(), DetailActivity.class);
-//                        it.putExtra(Config.NEWS, item.getUrl());
-//                        getActivity().startActivity(it);
-//                    }
-//                });
-//            }
-//        };
-//        mHomeRecycler.setAdapter(mAdapter);
-
-//        mHomeRefresh.setColorSchemeResources(R.color.colorBG);
-//        mHomeRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener()
-//        {
-//            @Override
-//            public void onRefresh()
-//            {
-//                mHomeRefresh.setRefreshing(true);
-//                initLoadData();
-//                mHandler.postDelayed(new Runnable()
-//                {
-//                    @Override
-//                    public void run()
-//                    {
-//                        mHomeRefresh.setRefreshing(false);
-//                    }
-//                }, 1200);
-//            }
-//        });
-
         //初始化  广告窗体
         mHomeHeader.attachTo(mHomeRecycler,true);
         initBannerData(); //服务器 链接不上  网页404
@@ -300,7 +240,6 @@ public class HomeFragment extends BaseFragment implements SwipeRefreshLayout.OnR
             public void hide() {
                 relativeLayout.animate().translationY(-relativeLayout.getHeight()).setInterpolator(new AccelerateDecelerateInterpolator());
                 relativeLayout.setVisibility(View.GONE);//效果 不是很好  总闪动
-
                 floatBtn.setVisibility(View.VISIBLE);//效果 不是很好  总闪动
             }
 
@@ -330,6 +269,8 @@ public class HomeFragment extends BaseFragment implements SwipeRefreshLayout.OnR
             public void onResponse(Call<Banners> call, Response<Banners> response) {
                 if(response!=null){
                     Banners banners=response.body();
+                    CacheUtil cacheUtil=CacheUtil.get(getActivity());
+                    cacheUtil.put(Config.CACHE,banners);
                     Log.e("++++++++++",banners.success);
                     resultsBeanList=banners.getResults();
                     Log.e("++++++++++",resultsBeanList.get(0).get_id());
