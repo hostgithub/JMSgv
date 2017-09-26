@@ -57,10 +57,11 @@ public class ZhengminHudongActivity extends BaseActivity {
                 break;
             case R.id.open_in_accordance_with_the_application:finish();
                 break;
-            case R.id.government_information_public_briefing:finish();
-                startActivity(new Intent(ZhengminHudongActivity.this,Some_suggestionsActivity.class));//进言献策
+            case R.id.government_information_public_briefing:
+                //startActivity(new Intent(ZhengminHudongActivity.this,Some_suggestionsActivity.class));//进言献策
+                startActivity(new Intent(ZhengminHudongActivity.this,SomeSuggestionsListActivity.class));//进言献策列表
                 break;
-            case R.id.annual_report_on_government_information_work:finish();
+            case R.id.annual_report_on_government_information_work:
                 startActivity(new Intent(ZhengminHudongActivity.this,Consulting_problemsActivity.class));//咨询问题
                 break;
             case R.id.important_area:finish();

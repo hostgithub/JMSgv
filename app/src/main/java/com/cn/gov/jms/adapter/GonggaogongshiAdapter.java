@@ -50,9 +50,9 @@ public class GonggaogongshiAdapter extends RecyclerView.Adapter<BaseViewHolder> 
     @Override
     public BaseViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         if (viewType == ITEM_NOIMAGE) {
-            return new BaseViewHolder(LayoutInflater.from(mContext).inflate(R.layout.item_gggs, parent, false));
+            return new BaseViewHolder(LayoutInflater.from(mContext).inflate(R.layout.item_some_suggestion, parent, false));
         } else if (viewType == ITEM_HASIMAGE) {
-            return new BaseViewHolder(LayoutInflater.from(mContext).inflate(R.layout.item_gggs, parent, false));
+            return new BaseViewHolder(LayoutInflater.from(mContext).inflate(R.layout.item_some_suggestion, parent, false));
         } else {
             footerView = LayoutInflater.from(mContext).inflate(viewFooter, parent, false);
             return new BaseViewHolder(footerView);
@@ -77,6 +77,7 @@ public class GonggaogongshiAdapter extends RecyclerView.Adapter<BaseViewHolder> 
             //CircleImageView avatar = holder.getView(R.id.avatar);
             holder.setText(R.id.title, item.title);
             holder.setText(R.id.time, item.addTime);
+            holder.setText(R.id.name, item.source);
 
 //            holder.setText(R.id.author, item.getAuthor());
 //            holder.setText(R.id.seeNum, item.getWatch());

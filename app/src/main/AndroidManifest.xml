@@ -195,6 +195,9 @@
         <activity android:name=".AboutusDetailActivity"
             android:screenOrientation="portrait"
             android:theme="@style/activityAnimation" ></activity>
+        <activity android:name=".SomeSuggestionsListActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/activityAnimation" ></activity>
     </application>
 
 </manifest>

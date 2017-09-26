@@ -80,4 +80,8 @@ public interface Api {    //retrofit方式
     @Headers({"Content-Type: application/json","Accept: application/json"})//需要添加头
     @POST("app/receiveData.do")
     Call<ResponseBean> postFlyRoute(@Body RequestBody route);//传入的参数为RequestBody
+
+    //http://192.168.0.137:8080/app/getSomeSuggestions.do?pages=1  进言献策
+    @GET("app/getSomeSuggestions.do")
+    Call<PublicNotice> getSomeSuggestionsData(@Query("pages") int pages);
 }
