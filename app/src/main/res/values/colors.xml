@@ -12,4 +12,5 @@
 
     <color name="main_color">#EB413D</color><!--主色调-->
     <color name="error">#ff4545</color>
+    <color name="title">#EE3B3B</color>
 </resources>

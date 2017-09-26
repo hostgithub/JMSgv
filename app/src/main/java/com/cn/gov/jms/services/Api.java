@@ -7,11 +7,15 @@ import com.cn.gov.jms.model.Detail;
 import com.cn.gov.jms.model.Gongzuonianbao;
 import com.cn.gov.jms.model.NewCenter;
 import com.cn.gov.jms.model.PublicNotice;
+import com.cn.gov.jms.model.ResponseBean;
 import com.cn.gov.jms.model.Sqgk;
 import com.cn.gov.jms.model.SqgkDetail;
 
+import okhttp3.RequestBody;
 import retrofit2.Call;
+import retrofit2.http.Body;
 import retrofit2.http.GET;
+import retrofit2.http.Headers;
 import retrofit2.http.POST;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
@@ -72,4 +76,8 @@ public interface Api {    //retrofit方式
     //http://192.168.0.130:8080/app/keyAreas.do?pages=1   民生工程  直属机构
     @GET("/app/keyAreas.do")
     Call<Gongzuonianbao> getKeyAreasData(@Query("pages") int pages);
+
+    @Headers({"Content-Type: application/json","Accept: application/json"})//需要添加头
+    @POST("app/receiveData.do")
+    Call<ResponseBean> postFlyRoute(@Body RequestBody route);//传入的参数为RequestBody
 }

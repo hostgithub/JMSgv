@@ -42,6 +42,8 @@
                 android:layout_height="wrap_content"  android:textSize="18sp"
                 android:layout_marginTop="15dp" android:textColor="#000"/>
             <EditText android:id="@+id/edt_theme"
+                android:imeOptions="actionNext" android:singleLine="true"
+                android:nextFocusForward="@+id/edt_name"
                 android:layout_width="match_parent" android:background="@drawable/editshape"
                 android:layout_height="wrap_content" android:layout_marginTop="10dp"/>
             <TextView android:text="建议人姓名:"
@@ -49,6 +51,8 @@
                 android:layout_height="wrap_content"  android:textSize="18sp"
                 android:layout_marginTop="15dp" android:textColor="#000"/>
             <EditText android:id="@+id/edt_name"
+                android:imeOptions="actionNext" android:singleLine="true"
+                android:nextFocusForward="@+id/edt_phone"
                 android:layout_width="match_parent" android:background="@drawable/editshape"
                 android:layout_height="wrap_content" android:layout_marginTop="10dp"/>
             <TextView android:text="电话:"
@@ -56,6 +60,8 @@
                 android:layout_height="wrap_content"  android:textSize="18sp"
                 android:layout_marginTop="15dp" android:textColor="#000"/>
             <EditText android:id="@+id/edt_phone"
+                android:imeOptions="actionNext" android:singleLine="true"
+                android:nextFocusForward="@+id/edt_address"
                 android:layout_width="match_parent" android:background="@drawable/editshape"
                 android:layout_height="wrap_content" android:layout_marginTop="10dp"/>
             <TextView android:text="地址:"
@@ -63,6 +69,8 @@
                 android:layout_height="wrap_content"  android:textSize="18sp"
                 android:layout_marginTop="15dp" android:textColor="#000"/>
             <EditText android:id="@+id/edt_address"
+                android:imeOptions="actionNext" android:singleLine="true"
+                android:nextFocusForward="@+id/edt_email"
                 android:layout_width="match_parent" android:background="@drawable/editshape"
                 android:layout_height="wrap_content" android:layout_marginTop="10dp"/>
             <TextView android:text="邮箱:"
@@ -70,6 +78,8 @@
             android:layout_height="wrap_content"  android:textSize="18sp"
             android:layout_marginTop="15dp" android:textColor="#000"/>
             <EditText android:id="@+id/edt_email"
+                android:imeOptions="actionNext" android:singleLine="true"
+                android:nextFocusForward="@+id/edt_content"
                 android:layout_width="match_parent" android:background="@drawable/editshape"
                 android:layout_height="wrap_content" android:layout_marginTop="10dp"/>
             <TextView android:text="内容:"
@@ -79,12 +89,12 @@
             <EditText android:id="@+id/edt_content"
                 android:layout_width="match_parent" android:background="@drawable/editshape"
                 android:layout_height="90dp" android:layout_marginTop="10dp"
-                android:gravity="left|top"/>
+                android:gravity="left|top" android:imeOptions="actionDone"/>
 
             <Button android:id="@+id/btn_submit" android:layout_marginTop="10dp"
-                android:text="提交" android:textColor="#ffff"
+                android:text="提  交" android:textColor="#ffff"
                 android:layout_width="120dp" android:layout_gravity="center_horizontal"
-                android:layout_height="40dp" android:background="#EE3B3B"/>
+                android:layout_height="40dp" android:background="@drawable/btnshape"/>
         </LinearLayout>
     </ScrollView>
 

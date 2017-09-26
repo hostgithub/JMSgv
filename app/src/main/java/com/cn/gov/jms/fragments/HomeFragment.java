@@ -251,9 +251,6 @@ public class HomeFragment extends BaseFragment implements SwipeRefreshLayout.OnR
             }
         });
     }
-
-
-
     /**
      *初始化 Banner数据
      */
@@ -436,5 +433,11 @@ public class HomeFragment extends BaseFragment implements SwipeRefreshLayout.OnR
             default:
                 break;
         }
+    }
+
+    @Override
+    public void onResume() {
+        mHomeViewpager.startAutoScroll();
+        super.onResume();
     }
 }
