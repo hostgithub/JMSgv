@@ -1,5 +1,6 @@
 package com.cn.gov.jms.ui;
 
+import android.content.Intent;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
@@ -47,7 +48,7 @@ public class SettingActivity extends BaseActivity {
                finish();
                break;
            case R.id.about_app:
-               Toast.makeText(this,"关于APP", Toast.LENGTH_SHORT).show();
+               startActivity(new Intent(SettingActivity.this, AboutusDetailActivity.class));
                break;
            case R.id.clear:
                try {

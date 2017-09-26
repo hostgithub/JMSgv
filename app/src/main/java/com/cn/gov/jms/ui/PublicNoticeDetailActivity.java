@@ -3,6 +3,7 @@ package com.cn.gov.jms.ui;
 import android.content.Intent;
 import android.text.Html;
 import android.view.View;
+import android.webkit.WebView;
 import android.widget.TextView;
 
 import com.cn.gov.jms.Config;
@@ -21,7 +22,7 @@ public class PublicNoticeDetailActivity extends BaseActivity
     @BindView(R.id.tv_time)
     TextView tv_time;
     @BindView(R.id.tv_content)
-    TextView tv_content;
+    WebView tv_content;
     @BindView(R.id.action_bar_title)
     TextView action_bar_title;
 
@@ -42,7 +43,8 @@ public class PublicNoticeDetailActivity extends BaseActivity
         action_bar_title.setText("公告公示");
         Intent intent = getIntent();
         Detail.ResultsBean resultsBean= (Detail.ResultsBean) intent.getSerializableExtra(Config.NEWS);
-        tv_content.setText(Html.fromHtml(resultsBean.content));
+        //tv_content.setText(Html.fromHtml(resultsBean.content));
+        tv_content.loadDataWithBaseURL(Config.BANNER_BASE_URL, resultsBean.content, "text/html", "utf-8", null);
         tv_title.setText(Html.fromHtml(resultsBean.title));
         tv_from.setText(Html.fromHtml("来源:"+resultsBean.source));
         tv_time.setText(Html.fromHtml("发布时间:"+resultsBean.addTime));

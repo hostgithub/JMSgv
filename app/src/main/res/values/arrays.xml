@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="kind">
+        <item>咨询问题1</item>
+        <item>咨询问题2 </item>
+        <item>咨询问题3</item>
+        <item>咨询问题4</item>
+        <item>咨询问题5</item>
+    </string-array>
+
+    <string-array name="bumen">
+        <item>住房保障局1</item>
+        <item>住房保障局2 </item>
+        <item>住房保障局3</item>
+        <item>住房保障局4</item>
+        <item>住房保障局5</item>
+    </string-array>
+</resources>

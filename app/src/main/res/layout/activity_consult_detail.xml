@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" android:background="@color/WhiteSmoke">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp" android:background="#EE3B3B">
+        <ImageView android:id="@+id/iv_back"
+            android:layout_width="50dp" android:src="@drawable/back"
+            android:layout_height="wrap_content" android:layout_marginLeft="10dp"/>
+        <TextView android:layout_centerInParent="true"
+            android:layout_width="wrap_content" android:text="咨询详情"
+            android:layout_height="wrap_content"
+            android:textColor="@color/colorWhite" android:layout_marginTop="20dp"
+            android:textSize="20sp" android:layout_marginLeft="5dp"/>
+    </RelativeLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" android:padding="10dp">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" android:orientation="vertical"
+            android:background="#fff" android:padding="5dp">
+            <TextView  android:text="主题"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"  android:textSize="20sp"
+                android:layout_marginTop="15dp" android:textColor="#000"/>
+            <View android:background="@drawable/realline"
+                android:layout_width="match_parent"
+                android:layout_height="2dp" android:layout_marginTop="10dp"/>
+            <TextView android:text="主题主题主题主题主题主题主题主题"
+                android:layout_width="wrap_content" android:id="@+id/tv_title"
+                android:layout_height="wrap_content"  android:textSize="18sp"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="15dp" android:textColor="#000"/>
+            <TextView android:text="2017-09-25 19:39"
+                android:layout_width="wrap_content" android:id="@+id/tv_time"
+                android:layout_height="wrap_content"  android:textSize="18sp"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="15dp" android:textColor="#000"/>
+            <TextView android:text="附件"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"  android:textSize="18sp"
+                android:layout_marginTop="15dp" android:textColor="#000"/>
+            <View android:background="@drawable/realline"
+                android:layout_width="match_parent"
+                android:layout_height="2dp" android:layout_marginTop="10dp"/>
+            <TextView android:text="无"
+                android:layout_width="wrap_content" android:id="@+id/tv_fujian"
+                android:layout_height="wrap_content"  android:textSize="18sp"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="15dp" android:textColor="#000"/>
+            <TextView android:text="类型"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"  android:textSize="18sp"
+                android:layout_marginTop="15dp" android:textColor="#000"/>
+            <View android:background="@drawable/realline"
+                android:layout_width="match_parent"
+                android:layout_height="2dp" android:layout_marginTop="10dp"/>
+            <TextView android:text="咨询问题"
+                android:layout_width="wrap_content" android:id="@+id/tv_kind"
+                android:layout_height="wrap_content"  android:textSize="18sp"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="15dp" android:textColor="#000"/>
+            <TextView android:text="咨询部门"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"  android:textSize="18sp"
+                android:layout_marginTop="15dp" android:textColor="#000"/>
+            <View android:background="@drawable/realline"
+                android:layout_width="match_parent"
+                android:layout_height="2dp" android:layout_marginTop="10dp"/>
+            <TextView android:text="不动产登记管理局"
+                android:layout_width="wrap_content" android:id="@+id/tv_bumen"
+                android:layout_height="wrap_content"  android:textSize="18sp"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="15dp" android:textColor="#000"/>
+            <TextView android:text="内容"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"  android:textSize="18sp"
+                android:layout_marginTop="15dp" android:textColor="#000"/>
+            <View android:background="@drawable/realline"
+                android:layout_width="match_parent"
+                android:layout_height="2dp" android:layout_marginTop="10dp"/>
+            <TextView android:text="内容内容内容内容内容内容内容内容内容内容内容"
+                android:layout_width="wrap_content" android:id="@+id/tv_content"
+                android:layout_height="wrap_content"  android:textSize="18sp"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="15dp" android:textColor="#000"/>
+
+            <TextView android:text="办理状态"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"  android:textSize="18sp"
+                android:layout_marginTop="15dp" android:textColor="#000"/>
+            <View android:background="@drawable/realline"
+                android:layout_width="match_parent"
+                android:layout_height="2dp" android:layout_marginTop="10dp"/>
+            <TextView android:text="已办"
+                android:layout_width="wrap_content" android:id="@+id/tv_state"
+                android:layout_height="wrap_content"  android:textSize="18sp"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="15dp" android:textColor="#000"/>
+            <TextView android:text="回复内容"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"  android:textSize="18sp"
+                android:layout_marginTop="15dp" android:textColor="@color/title"/>
+            <View android:background="@drawable/realline"
+                android:layout_width="match_parent"
+                android:layout_height="2dp" android:layout_marginTop="10dp"/>
+            <TextView android:text="回复内容回复内容回复内容回复内容回复内容回复内容回复内容"
+                android:layout_width="wrap_content" android:id="@+id/tv_return_content"
+                android:layout_height="wrap_content"  android:textSize="18sp"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="15dp" android:textColor="#000"/>
+            <TextView android:text="您对此回复是否满意"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"  android:textSize="18sp"
+                android:layout_marginTop="15dp" android:textColor="#000"/>
+            <View android:background="@drawable/realline"
+                android:layout_width="match_parent"
+                android:layout_height="2dp" android:layout_marginTop="10dp"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="40dp" android:layout_marginTop="10dp"
+                android:orientation="horizontal">
+
+                <RadioGroup
+                    android:id="@+id/rgStorageWay"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+                    <RadioButton
+                        android:id="@+id/rb1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:button="@null"
+                        android:drawableLeft="@drawable/selector_login_mode_radiobutton"
+                        android:text="非常满意" />
+
+                    <RadioButton
+                        android:id="@+id/rb2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:button="@null"
+                        android:layout_marginLeft="8dp"
+                        android:drawableLeft="@drawable/selector_login_mode_radiobutton"
+                        android:text="基本满意"/>
+
+                    <RadioButton
+                        android:id="@+id/rb3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:button="@null"
+                        android:layout_marginLeft="8dp"
+                        android:drawableLeft="@drawable/selector_login_mode_radiobutton"
+                        android:text="不满意" />
+                </RadioGroup>
+            </LinearLayout>
+
+            <Button android:id="@+id/btn_submit" android:layout_marginTop="15dp"
+                android:text="保存意见" android:textColor="#ffff"
+                android:layout_width="120dp" android:layout_gravity="center_horizontal"
+                android:layout_height="40dp" android:background="@drawable/btnshape"/>
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

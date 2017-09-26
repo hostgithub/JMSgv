@@ -63,12 +63,12 @@
                     <ImageView android:id="@+id/government_information_public_briefing"
                         android:layout_width="0dp" android:layout_weight="1"
                         android:scaleType="fitXY"
-                        android:layout_height="wrap_content" android:src="@drawable/zmhd_icon_05"/>
+                        android:layout_height="wrap_content" android:src="@drawable/jyxc"/>
                     <ImageView android:id="@+id/annual_report_on_government_information_work"
                         android:layout_width="0dp" android:layout_weight="1"
                         android:layout_marginLeft="5dp"
                         android:scaleType="fitXY"
-                        android:layout_height="wrap_content" android:src="@drawable/zmhd_icon_06"/>
+                        android:layout_height="wrap_content" android:src="@drawable/ask_question"/>
                 </LinearLayout>
 
                 <ImageView android:layout_marginTop="5dp"

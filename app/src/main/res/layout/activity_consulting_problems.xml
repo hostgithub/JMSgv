@@ -13,7 +13,7 @@
             android:layout_width="50dp" android:src="@drawable/back"
             android:layout_height="wrap_content" android:layout_marginLeft="10dp"/>
         <TextView android:layout_centerInParent="true"
-            android:layout_width="wrap_content" android:text="进言献策"
+            android:layout_width="wrap_content" android:text="咨询问题"
             android:layout_height="wrap_content"
             android:textColor="@color/colorWhite" android:layout_marginTop="20dp"
             android:textSize="20sp" android:layout_marginLeft="5dp"/>
@@ -26,7 +26,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent" android:orientation="vertical"
             android:background="#fff" android:padding="5dp">
-            <TextView android:id="@+id/tv_title" android:text="进言献策"
+            <TextView android:id="@+id/tv_title" android:text="咨询问题"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"  android:textSize="20sp"
                 android:layout_marginTop="15dp" android:textColor="#000"/>
@@ -34,10 +34,24 @@
                 android:layout_width="match_parent"
                 android:layout_height="2dp" android:layout_marginTop="10dp"/>
             <ImageView
-                android:layout_width="match_parent" android:src="@drawable/jyxc_img_2"
-                android:layout_height="80dp" android:layout_marginTop="5dp"
+                android:layout_width="match_parent" android:src="@drawable/askquestion_img_1"
+                android:layout_height="200dp" android:layout_marginTop="5dp"
                 android:scaleType="fitXY"/>
-            <TextView android:text="建议主题:"
+            <TextView android:text="类型:"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"  android:textSize="18sp"
+                android:layout_marginTop="15dp" android:textColor="#000"/>
+            <Spinner android:id="@+id/spinner_kind"
+                android:layout_width="match_parent" android:background="@drawable/spinner"
+                android:layout_height="40dp" android:layout_marginTop="10dp"/>
+            <TextView android:text="部门:"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"  android:textSize="18sp"
+                android:layout_marginTop="15dp" android:textColor="#000"/>
+            <Spinner android:id="@+id/spinner_bumen"
+                android:layout_width="match_parent" android:background="@drawable/spinner"
+                android:layout_height="40dp" android:layout_marginTop="10dp"/>
+            <TextView android:text="主题:"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"  android:textSize="18sp"
                 android:layout_marginTop="15dp" android:textColor="#000"/>
@@ -46,7 +60,16 @@
                 android:nextFocusForward="@+id/edt_name"
                 android:layout_width="match_parent" android:background="@drawable/editshape"
                 android:layout_height="wrap_content" android:layout_marginTop="10dp"/>
-            <TextView android:text="建议人姓名:"
+            <TextView android:text="内容:"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"  android:textSize="18sp"
+                android:layout_marginTop="15dp" android:textColor="#000"/>
+            <EditText android:id="@+id/edt_content"
+                android:layout_width="match_parent" android:background="@drawable/editshape"
+                android:layout_height="70dp" android:layout_marginTop="10dp"
+                android:gravity="left|top" android:imeOptions="actionDone"/>
+
+            <TextView android:text="姓名:"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"  android:textSize="18sp"
                 android:layout_marginTop="15dp" android:textColor="#000"/>
@@ -74,24 +97,39 @@
                 android:layout_width="match_parent" android:background="@drawable/editshape"
                 android:layout_height="wrap_content" android:layout_marginTop="10dp"/>
             <TextView android:text="邮箱:"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"  android:textSize="18sp"
-            android:layout_marginTop="15dp" android:textColor="#000"/>
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"  android:textSize="18sp"
+                android:layout_marginTop="15dp" android:textColor="#000"/>
             <EditText android:id="@+id/edt_email"
                 android:imeOptions="actionNext" android:singleLine="true"
                 android:nextFocusForward="@+id/edt_content"
                 android:layout_width="match_parent" android:background="@drawable/editshape"
                 android:layout_height="wrap_content" android:layout_marginTop="10dp"/>
-            <TextView android:text="内容:"
+            <TextView android:text="添加图片:"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"  android:textSize="18sp"
                 android:layout_marginTop="15dp" android:textColor="#000"/>
-            <EditText android:id="@+id/edt_content"
-                android:layout_width="match_parent" android:background="@drawable/editshape"
-                android:layout_height="90dp" android:layout_marginTop="10dp"
-                android:gravity="left|top" android:imeOptions="actionDone"/>
 
-            <Button android:id="@+id/btn_submit" android:layout_marginTop="10dp"
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="40dp" android:layout_marginTop="10dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/tv_imgUrl"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="2"
+                    android:background="@drawable/editshape" />
+
+                <ImageView
+                    android:id="@+id/iv_upload"
+                    android:layout_width="0dp" android:layout_weight="1"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/upload"/>
+            </LinearLayout>
+
+            <Button android:id="@+id/btn_submit" android:layout_marginTop="15dp"
                 android:text="提  交" android:textColor="#ffff"
                 android:layout_width="120dp" android:layout_gravity="center_horizontal"
                 android:layout_height="40dp" android:background="@drawable/btnshape"/>
