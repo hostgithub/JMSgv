@@ -19,6 +19,7 @@ public class DeptAdapter extends android.widget.BaseAdapter {
 
     private List<DeptBean.ResultsBean> sublist;
     private Context context;
+    private OnItemClickListener mOnItemClickListener;
 
     public DeptAdapter(List<DeptBean.ResultsBean> sublist, Context context){
         this.sublist=sublist;
@@ -61,5 +62,14 @@ public class DeptAdapter extends android.widget.BaseAdapter {
             this.itemView = itemView;
             tv_dept = (TextView) itemView.findViewById(R.id.tv_dept);
         }
+    }
+
+    //设置点击事件
+    public void setOnItemClickLitener(OnItemClickListener mLitener) {
+        //mOnItemClickListener = mLitener;
+    }
+
+    public interface OnItemClickListener {
+        void onItemClick(int position);
     }
 }

@@ -10,11 +10,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.cn.gov.jms.Config;
-import com.cn.gov.jms.adapter.GonggaogongshiAdapter;
+import com.cn.gov.jms.adapter.GovInfoAdapter;
 import com.cn.gov.jms.base.BaseActivity;
 import com.cn.gov.jms.base.EndLessOnScrollListener;
 import com.cn.gov.jms.model.Detail;
-import com.cn.gov.jms.model.PublicNotice;
+import com.cn.gov.jms.model.Gongzuonianbao;
 import com.cn.gov.jms.services.Api;
 import com.cn.gov.jms.utils.RecyclerViewSpacesItemDecoration;
 
@@ -29,7 +29,7 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class SomeSuggestionsListActivity extends BaseActivity implements SwipeRefreshLayout.OnRefreshListener {
+public class ZixunQuestionListActivity extends BaseActivity implements SwipeRefreshLayout.OnRefreshListener {
 
     @BindView(R.id.tv_title)
     TextView tv_title;
@@ -41,8 +41,8 @@ public class SomeSuggestionsListActivity extends BaseActivity implements SwipeRe
     SwipeRefreshLayout refreshLayout;
     @BindView(R.id.recyerview)
     RecyclerView mRecyclerView;
-    private ArrayList<PublicNotice.ResultsBean> list;
-    private GonggaogongshiAdapter picAdapter;
+    private ArrayList<Gongzuonianbao.ResultsBean> list;
+    private GovInfoAdapter picAdapter;
     private LinearLayoutManager linearLayoutManager;
     private int pages=1;
 
@@ -54,9 +54,8 @@ public class SomeSuggestionsListActivity extends BaseActivity implements SwipeRe
     @Override
     protected void initView() {
 
-        tv_title.setText("进言献策");
-        tv_bianji.setText("编辑");
-
+        tv_title.setText("咨询问题");
+        tv_bianji.setText("我要咨询");
         //图文
         refreshLayout.setOnRefreshListener(this);
         list=new ArrayList();
@@ -78,14 +77,15 @@ public class SomeSuggestionsListActivity extends BaseActivity implements SwipeRe
 
         mRecyclerView.addItemDecoration(new RecyclerViewSpacesItemDecoration(stringIntegerHashMap));
 
-        picAdapter=new GonggaogongshiAdapter(this,list);
+        picAdapter=new GovInfoAdapter(this,list);
 
 
         //条目点击事件
-        picAdapter.setOnItemClickLitener(new GonggaogongshiAdapter.OnItemClickListener() {
+        picAdapter.setOnItemClickLitener(new GovInfoAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(int position) {
-                getData(Integer.parseInt(list.get(position)._id));
+                startActivity(new Intent(ZixunQuestionListActivity.this,ConsultDetailActivity.class));
+                //getData(Integer.parseInt(list.get(position)._id));
                 //Toast.makeText(NewsCenterActivity.this,"点击了"+position,Toast.LENGTH_SHORT).show();
             }
         });
@@ -124,24 +124,24 @@ public class SomeSuggestionsListActivity extends BaseActivity implements SwipeRe
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         Api api =retrofit.create(Api.class);
-        Call<PublicNotice> call=api.getSomeSuggestionsData(pages);
-        call.enqueue(new Callback<PublicNotice>() {
+        Call<Gongzuonianbao> call=api.getZixunProblemData("10030001",pages);
+        call.enqueue(new Callback<Gongzuonianbao>() {
             @Override
-            public void onResponse(Call<PublicNotice> call, Response<PublicNotice> response) {
-                if(response.body().results.size()==0){
-                    Toast.makeText(SomeSuggestionsListActivity.this,"已经没有数据了!",Toast.LENGTH_SHORT).show();
+            public void onResponse(Call<Gongzuonianbao> call, Response<Gongzuonianbao> response) {
+                if(response.body().getResults().size()==0){
+                    Toast.makeText(ZixunQuestionListActivity.this,"已经没有数据了!",Toast.LENGTH_SHORT).show();
                 }else{
-                    list.addAll(response.body().results);
+                    list.addAll(response.body().getResults());
                     Log.e("xxxxxx请求数据集合大小", String.valueOf(list.size()));
-                    Log.e("xxxxxx请求数据response", String.valueOf(response.body().results.size()));
+                    Log.e("xxxxxx请求数据response", String.valueOf(response.body().getResults().size()));
                     picAdapter.notifyDataSetChanged();
                     refreshLayout.setRefreshing(false);
                 }
             }
 
             @Override
-            public void onFailure(Call<PublicNotice> call, Throwable t) {
-                Toast.makeText(SomeSuggestionsListActivity.this,"请求失败!",Toast.LENGTH_SHORT).show();
+            public void onFailure(Call<Gongzuonianbao> call, Throwable t) {
+                Toast.makeText(ZixunQuestionListActivity.this,"请求失败!",Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -154,25 +154,25 @@ public class SomeSuggestionsListActivity extends BaseActivity implements SwipeRe
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         Api api =retrofit.create(Api.class);
-        Call<Detail> call=api.getgetByIdSomeData(id);
+        Call<Detail> call=api.getDetailData(id);
         call.enqueue(new Callback<Detail>() {
             @Override
             public void onResponse(Call<Detail> call, Response<Detail> response) {
                 if(response!=null){
                     Detail detail=response.body();
-                    Detail.ResultsBean resultsBean=detail.getResults().get(0);// java.lang.IndexOutOfBoundsException: Index: 0, Size: 0
-                    Intent intent = new Intent(SomeSuggestionsListActivity.this,DetailActivity.class);
+                    Detail.ResultsBean resultsBean=detail.getResults().get(0);
+                    Intent intent = new Intent(ZixunQuestionListActivity.this,DetailActivity.class);
                     intent.putExtra(Config.NEWS,resultsBean);
                     startActivity(intent);
                     Log.e("xxxxxxx",resultsBean.content);
                 }else{
-                    Toast.makeText(SomeSuggestionsListActivity.this,"数据为空!",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(ZixunQuestionListActivity.this,"数据为空!",Toast.LENGTH_SHORT).show();
                 }
             }
 
             @Override
             public void onFailure(Call<Detail> call, Throwable t) {
-                Toast.makeText(SomeSuggestionsListActivity.this,"请求失败!",Toast.LENGTH_SHORT).show();
+                Toast.makeText(ZixunQuestionListActivity.this,"请求失败!",Toast.LENGTH_SHORT).show();
                 Log.e("-------------",t.getMessage().toString());
             }
         });
@@ -184,8 +184,8 @@ public class SomeSuggestionsListActivity extends BaseActivity implements SwipeRe
             case R.id.iv_back:
                 finish();
                 break;
-            case R.id.tv_bianji:
-                startActivity(new Intent(SomeSuggestionsListActivity.this,Some_suggestionsActivity.class));
+            case R.id.tv_bianji: //我要咨询
+                startActivity(new Intent(ZixunQuestionListActivity.this,Consulting_problemsActivity.class));
                 break;
             default:
                 break;

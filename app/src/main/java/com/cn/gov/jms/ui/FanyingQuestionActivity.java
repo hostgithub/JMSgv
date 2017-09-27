@@ -46,9 +46,9 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class Consulting_problemsActivity extends BaseActivity {
+public class FanyingQuestionActivity extends BaseActivity {
 
-//    @BindView(R.id.spinner_kind)
+    //    @BindView(R.id.spinner_kind)
 //    Spinner spinner_kind;
     @BindView(R.id.spinner_bumen)
     Spinner spinner_bumen;
@@ -80,7 +80,7 @@ public class Consulting_problemsActivity extends BaseActivity {
 
     @Override
     protected int getLayoutId() {
-        return R.layout.activity_consulting_problems;
+        return R.layout.activity_fanying_question;
     }
 
     @Override
@@ -130,23 +130,15 @@ public class Consulting_problemsActivity extends BaseActivity {
                     DeptBean deptBean=response.body();
                     list=deptBean.getResults();
                     Log.e("---------部门名称-----",list.get(0).deptName);
-                    DeptAdapter deptAdapter=new DeptAdapter(deptBean.getResults(),Consulting_problemsActivity.this);
+                    DeptAdapter deptAdapter=new DeptAdapter(deptBean.getResults(),FanyingQuestionActivity.this);
                     Log.e("-------------",list.toString());
                     //绑定 Adapter到控件
                     spinner_bumen .setAdapter(deptAdapter);
-
-                    deptAdapter.setOnItemClickLitener(new DeptAdapter.OnItemClickListener() {
-                        @Override
-                        public void onItemClick(int position) {
-                            Toast.makeText(Consulting_problemsActivity.this,position,Toast.LENGTH_SHORT).show();
-                        }
-                    });
                     spinner_bumen.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                         @Override
                         public void onItemSelected(AdapterView<?> parent, View view,
                                                    int pos, long id) {
-                            deptId=list.get(pos).deptId;
-                            Log.e("======选择的deptId===",deptId);
+                            deptId=list.get(0).deptId;
                         }
                         @Override
                         public void onNothingSelected(AdapterView<?> parent) {
@@ -154,13 +146,13 @@ public class Consulting_problemsActivity extends BaseActivity {
                         }
                     });
                 }else{
-                    Toast.makeText(Consulting_problemsActivity.this,"数据为空!",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(FanyingQuestionActivity.this,"数据为空!",Toast.LENGTH_SHORT).show();
                 }
             }
 
             @Override
             public void onFailure(Call<DeptBean> call, Throwable t) {
-                Toast.makeText(Consulting_problemsActivity.this,"请求失败!",Toast.LENGTH_SHORT).show();
+                Toast.makeText(FanyingQuestionActivity.this,"请求失败!",Toast.LENGTH_SHORT).show();
                 Log.e("-------------",t.getMessage().toString());
             }
         });
@@ -275,8 +267,7 @@ public class Consulting_problemsActivity extends BaseActivity {
     private void post(){
         Gson gson=new Gson();
         HashMap<String,String> paramsMap=new HashMap<>();
-        paramsMap.put("id","10030001");
-        Log.e("======上传的deptId===",deptId);
+        paramsMap.put("id","10030002");
         paramsMap.put("dept",deptId);
         paramsMap.put("title",edt_theme.getText().toString());
         paramsMap.put("contents",edt_content.getText().toString());
@@ -302,8 +293,8 @@ public class Consulting_problemsActivity extends BaseActivity {
             public void onResponse(Call<ResponseBean> call, Response<ResponseBean> response) {
                 Log.e("sssss","-----------------------"+response.body().success);
                 if(response.body().success=="true"){
-                    AlertDialog.Builder builder=new AlertDialog.Builder(Consulting_problemsActivity.this);
-                    builder.setTitle("咨询问题");//设置对话框的标题
+                    AlertDialog.Builder builder=new AlertDialog.Builder(FanyingQuestionActivity.this);
+                    builder.setTitle("反映问题");//设置对话框的标题
                     builder.setMessage("您填写的信息已成功提交，请返回");//设置对话框的内容
                     builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {  //这个是设置确定按钮
 
@@ -328,7 +319,7 @@ public class Consulting_problemsActivity extends BaseActivity {
             @Override
             public void onFailure(Call<ResponseBean> call, Throwable t) {
                 Log.e("sssss",t.getMessage());
-                Toast.makeText(Consulting_problemsActivity.this,"请求失败!",Toast.LENGTH_SHORT).show();
+                Toast.makeText(FanyingQuestionActivity.this,"请求失败!",Toast.LENGTH_SHORT).show();
             }
         });
     }

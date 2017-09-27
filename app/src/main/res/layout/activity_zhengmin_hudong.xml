@@ -54,7 +54,7 @@
                     <ImageView android:id="@+id/open_in_accordance_with_the_application"
                         android:layout_width="0dp" android:layout_weight="1"
                         android:layout_marginLeft="5dp" android:scaleType="fitXY"
-                        android:layout_height="wrap_content" android:src="@drawable/zmhd_icon_04"/>
+                        android:layout_height="wrap_content" android:src="@drawable/fanying_question"/>
                 </LinearLayout>
 
                 <LinearLayout android:layout_marginTop="5dp"

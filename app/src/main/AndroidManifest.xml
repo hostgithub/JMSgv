@@ -4,6 +4,11 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.CHANGE_WIFI_MULTICAST_STATE" />
 
     <application
         android:name="com.cn.gov.jms.MyApplication"
@@ -22,6 +27,17 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <provider
+            android:name="android.support.v4.content.FileProvider"
+            android:authorities="com.cn.gov.jms.MyApplication.fileprovider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/provider_paths" />
+        </provider>
+
         <activity
             android:name=".MainActivity"
             android:configChanges="orientation|keyboardHidden"
@@ -186,16 +202,34 @@
             android:theme="@style/activityAnimation" />
         <activity
             android:name=".Consulting_problemsActivity"
+            android:exported="true"
             android:screenOrientation="portrait"
             android:theme="@style/activityAnimation" />
         <activity
             android:name=".ConsultDetailActivity"
             android:screenOrientation="portrait"
             android:theme="@style/activityAnimation" />
-        <activity android:name=".AboutusDetailActivity"
+        <activity
+            android:name=".AboutusDetailActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/activityAnimation" ></activity>
-        <activity android:name=".SomeSuggestionsListActivity"
+            android:theme="@style/activityAnimation" />
+        <activity
+            android:name=".SomeSuggestionsListActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/activityAnimation" />
+        <activity
+            android:name=".FanyingQuestionActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/activityAnimation" />
+        <activity
+            android:name=".ZixunQuestionListActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/activityAnimation" />
+        <activity
+            android:name=".FanyingDetailActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/activityAnimation" />
+        <activity android:name=".FanyingQuestionListActivity"
             android:screenOrientation="portrait"
             android:theme="@style/activityAnimation" ></activity>
     </application>

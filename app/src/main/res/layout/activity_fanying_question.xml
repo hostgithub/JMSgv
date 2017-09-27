@@ -13,7 +13,7 @@
             android:layout_width="50dp" android:src="@drawable/back"
             android:layout_height="wrap_content" android:layout_marginLeft="10dp"/>
         <TextView android:layout_centerInParent="true"
-            android:layout_width="wrap_content" android:text="咨询问题"
+            android:layout_width="wrap_content" android:text="反映问题"
             android:layout_height="wrap_content"
             android:textColor="@color/colorWhite" android:layout_marginTop="20dp"
             android:textSize="20sp" android:layout_marginLeft="5dp"/>
@@ -26,7 +26,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent" android:orientation="vertical"
             android:background="#fff" android:padding="5dp">
-            <TextView android:id="@+id/tv_title" android:text="咨询问题"
+            <TextView android:id="@+id/tv_title" android:text="反映问题"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"  android:textSize="20sp"
                 android:layout_marginTop="15dp" android:textColor="#000"/>

@@ -13,7 +13,7 @@
             android:layout_width="50dp" android:src="@drawable/back"
             android:layout_height="wrap_content" android:layout_marginLeft="10dp"/>
         <TextView android:layout_centerInParent="true"
-            android:layout_width="wrap_content" android:text="咨询问题详情"
+            android:layout_width="wrap_content" android:text="反映问题详情"
             android:layout_height="wrap_content"
             android:textColor="@color/colorWhite" android:layout_marginTop="20dp"
             android:textSize="20sp" android:layout_marginLeft="5dp"/>
@@ -62,7 +62,7 @@
             <View android:background="@drawable/realline"
                 android:layout_width="match_parent"
                 android:layout_height="2dp" android:layout_marginTop="10dp"/>
-            <TextView android:text="咨询问题"
+            <TextView android:text="反映问题"
                 android:layout_width="wrap_content" android:id="@+id/tv_kind"
                 android:layout_height="wrap_content"  android:textSize="18sp"
                 android:layout_marginLeft="5dp"
@@ -116,59 +116,6 @@
                 android:layout_height="wrap_content"  android:textSize="18sp"
                 android:layout_marginLeft="5dp"
                 android:layout_marginTop="15dp" android:textColor="#000"/>
-            <TextView android:text="您对此回复是否满意"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"  android:textSize="18sp"
-                android:layout_marginTop="15dp" android:textColor="#000"/>
-            <View android:background="@drawable/realline"
-                android:layout_width="match_parent"
-                android:layout_height="2dp" android:layout_marginTop="10dp"/>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="40dp" android:layout_marginTop="10dp"
-                android:orientation="horizontal">
-
-                <RadioGroup
-                    android:id="@+id/rgStorageWay"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:gravity="center_vertical"
-                    android:orientation="horizontal">
-                    <RadioButton
-                        android:id="@+id/rb1"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:button="@null"
-                        android:drawableLeft="@drawable/selector_login_mode_radiobutton"
-                        android:text="非常满意" />
-
-                    <RadioButton
-                        android:id="@+id/rb2"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:button="@null"
-                        android:layout_marginLeft="8dp"
-                        android:drawableLeft="@drawable/selector_login_mode_radiobutton"
-                        android:text="基本满意"/>
-
-                    <RadioButton
-                        android:id="@+id/rb3"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:button="@null"
-                        android:layout_marginLeft="8dp"
-                        android:drawableLeft="@drawable/selector_login_mode_radiobutton"
-                        android:text="不满意" />
-                </RadioGroup>
-            </LinearLayout>
-
-            <Button android:id="@+id/btn_submit" android:layout_marginTop="15dp"
-                android:text="保存意见" android:textColor="#ffff"
-                android:layout_width="120dp" android:layout_gravity="center_horizontal"
-                android:layout_height="40dp" android:background="@drawable/btnshape"/>
         </LinearLayout>
     </ScrollView>
 

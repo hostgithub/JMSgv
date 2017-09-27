@@ -93,4 +93,12 @@ public interface Api {    //retrofit方式
     //http://192.168.0.137:8080/app/getSomeSuggestions.do?pages=1  进言献策详情
     @GET("app/getByIdSome.do")
     Call<Detail> getgetByIdSomeData(@Query("id") int id);
+
+    @Headers({"Content-Type: application/json","Accept: application/json"})//需要添加头  咨询问题和反映问题
+    @POST("/app/addProblem.do")
+    Call<ResponseBean> addProblem(@Body RequestBody route);//传入的参数为RequestBody
+
+    //http://192.168.0.130:8080/app/consultingProblem.do?id=10030001&pages=1   咨询问题和反映问题列表
+    @GET("/app/consultingProblem.do")
+    Call<Gongzuonianbao> getZixunProblemData(@Query("id") String id,@Query("pages") int pages);
 }
