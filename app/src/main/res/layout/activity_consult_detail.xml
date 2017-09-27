@@ -13,7 +13,7 @@
             android:layout_width="50dp" android:src="@drawable/back"
             android:layout_height="wrap_content" android:layout_marginLeft="10dp"/>
         <TextView android:layout_centerInParent="true"
-            android:layout_width="wrap_content" android:text="咨询问题详情"
+            android:layout_width="wrap_content" android:text="问题详情"
             android:layout_height="wrap_content"
             android:textColor="@color/colorWhite" android:layout_marginTop="20dp"
             android:textSize="20sp" android:layout_marginLeft="5dp"/>
@@ -75,7 +75,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="2dp" android:layout_marginTop="10dp"/>
             <TextView android:text="不动产登记管理局"
-                android:layout_width="wrap_content" android:id="@+id/tv_bumen"
+                android:layout_width="wrap_content" android:id="@+id/tv_dept"
                 android:layout_height="wrap_content"  android:textSize="18sp"
                 android:layout_marginLeft="5dp"
                 android:layout_marginTop="15dp" android:textColor="#000"/>
@@ -112,7 +112,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="2dp" android:layout_marginTop="10dp"/>
             <TextView android:text="回复内容回复内容回复内容回复内容回复内容回复内容回复内容"
-                android:layout_width="wrap_content" android:id="@+id/tv_return_content"
+                android:layout_width="wrap_content" android:id="@+id/tv_reply"
                 android:layout_height="wrap_content"  android:textSize="18sp"
                 android:layout_marginLeft="5dp"
                 android:layout_marginTop="15dp" android:textColor="#000"/>

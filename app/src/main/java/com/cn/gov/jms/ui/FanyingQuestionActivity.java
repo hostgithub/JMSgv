@@ -20,6 +20,8 @@ import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -70,6 +72,14 @@ public class FanyingQuestionActivity extends BaseActivity {
     @BindView(R.id.imageview)
     ImageView imageview;
 
+    @BindView(R.id.radioGroup)
+    RadioGroup radioGroup;
+    @BindView(R.id.rb1)
+    RadioButton rb1;
+    @BindView(R.id.rb2)
+    RadioButton rb2;
+    private String isOpen="1";
+
     private List<DeptBean.ResultsBean> list;
     private List<String> deptNmaeList;
     private String fileName;
@@ -92,11 +102,17 @@ public class FanyingQuestionActivity extends BaseActivity {
         initBumenData();
     }
 
-    @OnClick({ R.id.iv_back,R.id.btn_submit,R.id.iv_upload})
+    @OnClick({ R.id.iv_back,R.id.btn_submit,R.id.iv_upload,R.id.iv_upload,R.id.rb1,R.id.rb2})
     public void onClick(View view) {
         switch (view.getId()){
             case R.id.iv_back:
                 finish();
+                break;
+            case R.id.rb1:
+                isOpen="1";
+                break;
+            case R.id.rb2:
+                isOpen="0";
                 break;
             case R.id.btn_submit://提交
                 if(edt_theme.getText().toString().trim().equals("")||edt_name.getText().toString().trim().equals("")||edt_phone.getText().toString().trim().equals("")
@@ -271,7 +287,7 @@ public class FanyingQuestionActivity extends BaseActivity {
         paramsMap.put("dept",deptId);
         paramsMap.put("title",edt_theme.getText().toString());
         paramsMap.put("contents",edt_content.getText().toString());
-        paramsMap.put("isOpen","1");
+        paramsMap.put("isOpen",isOpen);
         paramsMap.put("name",edt_name.getText().toString());
         paramsMap.put("phone",edt_phone.getText().toString());
         paramsMap.put("address",edt_address.getText().toString());
