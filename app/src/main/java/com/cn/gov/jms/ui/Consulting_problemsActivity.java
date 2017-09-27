@@ -2,6 +2,7 @@ package com.cn.gov.jms.ui;
 
 import android.content.DialogInterface;
 import android.support.v7.app.AlertDialog;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
@@ -13,12 +14,16 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.cn.gov.jms.Config;
+import com.cn.gov.jms.adapter.DeptAdapter;
 import com.cn.gov.jms.base.BaseActivity;
+import com.cn.gov.jms.model.DeptBean;
 import com.cn.gov.jms.model.ResponseBean;
 import com.cn.gov.jms.services.Api;
 import com.google.gson.Gson;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -51,6 +56,9 @@ public class Consulting_problemsActivity extends BaseActivity {
     @BindView(R.id.tv_imgUrl)
     TextView tv_imgUrl;
 
+    private List<DeptBean.ResultsBean> list;
+    private List<String> deptNmaeList;
+
     @Override
     protected int getLayoutId() {
         return R.layout.activity_consulting_problems;
@@ -59,6 +67,8 @@ public class Consulting_problemsActivity extends BaseActivity {
     @Override
     protected void initView() {
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);// 让输入框不自动打开输入法
+        list=new ArrayList<>();
+        deptNmaeList=new ArrayList<>();
         initKindData();
         initBumenData();
     }
@@ -85,8 +95,62 @@ public class Consulting_problemsActivity extends BaseActivity {
         }
     }
 
+    private void initBumenData(){
+
+        //使用retrofit配置api
+        Retrofit retrofit=new Retrofit.Builder()
+                .baseUrl(Config.BANNER_BASE_URL)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+        Api api =retrofit.create(Api.class);
+        Call<DeptBean> call=api.getTypeAndDeptData();
+        call.enqueue(new Callback<DeptBean>() {
+            @Override
+            public void onResponse(Call<DeptBean> call, Response<DeptBean> response) {
+                if(response!=null){
+                    DeptBean deptBean=response.body();
+                    list=deptBean.getResults();
+                    Log.e("---------部门名称-----",list.get(0).deptName);
+                    //sqgkAdapter = new SQGKAdapter(ShiQingGaiKuangActivity.this, resultsBeanList);
+                    //sqgkAdapter = new SQGKAdapter(Consulting_problemsActivity.this, list);
+                    //mRecyclerView.setAdapter(sqgkAdapter);
+
+                    DeptAdapter deptAdapter=new DeptAdapter(deptBean.getResults(),Consulting_problemsActivity.this);
+                    Log.e("-------------",list.toString());
+                    //绑定 Adapter到控件
+                    spinner_bumen .setAdapter(deptAdapter);
+                    spinner_bumen.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                        @Override
+                        public void onItemSelected(AdapterView<?> parent, View view,
+                                                   int pos, long id) {
+                        }
+                        @Override
+                        public void onNothingSelected(AdapterView<?> parent) {
+                            // Another interface callback
+                        }
+                    });
+                }else{
+                    Toast.makeText(Consulting_problemsActivity.this,"数据为空!",Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<DeptBean> call, Throwable t) {
+                Toast.makeText(Consulting_problemsActivity.this,"请求失败!",Toast.LENGTH_SHORT).show();
+                Log.e("-------------",t.getMessage().toString());
+            }
+        });
+
+        // 本地建立Adapter并且绑定数据源
+        //final String[] mItems = getResources().getStringArray(R.array.kind);
+//        ArrayAdapter adapter=new ArrayAdapter<>(this,android.R.layout.simple_spinner_item,mItems);
+//        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+    }
+
+
     private void initKindData(){
-        // 建立数据源
+        // 本地建立数据源
         final String[] mItems = getResources().getStringArray(R.array.kind);
         // 建立Adapter并且绑定数据源
         ArrayAdapter<String> adapter=new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item, mItems);
@@ -97,7 +161,7 @@ public class Consulting_problemsActivity extends BaseActivity {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view,
                                        int pos, long id) {
-                String strKind=mItems[pos];
+                String strBumen=mItems[pos];
             }
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
@@ -106,26 +170,19 @@ public class Consulting_problemsActivity extends BaseActivity {
         });
     }
 
-
-    private void initBumenData(){
-        // 建立数据源
-        final String[] mItems = getResources().getStringArray(R.array.bumen);
-        // 建立Adapter并且绑定数据源
-        ArrayAdapter<String> adapter=new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item, mItems);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        //绑定 Adapter到控件
-        spinner_bumen .setAdapter(adapter);
-        spinner_bumen.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view,
-                                       int pos, long id) {
-                String strBumen=mItems[pos];
-            }
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-                // Another interface callback
-            }
-        });
+    /**
+     * 验证手机格式
+     */
+    public static boolean isMobileNO(String mobiles) {
+    /*
+    移动：134、135、136、137、138、139、150、151、157(TD)、158、159、187、188
+    联通：130、131、132、152、155、156、185、186
+    电信：133、153、180、189、（1349卫通）
+    总结起来就是第一位必定为1，第二位必定为3或5或8，其他位置的可以为0-9
+    */
+        String telRegex = "[1][358]\\d{9}";//"[1]"代表第1位为数字1，"[358]"代表第二位可以为3、5、8中的一个，"\\d{9}"代表后面是可以是0～9的数字，有9位。
+        if (TextUtils.isEmpty(mobiles)) return false;
+        else return mobiles.matches(telRegex);
     }
 
     private void post(){

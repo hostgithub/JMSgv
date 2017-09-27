@@ -3,6 +3,7 @@ package com.cn.gov.jms.services;
 import com.cn.gov.jms.model.AboutAndContact;
 import com.cn.gov.jms.model.Banners;
 import com.cn.gov.jms.model.DataInfo;
+import com.cn.gov.jms.model.DeptBean;
 import com.cn.gov.jms.model.Detail;
 import com.cn.gov.jms.model.Gongzuonianbao;
 import com.cn.gov.jms.model.NewCenter;
@@ -56,6 +57,10 @@ public interface Api {    //retrofit方式
     //http://192.168.0.122:8080/app/singlePageData.do   获取市情概况json
     @GET("/app/singlePageData.do")
     Call<Sqgk> getSqgkData();
+
+    //http://192.168.0.117:8080/app/getTypeAndDept.do 部门
+    @GET("app/getTypeAndDept.do")
+    Call<DeptBean> getTypeAndDeptData();
 
     //http://192.168.0.130:8080/app/singlePageById.do?id=2  市情概况里面每个模块的详情信息json   id=568    578 关于我们与联系我们 详情信息json
     @GET("/app/singlePageById.do")
