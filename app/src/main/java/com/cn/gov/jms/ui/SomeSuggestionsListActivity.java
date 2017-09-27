@@ -151,7 +151,7 @@ public class SomeSuggestionsListActivity extends BaseActivity implements SwipeRe
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         Api api =retrofit.create(Api.class);
-        Call<Detail> call=api.getDetailData(id);
+        Call<Detail> call=api.getgetByIdSomeData(id);
         call.enqueue(new Callback<Detail>() {
             @Override
             public void onResponse(Call<Detail> call, Response<Detail> response) {
@@ -175,9 +175,18 @@ public class SomeSuggestionsListActivity extends BaseActivity implements SwipeRe
         });
     }
 
-    @OnClick({ R.id.iv_back})
+    @OnClick({ R.id.iv_back,R.id.tv_bianji})
     public void onClick(View view) {
-        finish();
+        switch (view.getId()){
+            case R.id.iv_back:
+                finish();
+                break;
+            case R.id.tv_bianji:
+                startActivity(new Intent(SomeSuggestionsListActivity.this,Some_suggestionsActivity.class));
+                break;
+            default:
+                break;
+        }
     }
 
     @Override
@@ -186,5 +195,13 @@ public class SomeSuggestionsListActivity extends BaseActivity implements SwipeRe
         pages = 1;
         list.clear();
         initNewsData(1);
+    }
+
+    @Override
+    protected void onResume() {
+        pages = 1;
+        list.clear();
+        initNewsData(1);
+        super.onResume();
     }
 }

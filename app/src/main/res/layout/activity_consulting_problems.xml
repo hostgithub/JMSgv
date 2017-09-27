@@ -69,6 +69,47 @@
                 android:layout_height="70dp" android:layout_marginTop="10dp"
                 android:gravity="left|top" android:imeOptions="actionDone"/>
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" android:layout_marginTop="10dp"
+                android:orientation="horizontal">
+
+                <TextView android:text="是否公开:"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"  android:textSize="18sp"
+                    android:layout_marginTop="15dp" android:textColor="#000"/>
+                <RadioGroup
+                    android:id="@+id/rgStorageWay"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:gravity="center_vertical" android:layout_marginTop="13dp"
+                    android:orientation="horizontal">
+                    <RadioButton
+                        android:id="@+id/rb1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:button="@null"
+                        android:layout_marginLeft="8dp"
+                        android:clickable="true"
+                        android:textSize="18sp"
+                        android:drawableLeft="@drawable/selector_login_mode_radiobutton"
+                        android:text="是" />
+
+                    <RadioButton
+                        android:id="@+id/rb2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:button="@null"
+                        android:clickable="true"
+                        android:layout_marginLeft="18dp"
+                        android:textSize="18sp"
+                        android:drawableLeft="@drawable/selector_login_mode_radiobutton"
+                        android:text="否"/>
+                </RadioGroup>
+            </LinearLayout>
+
             <TextView android:text="姓名:"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"  android:textSize="18sp"

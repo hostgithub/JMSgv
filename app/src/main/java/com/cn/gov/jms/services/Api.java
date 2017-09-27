@@ -81,7 +81,11 @@ public interface Api {    //retrofit方式
     @POST("app/receiveData.do")
     Call<ResponseBean> postFlyRoute(@Body RequestBody route);//传入的参数为RequestBody
 
-    //http://192.168.0.137:8080/app/getSomeSuggestions.do?pages=1  进言献策
+    //http://192.168.0.137:8080/app/getSomeSuggestions.do?pages=1  进言献策列表
     @GET("app/getSomeSuggestions.do")
     Call<PublicNotice> getSomeSuggestionsData(@Query("pages") int pages);
+
+    //http://192.168.0.137:8080/app/getSomeSuggestions.do?pages=1  进言献策详情
+    @GET("app/getByIdSome.do")
+    Call<Detail> getgetByIdSomeData(@Query("id") int id);
 }
