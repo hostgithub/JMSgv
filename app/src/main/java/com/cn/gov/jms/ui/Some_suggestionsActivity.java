@@ -69,16 +69,31 @@ public class Some_suggestionsActivity extends BaseActivity {
                 finish();
                 break;
             case R.id.btn_submit:
+
                 if(edt_theme.getText().toString().trim().equals("")||edt_name.getText().toString().trim().equals("")||edt_phone.getText().toString().trim().equals("")
-                        || edt_address.getText().toString().trim().equals("")||edt_email.getText().toString().trim().equals("")||edt_content.getText().toString().trim().equals("")){
+                        || edt_address.getText().toString().trim().equals("")||edt_email.getText().toString().trim().equals("")
+                        ||edt_content.getText().toString().trim().equals("")){
                     Toast.makeText(this,"请您将信息填写完整!",Toast.LENGTH_SHORT).show();
-                }else {
+                } else if(edt_phone.getText().toString().trim().length()!=11){
+                Toast.makeText(this,"手机号码不正确!",Toast.LENGTH_SHORT).show();
+            }else {
                     post();
                 }
-                //post();
                 break;
             default:
                 break;
+        }
+    }
+
+    /**
+     * 判断字符串是否是整数
+     */
+    public static boolean isInteger(String value) {
+        try {
+            Integer.parseInt(value);
+            return true;
+        } catch (NumberFormatException e) {
+            return false;
         }
     }
 

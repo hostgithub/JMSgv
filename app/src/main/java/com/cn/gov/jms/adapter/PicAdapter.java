@@ -80,7 +80,7 @@ public class PicAdapter extends RecyclerView.Adapter<BaseViewHolder> {
 //            if (type == ITEM_HASIMAGE) {
 //                ImageLoaderUtils.loadingImg(mContext, (ImageView) holder.getView(R.id.image), Config.BANNER_BASE_URL+item.picNme);
 //            }
-            ImageLoaderUtils.loadingImg(mContext, (ImageView) holder.getView(R.id.image), Config.BANNER_BASE_URL+item.picNme);
+            ImageLoaderUtils.loadingImg(mContext, (ImageView) holder.getView(R.id.image), Config.BANNER_BASE_URL+item.picName);
             //CircleImageView avatar = holder.getView(R.id.avatar);
             holder.setText(R.id.textview, item.title);
 
@@ -115,7 +115,7 @@ public class PicAdapter extends RecyclerView.Adapter<BaseViewHolder> {
             type = TYPE_FOOTER;
             return type;
         }
-        if (TextUtils.isEmpty(datas.get(position).picNme)) {
+        if (TextUtils.isEmpty(datas.get(position).picName)) {
             type = ITEM_NOIMAGE;
         } else {
             type = ITEM_HASIMAGE;

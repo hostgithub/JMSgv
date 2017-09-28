@@ -77,7 +77,7 @@ public class GirlAdapter extends RecyclerView.Adapter<BaseViewHolder> {
             int type = getItemViewType(position);
             final NewCenter.ResultsBean item = datas.get(position);
             if (type == ITEM_HASIMAGE) {
-                ImageLoaderUtils.loadingImg(mContext, (ImageView) holder.getView(R.id.cover), Config.BANNER_BASE_URL + item.picNme);
+                ImageLoaderUtils.loadingImg(mContext, (ImageView) holder.getView(R.id.cover), Config.BANNER_BASE_URL + item.picName);
             }
             //CircleImageView avatar = holder.getView(R.id.avatar);
             holder.setText(R.id.title, item.title);
@@ -114,7 +114,7 @@ public class GirlAdapter extends RecyclerView.Adapter<BaseViewHolder> {
             type = TYPE_FOOTER;
             return type;
         }
-        if (TextUtils.isEmpty(datas.get(position).picNme)) {
+        if (TextUtils.isEmpty(datas.get(position).picName)) {
             type = ITEM_NOIMAGE;
         } else {
             type = ITEM_HASIMAGE;

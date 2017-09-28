@@ -6,13 +6,10 @@ import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 
-import com.cn.gov.jms.Config;
 import com.cn.gov.jms.base.BaseViewHolder;
-import com.cn.gov.jms.model.NewCenter;
+import com.cn.gov.jms.model.Search;
 import com.cn.gov.jms.ui.R;
-import com.cn.gov.jms.utils.ImageLoaderUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,23 +19,23 @@ import java.util.List;
  * 发现的适配器，分为两种样式
  */
 
-public class NewsCenterAdapter extends RecyclerView.Adapter<BaseViewHolder> {
+public class SearchListAdapter extends RecyclerView.Adapter<BaseViewHolder> {
     private static final int TYPE_FOOTER = 0;
     private static final int ITEM_NOIMAGE = 1;
     private static final int ITEM_HASIMAGE = 2;
 
-    private ArrayList<NewCenter.ResultsBean> datas;
+    private ArrayList<Search.ResultsBean> datas;
     private Context mContext;
     private int viewFooter;
     private View footerView;
     private OnItemClickListener mOnItemClickListener;
 
-    public NewsCenterAdapter(Context context, ArrayList<NewCenter.ResultsBean> datas) {
+    public SearchListAdapter(Context context, ArrayList<Search.ResultsBean> datas) {
         this.datas = datas;
         this.mContext = context;
     }
 
-    public void replaceAll(List<NewCenter.ResultsBean> elements) {
+    public void replaceAll(List<Search.ResultsBean> elements) {
         if (datas.size() > 0) {
             datas.clear();
         }
@@ -46,16 +43,16 @@ public class NewsCenterAdapter extends RecyclerView.Adapter<BaseViewHolder> {
         notifyDataSetChanged();
     }
 
-    public void addAll(List<NewCenter.ResultsBean> elements) {
+    public void addAll(List<Search.ResultsBean> elements) {
         datas.addAll(elements);
         notifyDataSetChanged();
     }
     @Override
     public BaseViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         if (viewType == ITEM_NOIMAGE) {
-            return new BaseViewHolder(LayoutInflater.from(mContext).inflate(R.layout.item_news_center, parent, false));
+            return new BaseViewHolder(LayoutInflater.from(mContext).inflate(R.layout.item_gggs, parent, false));
         } else if (viewType == ITEM_HASIMAGE) {
-            return new BaseViewHolder(LayoutInflater.from(mContext).inflate(R.layout.item_news_center, parent, false));
+            return new BaseViewHolder(LayoutInflater.from(mContext).inflate(R.layout.item_gggs, parent, false));
         } else {
             footerView = LayoutInflater.from(mContext).inflate(viewFooter, parent, false);
             return new BaseViewHolder(footerView);
@@ -75,13 +72,11 @@ public class NewsCenterAdapter extends RecyclerView.Adapter<BaseViewHolder> {
             }
 
             int type = getItemViewType(position);
-            final NewCenter.ResultsBean item = datas.get(position);
-
-            ImageLoaderUtils.loadingImg(mContext, (ImageView) holder.getView(R.id.cover), Config.BANNER_BASE_URL+item.picName);
+            final Search.ResultsBean item = datas.get(position);
 
             //CircleImageView avatar = holder.getView(R.id.avatar);
-            holder.setText(R.id.title, item.text);
-            holder.setText(R.id.content, item.addTime);
+            holder.setText(R.id.title, item.title);
+            holder.setText(R.id.time, item.addTime);
 
 //            holder.setText(R.id.author, item.getAuthor());
 //            holder.setText(R.id.seeNum, item.getWatch());

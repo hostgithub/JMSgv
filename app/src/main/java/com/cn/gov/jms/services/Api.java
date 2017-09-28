@@ -9,6 +9,7 @@ import com.cn.gov.jms.model.Gongzuonianbao;
 import com.cn.gov.jms.model.NewCenter;
 import com.cn.gov.jms.model.PublicNotice;
 import com.cn.gov.jms.model.ResponseBean;
+import com.cn.gov.jms.model.Search;
 import com.cn.gov.jms.model.Sqgk;
 import com.cn.gov.jms.model.SqgkDetail;
 import com.cn.gov.jms.model.ZixunFanyingDetailBean;
@@ -111,4 +112,7 @@ public interface Api {    //retrofit方式
     //http://192.168.0.130:8080/app/corGetzwgkData.do?id=000100020012&pages=1   保存意见
     @GET("/app/saveOpinions.do")
     Call<ResponseBean> getSaveOpinionsData(@Query("id") String id, @Query("pj") String pj);
+
+    @GET("app/fullTextRetrieval.do")
+    Call<Search> getSearchData(@Query("text") String text, @Query("pages") int pages);//搜索列表
 }

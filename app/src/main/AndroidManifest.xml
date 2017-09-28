@@ -229,9 +229,13 @@
             android:name=".FanyingDetailActivity"
             android:screenOrientation="portrait"
             android:theme="@style/activityAnimation" />
-        <activity android:name=".FanyingQuestionListActivity"
+        <activity
+            android:name=".FanyingQuestionListActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/activityAnimation" ></activity>
+            android:theme="@style/activityAnimation" />
+        <activity android:name=".SearchListActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/activityAnimation"></activity>
     </application>
 
 </manifest>
