@@ -80,6 +80,11 @@ public class FanyingQuestionActivity extends BaseActivity {
     RadioButton rb2;
     private String isOpen="1";
 
+    @BindView(R.id.tv_number)
+    TextView tv_number;
+    @BindView(R.id.edt_number)
+    EditText edt_number;
+
     private List<DeptBean.ResultsBean> list;
     private List<String> deptNmaeList;
     private String fileName;
@@ -102,7 +107,7 @@ public class FanyingQuestionActivity extends BaseActivity {
         initBumenData();
     }
 
-    @OnClick({ R.id.iv_back,R.id.btn_submit,R.id.iv_upload,R.id.iv_upload,R.id.rb1,R.id.rb2})
+    @OnClick({ R.id.iv_back,R.id.btn_submit,R.id.iv_upload,R.id.rb1,R.id.rb2})
     public void onClick(View view) {
         switch (view.getId()){
             case R.id.iv_back:
@@ -110,11 +115,18 @@ public class FanyingQuestionActivity extends BaseActivity {
                 break;
             case R.id.rb1:
                 isOpen="1";
+                tv_number.setVisibility(View.GONE);edt_number.setVisibility(View.GONE);
                 break;
             case R.id.rb2:
                 isOpen="0";
+                tv_number.setVisibility(View.VISIBLE);edt_number.setVisibility(View.VISIBLE);
                 break;
             case R.id.btn_submit://提交
+                if(isOpen=="0"){
+                    if(edt_theme.getText().toString().trim().equals("")){
+                        Toast.makeText(this,"请您输入查询码!",Toast.LENGTH_SHORT).show();
+                    }
+                }
                 if(edt_theme.getText().toString().trim().equals("")||edt_name.getText().toString().trim().equals("")||edt_phone.getText().toString().trim().equals("")
                         || edt_address.getText().toString().trim().equals("")||edt_email.getText().toString().trim().equals("")||edt_content.getText().toString().trim().equals("")){
                     Toast.makeText(this,"请您将信息填写完整!",Toast.LENGTH_SHORT).show();
@@ -288,6 +300,9 @@ public class FanyingQuestionActivity extends BaseActivity {
         paramsMap.put("title",edt_theme.getText().toString());
         paramsMap.put("contents",edt_content.getText().toString());
         paramsMap.put("isOpen",isOpen);
+        if(isOpen=="0"){
+            paramsMap.put("hiddenCode",edt_number.getText().toString().trim());
+        }
         paramsMap.put("name",edt_name.getText().toString());
         paramsMap.put("phone",edt_phone.getText().toString());
         paramsMap.put("address",edt_address.getText().toString());

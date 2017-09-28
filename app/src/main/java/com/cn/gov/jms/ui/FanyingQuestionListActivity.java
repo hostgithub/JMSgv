@@ -13,8 +13,8 @@ import com.cn.gov.jms.Config;
 import com.cn.gov.jms.adapter.GovInfoAdapter;
 import com.cn.gov.jms.base.BaseActivity;
 import com.cn.gov.jms.base.EndLessOnScrollListener;
-import com.cn.gov.jms.model.Detail;
 import com.cn.gov.jms.model.Gongzuonianbao;
+import com.cn.gov.jms.model.ZixunFanyingDetailBean;
 import com.cn.gov.jms.services.Api;
 import com.cn.gov.jms.utils.RecyclerViewSpacesItemDecoration;
 
@@ -84,9 +84,7 @@ public class FanyingQuestionListActivity extends BaseActivity implements SwipeRe
         picAdapter.setOnItemClickLitener(new GovInfoAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(int position) {
-                startActivity(new Intent(FanyingQuestionListActivity.this,FanyingDetailActivity.class));
-                //getData(Integer.parseInt(list.get(position)._id));
-                //Toast.makeText(NewsCenterActivity.this,"点击了"+position,Toast.LENGTH_SHORT).show();
+                getData(Integer.parseInt(list.get(position)._id));
             }
         });
         mRecyclerView.setAdapter(picAdapter);
@@ -147,31 +145,32 @@ public class FanyingQuestionListActivity extends BaseActivity implements SwipeRe
     }
 
 
-    private void getData(int id){
+    private void getData(final int id){
         //使用retrofit配置api
         Retrofit retrofit=new Retrofit.Builder()
                 .baseUrl(Config.BANNER_BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         Api api =retrofit.create(Api.class);
-        Call<Detail> call=api.getDetailData(id);
-        call.enqueue(new Callback<Detail>() {
+        Call<ZixunFanyingDetailBean> call=api.getByIdrocData(id);
+        call.enqueue(new Callback<ZixunFanyingDetailBean>() {
             @Override
-            public void onResponse(Call<Detail> call, Response<Detail> response) {
+            public void onResponse(Call<ZixunFanyingDetailBean> call, Response<ZixunFanyingDetailBean> response) {
                 if(response!=null){
-                    Detail detail=response.body();
-                    Detail.ResultsBean resultsBean=detail.getResults().get(0);
-                    Intent intent = new Intent(FanyingQuestionListActivity.this,DetailActivity.class);
+                    ZixunFanyingDetailBean detail=response.body();
+                    ZixunFanyingDetailBean.ResultsBean resultsBean=detail.getResults().get(0);
+                    Intent intent = new Intent(FanyingQuestionListActivity.this,FanyingDetailActivity.class);
                     intent.putExtra(Config.NEWS,resultsBean);
+                    intent.putExtra(Config.LIST_ID,id);
                     startActivity(intent);
-                    Log.e("xxxxxxx",resultsBean.content);
+                    Log.e("xxx咨询详情xxxx",response.body().toString());
                 }else{
                     Toast.makeText(FanyingQuestionListActivity.this,"数据为空!",Toast.LENGTH_SHORT).show();
                 }
             }
 
             @Override
-            public void onFailure(Call<Detail> call, Throwable t) {
+            public void onFailure(Call<ZixunFanyingDetailBean> call, Throwable t) {
                 Toast.makeText(FanyingQuestionListActivity.this,"请求失败!",Toast.LENGTH_SHORT).show();
                 Log.e("-------------",t.getMessage().toString());
             }

@@ -109,7 +109,15 @@
                         android:text="否"/>
                 </RadioGroup>
             </LinearLayout>
-
+            <TextView android:text="请输入查询码:" android:id="@+id/tv_number"
+                android:layout_width="wrap_content" android:visibility="gone"
+                android:layout_height="wrap_content"  android:textSize="18sp"
+                android:layout_marginTop="15dp" android:textColor="#000"/>
+            <EditText android:id="@+id/edt_number" android:visibility="gone"
+                android:imeOptions="actionNext" android:singleLine="true"
+                android:nextFocusForward="@+id/edt_phone"
+                android:layout_width="match_parent" android:background="@drawable/editshape"
+                android:layout_height="wrap_content" android:layout_marginTop="10dp"/>
             <TextView android:text="姓名:"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"  android:textSize="18sp"

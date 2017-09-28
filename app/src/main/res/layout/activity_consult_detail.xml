@@ -29,7 +29,7 @@
             <TextView  android:text="主题"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"  android:textSize="20sp"
-                android:layout_marginTop="15dp" android:textColor="#000"/>
+                android:layout_marginTop="15dp" />
             <View android:background="@drawable/realline"
                 android:layout_width="match_parent"
                 android:layout_height="2dp" android:layout_marginTop="10dp"/>
@@ -46,7 +46,7 @@
             <TextView android:text="附件"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"  android:textSize="18sp"
-                android:layout_marginTop="15dp" android:textColor="#000"/>
+                android:layout_marginTop="15dp" />
             <View android:background="@drawable/realline"
                 android:layout_width="match_parent"
                 android:layout_height="2dp" android:layout_marginTop="10dp"/>
@@ -58,7 +58,7 @@
             <TextView android:text="类型"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"  android:textSize="18sp"
-                android:layout_marginTop="15dp" android:textColor="#000"/>
+                android:layout_marginTop="15dp" />
             <View android:background="@drawable/realline"
                 android:layout_width="match_parent"
                 android:layout_height="2dp" android:layout_marginTop="10dp"/>
@@ -70,7 +70,7 @@
             <TextView android:text="咨询部门"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"  android:textSize="18sp"
-                android:layout_marginTop="15dp" android:textColor="#000"/>
+                android:layout_marginTop="15dp" />
             <View android:background="@drawable/realline"
                 android:layout_width="match_parent"
                 android:layout_height="2dp" android:layout_marginTop="10dp"/>
@@ -82,7 +82,7 @@
             <TextView android:text="内容"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"  android:textSize="18sp"
-                android:layout_marginTop="15dp" android:textColor="#000"/>
+                android:layout_marginTop="15dp" />
             <View android:background="@drawable/realline"
                 android:layout_width="match_parent"
                 android:layout_height="2dp" android:layout_marginTop="10dp"/>
@@ -95,11 +95,11 @@
             <TextView android:text="办理状态"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"  android:textSize="18sp"
-                android:layout_marginTop="15dp" android:textColor="#000"/>
+                android:layout_marginTop="15dp" />
             <View android:background="@drawable/realline"
                 android:layout_width="match_parent"
                 android:layout_height="2dp" android:layout_marginTop="10dp"/>
-            <TextView android:text="已办"
+            <TextView android:text="正在办理"
                 android:layout_width="wrap_content" android:id="@+id/tv_state"
                 android:layout_height="wrap_content"  android:textSize="18sp"
                 android:layout_marginLeft="5dp"
@@ -129,7 +129,7 @@
                 android:orientation="horizontal">
 
                 <RadioGroup
-                    android:id="@+id/rgStorageWay"
+                    android:id="@+id/radioGroup"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"

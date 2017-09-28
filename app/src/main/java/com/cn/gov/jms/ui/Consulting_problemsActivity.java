@@ -79,6 +79,10 @@ public class Consulting_problemsActivity extends BaseActivity {
     RadioButton rb2;
     private String isOpen="1";
 
+    @BindView(R.id.tv_number)
+    TextView tv_number;
+    @BindView(R.id.edt_number)
+    EditText edt_number;
 
     private List<DeptBean.ResultsBean> list;
     private String fileName;
@@ -109,16 +113,23 @@ public class Consulting_problemsActivity extends BaseActivity {
                 break;
             case R.id.rb1:
                 isOpen="1";
+                tv_number.setVisibility(View.GONE);edt_number.setVisibility(View.GONE);
                 break;
             case R.id.rb2:
                 isOpen="0";
+                tv_number.setVisibility(View.VISIBLE);edt_number.setVisibility(View.VISIBLE);
                 break;
             case R.id.btn_submit://提交
+                if(isOpen=="0"){
+                    if(edt_theme.getText().toString().trim().equals("")){
+                        Toast.makeText(this,"请您输入查询码!",Toast.LENGTH_SHORT).show();
+                    }
+                }
                 if(edt_theme.getText().toString().trim().equals("")||edt_name.getText().toString().trim().equals("")||edt_phone.getText().toString().trim().equals("")
                         || edt_address.getText().toString().trim().equals("")||edt_email.getText().toString().trim().equals("")||edt_content.getText().toString().trim().equals("")){
                     Toast.makeText(this,"请您将信息填写完整!",Toast.LENGTH_SHORT).show();
                 }else {
-                    post();
+                    postOpen();
                 }
                 break;
             case R.id.iv_upload://浏览文件
@@ -287,7 +298,71 @@ public class Consulting_problemsActivity extends BaseActivity {
         }
     }
 
-    private void post(){
+    private void postOpen(){
+        Gson gson=new Gson();
+        HashMap<String,String> paramsMap=new HashMap<>();
+        paramsMap.put("id","10030001");
+        Log.e("======上传的deptId===",deptId);
+        paramsMap.put("dept",deptId);
+        paramsMap.put("title",edt_theme.getText().toString().trim());
+        paramsMap.put("contents",edt_content.getText().toString().trim());
+        paramsMap.put("isOpen",isOpen);
+        if(isOpen=="0"){
+            paramsMap.put("hiddenCode",edt_number.getText().toString().trim());
+        }
+        paramsMap.put("name",edt_name.getText().toString().trim());
+        paramsMap.put("phone",edt_phone.getText().toString().trim());
+        paramsMap.put("address",edt_address.getText().toString().trim());
+        paramsMap.put("email",edt_email.getText().toString().trim());
+        //paramsMap.put("imagePath","");//图片路径
+        String route= gson.toJson(paramsMap);
+        Log.e("ssssssss",route.toString());
+
+        Retrofit retrofit=new Retrofit.Builder()
+                .baseUrl(Config.BANNER_BASE_URL)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+        Api api =retrofit.create(Api.class);
+        RequestBody body=RequestBody.create(okhttp3.MediaType.parse("application/json; charset=utf-8"),route);
+        Log.e("ssssssss",body.toString());
+        Call<ResponseBean> call=api.addProblem(body);
+        call.enqueue(new Callback<ResponseBean>() {
+            @Override
+            public void onResponse(Call<ResponseBean> call, Response<ResponseBean> response) {
+                Log.e("sssss","-----------------------"+response.body().success);
+                if(response.body().success=="true"){
+                    AlertDialog.Builder builder=new AlertDialog.Builder(Consulting_problemsActivity.this);
+                    builder.setTitle("咨询问题");//设置对话框的标题
+                    builder.setMessage("您填写的信息已成功提交，请返回");//设置对话框的内容
+                    builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {  //这个是设置确定按钮
+
+                        @Override
+                        public void onClick(DialogInterface arg0, int arg1) {
+                            //Toast.makeText(Some_suggestionsActivity.this, "确定", Toast.LENGTH_SHORT).show();
+                            finish();
+                        }
+                    });
+//                    builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {  //取消按钮
+//
+//                        @Override
+//                        public void onClick(DialogInterface arg0, int arg1) {
+//                            Toast.makeText(Some_suggestionsActivity.this, "取消",Toast.LENGTH_SHORT).show();
+//                        }
+//                    });
+                    AlertDialog b=builder.create();
+                    b.show();  //必须show一下才能看到对话框，跟Toast一样的道理
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBean> call, Throwable t) {
+                Log.e("sssss",t.getMessage());
+                Toast.makeText(Consulting_problemsActivity.this,"请求失败!",Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    private void postHide(){
         Gson gson=new Gson();
         HashMap<String,String> paramsMap=new HashMap<>();
         paramsMap.put("id","10030001");

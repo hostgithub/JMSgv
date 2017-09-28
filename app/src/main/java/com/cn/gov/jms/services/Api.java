@@ -11,6 +11,7 @@ import com.cn.gov.jms.model.PublicNotice;
 import com.cn.gov.jms.model.ResponseBean;
 import com.cn.gov.jms.model.Sqgk;
 import com.cn.gov.jms.model.SqgkDetail;
+import com.cn.gov.jms.model.ZixunFanyingDetailBean;
 
 import okhttp3.RequestBody;
 import retrofit2.Call;
@@ -101,4 +102,13 @@ public interface Api {    //retrofit方式
     //http://192.168.0.130:8080/app/consultingProblem.do?id=10030001&pages=1   咨询问题和反映问题列表
     @GET("/app/consultingProblem.do")
     Call<Gongzuonianbao> getZixunProblemData(@Query("id") String id,@Query("pages") int pages);
+
+    //http://192.168.0.137:8080/app/getByIdroc.do?id=7621  咨询问题详情
+    @GET("app/getByIdroc.do")
+    Call<ZixunFanyingDetailBean> getByIdrocData(@Query("id") int id);
+
+
+    //http://192.168.0.130:8080/app/corGetzwgkData.do?id=000100020012&pages=1   保存意见
+    @GET("/app/saveOpinions.do")
+    Call<ResponseBean> getSaveOpinionsData(@Query("id") String id, @Query("pj") String pj);
 }
