@@ -3,15 +3,8 @@ package com.cn.gov.jms.ui;
 import android.Manifest;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.graphics.BitmapFactory;
 import android.net.Uri;
-import android.os.Build;
-import android.os.Environment;
-import android.provider.MediaStore;
 import android.support.annotation.NonNull;
-import android.support.v4.content.ContextCompat;
-import android.support.v4.content.FileProvider;
 import android.support.v7.app.AlertDialog;
 import android.text.TextUtils;
 import android.util.Log;
@@ -26,12 +19,15 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.cn.gov.jms.Config;
 import com.cn.gov.jms.adapter.DeptAdapter;
 import com.cn.gov.jms.base.BaseActivity;
 import com.cn.gov.jms.model.DeptBean;
 import com.cn.gov.jms.model.ResponseBean;
 import com.cn.gov.jms.services.Api;
+import com.cn.gov.jms.utils.LQRPhotoSelectUtils;
+import com.cn.gov.jms.utils.PhotoBitmapUtils2;
 import com.google.gson.Gson;
 
 import java.io.File;
@@ -41,6 +37,9 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.OnClick;
+import kr.co.namee.permissiongen.PermissionFail;
+import kr.co.namee.permissiongen.PermissionGen;
+import kr.co.namee.permissiongen.PermissionSuccess;
 import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -90,6 +89,7 @@ public class Consulting_problemsActivity extends BaseActivity {
     private String mCurrentPhotoPath;
     private File file;
     private String deptId;
+    private LQRPhotoSelectUtils mLqrPhotoSelectUtils;
 
     @Override
     protected int getLayoutId() {
@@ -103,6 +103,25 @@ public class Consulting_problemsActivity extends BaseActivity {
         initBumenData();//从网络获取部门数据
 
         rb1.setChecked(true);
+        init();
+    }
+
+    private void init() {
+        // 1、创建LQRPhotoSelectUtils（一个Activity对应一个LQRPhotoSelectUtils）
+        mLqrPhotoSelectUtils = new LQRPhotoSelectUtils(this, new LQRPhotoSelectUtils.PhotoSelectListener() {
+            @Override
+            public void onFinish(File outputFile, Uri outputUri) {
+                // 4、当拍照或从图库选取图片成功后回调
+                //tv_imgUrl.setText(outputFile.getAbsolutePath());//图片路径
+                tv_imgUrl.setText(PhotoBitmapUtils2.amendRotatePhoto(outputFile.getAbsolutePath(),Consulting_problemsActivity.this,""));//修复后的图片路径
+                file=new File(PhotoBitmapUtils2.amendRotatePhoto(outputFile.getAbsolutePath(),Consulting_problemsActivity.this,""));
+                //mTvUri.setText(outputUri.toString());//图片Uri
+                Glide.with(Consulting_problemsActivity.this).load(outputUri).into(imageview);
+            }
+        }, false);//true裁剪，false不裁剪
+
+        //        mLqrPhotoSelectUtils.setAuthorities("com.lqr.lqrnativepicselect.fileprovider");
+        //        mLqrPhotoSelectUtils.setImgPath(Environment.getExternalStorageDirectory().getAbsolutePath() + File.separator + String.valueOf(System.currentTimeMillis()) + ".jpg");
     }
 
     @OnClick({ R.id.iv_back,R.id.btn_submit,R.id.iv_upload,R.id.rb1,R.id.rb2})
@@ -133,7 +152,12 @@ public class Consulting_problemsActivity extends BaseActivity {
                 }
                 break;
             case R.id.iv_upload://浏览文件
-                applyWritePermission();
+                // 3、调用从图库选取图片方法
+                PermissionGen.needPermission(Consulting_problemsActivity.this,
+                        LQRPhotoSelectUtils.REQ_SELECT_PHOTO,
+                        new String[]{Manifest.permission.READ_EXTERNAL_STORAGE,
+                                Manifest.permission.WRITE_EXTERNAL_STORAGE}
+                );
                 break;
             default:
                 break;
@@ -236,68 +260,88 @@ public class Consulting_problemsActivity extends BaseActivity {
     }
 
 
-    /**
-     * 用onActivityResult()接收传回的图像，当用户拍完照片，或者取消后，系统都会调用这个函数
-     */
+//    /**
+//     * 用onActivityResult()接收传回的图像，当用户拍完照片，或者取消后，系统都会调用这个函数
+//     */
+//    @Override
+//    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+//        super.onActivityResult(requestCode, resultCode, data);
+//
+//        if (requestCode == REQUEST_TAKE_PHOTO && resultCode == RESULT_OK) {
+//            Log.e("TAG", "---------" + FileProvider.getUriForFile(this, "com.cn.gov.jms.MyApplication.fileprovider", file));
+//            imageview.setImageBitmap(BitmapFactory.decodeFile(file.getAbsolutePath()));
+//        }
+//    }
+
+    @PermissionSuccess(requestCode = LQRPhotoSelectUtils.REQ_TAKE_PHOTO)
+    private void takePhoto() {
+        mLqrPhotoSelectUtils.takePhoto();
+    }
+
+    @PermissionSuccess(requestCode = LQRPhotoSelectUtils.REQ_SELECT_PHOTO)
+    private void selectPhoto() {
+        mLqrPhotoSelectUtils.selectPhoto();
+    }
+
+    @PermissionFail(requestCode = LQRPhotoSelectUtils.REQ_TAKE_PHOTO)
+    private void showTip1() {
+        //        Toast.makeText(getApplicationContext(), "不给我权限是吧，那就别玩了", Toast.LENGTH_SHORT).show();
+        showDialog();
+    }
+
+    @PermissionFail(requestCode = LQRPhotoSelectUtils.REQ_SELECT_PHOTO)
+    private void showTip2() {
+        //        Toast.makeText(getApplicationContext(), "不给我权限是吧，那就别玩了", Toast.LENGTH_SHORT).show();
+        showDialog();
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        PermissionGen.onRequestPermissionsResult(this, requestCode, permissions, grantResults);
+    }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-
-        if (requestCode == REQUEST_TAKE_PHOTO && resultCode == RESULT_OK) {
-            Log.e("TAG", "---------" + FileProvider.getUriForFile(this, "com.cn.gov.jms.MyApplication.fileprovider", file));
-            imageview.setImageBitmap(BitmapFactory.decodeFile(file.getAbsolutePath()));
-        }
+        // 2、在Activity中的onActivityResult()方法里与LQRPhotoSelectUtils关联
+        mLqrPhotoSelectUtils.attachToActivityForResult(requestCode, resultCode, data);
     }
 
+    public void showDialog() {
+        //创建对话框创建器
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        //设置对话框显示小图标
+        builder.setIcon(android.R.drawable.ic_dialog_alert);
+        //设置标题
+        builder.setTitle("权限申请");
+        //设置正文
+        builder.setMessage("在设置-应用-权限 中开启相机、存储权限，才能正常使用拍照或图片选择功能");
 
-    public void applyWritePermission() {
+        //添加确定按钮点击事件
+        builder.setPositiveButton("去设置", new DialogInterface.OnClickListener() {//点击完确定后，触发这个事件
 
-        String[] permissions = {Manifest.permission.WRITE_EXTERNAL_STORAGE};
-
-        if (Build.VERSION.SDK_INT >= 23) {
-            int check = ContextCompat.checkSelfPermission(this, permissions[0]);
-            // 权限是否已经 授权 GRANTED---授权  DINIED---拒绝
-            if (check == PackageManager.PERMISSION_GRANTED) {
-                //调用相机
-                useCamera();
-            } else {
-                requestPermissions(new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1);
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                //这里用来跳到手机设置页，方便用户开启权限
+                Intent intent = new Intent(android.provider.Settings.ACTION_MANAGE_WRITE_SETTINGS);
+                intent.setData(Uri.parse("package:" + Consulting_problemsActivity.this.getPackageName()));
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intent);
             }
-        } else {
-            useCamera();
-        }
+        });
+
+        //添加取消按钮点击事件
+        builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
+
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+            }
+        });
+
+        //使用构建器创建出对话框对象
+        AlertDialog dialog = builder.create();
+        dialog.show();//显示对话框
     }
-
-    /**
-     * 使用相机
-     */
-    private void useCamera() {
-        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-        file = new File(Environment.getExternalStorageDirectory().getAbsolutePath()
-                + "/test/" + System.currentTimeMillis() + ".jpg");
-        file.getParentFile().mkdirs();
-
-        //改变Uri  com.xykj.customview.fileprovider注意和xml中的一致
-        Uri uri = FileProvider.getUriForFile(this, "com.cn.gov.jms.MyApplication.fileprovider", file);
-        //添加权限
-        intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-
-        intent.putExtra(MediaStore.EXTRA_OUTPUT, uri);
-        startActivityForResult(intent, REQUEST_TAKE_PHOTO);
-    }
-
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions,
-                                           @NonNull int[] grantResults) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        if (requestCode == 1 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-            useCamera();
-        } else {
-            // 没有获取 到权限，从新请求，或者关闭app
-            Toast.makeText(this, "需要存储权限", Toast.LENGTH_SHORT).show();
-        }
-    }
-
     private void postOpen(){
         Gson gson=new Gson();
         HashMap<String,String> paramsMap=new HashMap<>();
@@ -314,68 +358,9 @@ public class Consulting_problemsActivity extends BaseActivity {
         paramsMap.put("phone",edt_phone.getText().toString().trim());
         paramsMap.put("address",edt_address.getText().toString().trim());
         paramsMap.put("email",edt_email.getText().toString().trim());
-        //paramsMap.put("imagePath","");//图片路径
-        String route= gson.toJson(paramsMap);
-        Log.e("ssssssss",route.toString());
 
-        Retrofit retrofit=new Retrofit.Builder()
-                .baseUrl(Config.BANNER_BASE_URL)
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
-        Api api =retrofit.create(Api.class);
-        RequestBody body=RequestBody.create(okhttp3.MediaType.parse("application/json; charset=utf-8"),route);
-        Log.e("ssssssss",body.toString());
-        Call<ResponseBean> call=api.addProblem(body);
-        call.enqueue(new Callback<ResponseBean>() {
-            @Override
-            public void onResponse(Call<ResponseBean> call, Response<ResponseBean> response) {
-                Log.e("sssss","-----------------------"+response.body().success);
-                if(response.body().success=="true"){
-                    AlertDialog.Builder builder=new AlertDialog.Builder(Consulting_problemsActivity.this);
-                    builder.setTitle("咨询问题");//设置对话框的标题
-                    builder.setMessage("您填写的信息已成功提交，请返回");//设置对话框的内容
-                    builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {  //这个是设置确定按钮
-
-                        @Override
-                        public void onClick(DialogInterface arg0, int arg1) {
-                            //Toast.makeText(Some_suggestionsActivity.this, "确定", Toast.LENGTH_SHORT).show();
-                            finish();
-                        }
-                    });
-//                    builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {  //取消按钮
-//
-//                        @Override
-//                        public void onClick(DialogInterface arg0, int arg1) {
-//                            Toast.makeText(Some_suggestionsActivity.this, "取消",Toast.LENGTH_SHORT).show();
-//                        }
-//                    });
-                    AlertDialog b=builder.create();
-                    b.show();  //必须show一下才能看到对话框，跟Toast一样的道理
-                }
-            }
-
-            @Override
-            public void onFailure(Call<ResponseBean> call, Throwable t) {
-                Log.e("sssss",t.getMessage());
-                Toast.makeText(Consulting_problemsActivity.this,"请求失败!",Toast.LENGTH_SHORT).show();
-            }
-        });
-    }
-
-    private void postHide(){
-        Gson gson=new Gson();
-        HashMap<String,String> paramsMap=new HashMap<>();
-        paramsMap.put("id","10030001");
-        Log.e("======上传的deptId===",deptId);
-        paramsMap.put("dept",deptId);
-        paramsMap.put("title",edt_theme.getText().toString());
-        paramsMap.put("contents",edt_content.getText().toString());
-        paramsMap.put("isOpen",isOpen);
-        paramsMap.put("name",edt_name.getText().toString());
-        paramsMap.put("phone",edt_phone.getText().toString());
-        paramsMap.put("address",edt_address.getText().toString());
-        paramsMap.put("email",edt_email.getText().toString());
-        //paramsMap.put("imagePath","");//图片路径
+//        HashMap<String,RequestBody> bodyMap=new HashMap<>();
+//        bodyMap.put("file"+"\";filename=\""+file.getName(),RequestBody.create(MediaType.parse("image/png"),file));//图片路径
         String route= gson.toJson(paramsMap);
         Log.e("ssssssss",route.toString());
 

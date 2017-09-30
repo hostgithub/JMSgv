@@ -12,7 +12,7 @@ public class Config
     public static final String LIST_ID = "list_id";
 
     //public static final String BANNER_BASE_URL = "http://192.168.0.110:8080/";
-    public static final String BANNER_BASE_URL = "http://192.168.0.121:8080/";
+    public static final String BANNER_BASE_URL = "http://192.168.0.125:8080/";
     //http://192.168.0.110:8080/app/corNewsListImg.do   获取json
     public static final String CACHE = "cache";
 

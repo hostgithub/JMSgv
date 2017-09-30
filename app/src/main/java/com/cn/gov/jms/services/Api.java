@@ -22,6 +22,7 @@ import retrofit2.http.Headers;
 import retrofit2.http.POST;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
+import retrofit2.http.Url;
 
 /**
  * Created by Administrator on 2016/6/25.
@@ -99,6 +100,11 @@ public interface Api {    //retrofit方式
     @Headers({"Content-Type: application/json","Accept: application/json"})//需要添加头  咨询问题和反映问题
     @POST("/app/addProblem.do")
     Call<ResponseBean> addProblem(@Body RequestBody route);//传入的参数为RequestBody
+
+    @POST()
+    Call<ResponseBean> upLoad(  //动态的Url
+            @Url() String url,
+            @Body RequestBody Body);
 
     //http://192.168.0.130:8080/app/consultingProblem.do?id=10030001&pages=1   咨询问题和反映问题列表
     @GET("/app/consultingProblem.do")

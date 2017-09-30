@@ -69,7 +69,7 @@ public class PhotoBitmapUtils2{
         String dateStr= DateUtil.getMyMillon(System.currentTimeMillis());
         dateGeshi= DateUtil.getMillonDate(System.currentTimeMillis());//日期生成格式
 
-        return "AKSR-"+number+"_"+dateStr+strRand+".jpg";
+        return "jms-"+number+"_"+dateStr+strRand+".jpg";
     }
 
     /**
@@ -100,8 +100,8 @@ public class PhotoBitmapUtils2{
         String dateStr= DateUtil.getMyMillon(System.currentTimeMillis());
         dateGeshi= DateUtil.getMillonDate(System.currentTimeMillis());//日期生成格式
 
-        photoName="AKSR-"+number+"_"+dateStr+strRand+".jpg";
-        File file = new File(dir,"AKSR-"+number+"_"+dateStr+strRand+".jpg");  //为拍照图片命名规则
+        photoName="jms-"+number+"_"+dateStr+strRand+".jpg";
+        File file = new File(dir,"jms-"+number+"_"+dateStr+strRand+".jpg");  //为拍照图片命名规则
         if (!file.exists()) {
             try {
                 file.createNewFile();
