@@ -14,12 +14,16 @@ import com.cn.gov.jms.model.Sqgk;
 import com.cn.gov.jms.model.SqgkDetail;
 import com.cn.gov.jms.model.ZixunFanyingDetailBean;
 
+import java.util.Map;
+
 import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.http.Body;
+import retrofit2.http.FieldMap;
 import retrofit2.http.GET;
 import retrofit2.http.Headers;
 import retrofit2.http.POST;
+import retrofit2.http.Part;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
 import retrofit2.http.Url;
@@ -102,9 +106,10 @@ public interface Api {    //retrofit方式
     Call<ResponseBean> addProblem(@Body RequestBody route);//传入的参数为RequestBody
 
     @POST()
-    Call<ResponseBean> upLoad(  //动态的Url
+    Call<ResponseBean> upLoadTextAndPic(  //动态的Url  图文
             @Url() String url,
-            @Body RequestBody Body);
+            @FieldMap Map<String , String> map,
+            @Part("avatar\"; filename=\"avatar.jpg") RequestBody avatar);
 
     //http://192.168.0.130:8080/app/consultingProblem.do?id=10030001&pages=1   咨询问题和反映问题列表
     @GET("/app/consultingProblem.do")

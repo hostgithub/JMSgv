@@ -115,6 +115,7 @@ public class Consulting_problemsActivity extends BaseActivity {
                 //tv_imgUrl.setText(outputFile.getAbsolutePath());//图片路径
                 tv_imgUrl.setText(PhotoBitmapUtils2.amendRotatePhoto(outputFile.getAbsolutePath(),Consulting_problemsActivity.this,""));//修复后的图片路径
                 file=new File(PhotoBitmapUtils2.amendRotatePhoto(outputFile.getAbsolutePath(),Consulting_problemsActivity.this,""));
+                Log.e("======上传的文件名===",file.getName());
                 //mTvUri.setText(outputUri.toString());//图片Uri
                 Glide.with(Consulting_problemsActivity.this).load(outputUri).into(imageview);
             }
@@ -344,7 +345,7 @@ public class Consulting_problemsActivity extends BaseActivity {
     }
     private void postOpen(){
         Gson gson=new Gson();
-        HashMap<String,String> paramsMap=new HashMap<>();
+        HashMap<String,Object> paramsMap=new HashMap<>();
         paramsMap.put("id","10030001");
         Log.e("======上传的deptId===",deptId);
         paramsMap.put("dept",deptId);
@@ -360,7 +361,8 @@ public class Consulting_problemsActivity extends BaseActivity {
         paramsMap.put("email",edt_email.getText().toString().trim());
 
 //        HashMap<String,RequestBody> bodyMap=new HashMap<>();
-//        bodyMap.put("file"+"\";filename=\""+file.getName(),RequestBody.create(MediaType.parse("image/png"),file));//图片路径
+//        bodyMap.put("file"+"\";filename=\""+file.getName(),RequestBody.create(MediaType.parse("image/png"),file));
+//        paramsMap.put("key_service"+"\";filename=\""+file.getName(),RequestBody.create(MediaType.parse("image/jpg"),file));
         String route= gson.toJson(paramsMap);
         Log.e("ssssssss",route.toString());
 

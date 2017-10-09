@@ -57,7 +57,7 @@
                 android:layout_marginTop="15dp" android:textColor="#000"/>
             <EditText android:id="@+id/edt_theme"
                 android:imeOptions="actionNext" android:singleLine="true"
-                android:nextFocusForward="@+id/edt_name"
+                android:nextFocusForward="@+id/edt_content"
                 android:layout_width="match_parent" android:background="@drawable/editshape"
                 android:layout_height="wrap_content" android:layout_marginTop="10dp"/>
             <TextView android:text="内容:"
@@ -66,8 +66,9 @@
                 android:layout_marginTop="15dp" android:textColor="#000"/>
             <EditText android:id="@+id/edt_content"
                 android:layout_width="match_parent" android:background="@drawable/editshape"
+                android:imeOptions="actionNext" android:nextFocusForward="@+id/edt_name"
                 android:layout_height="70dp" android:layout_marginTop="10dp"
-                android:gravity="left|top" android:imeOptions="actionDone"/>
+                android:gravity="left|top"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -150,8 +151,7 @@
                 android:layout_height="wrap_content"  android:textSize="18sp"
                 android:layout_marginTop="15dp" android:textColor="#000"/>
             <EditText android:id="@+id/edt_email"
-                android:imeOptions="actionNext" android:singleLine="true"
-                android:nextFocusForward="@+id/edt_content"
+                android:imeOptions="actionDone" android:singleLine="true"
                 android:layout_width="match_parent" android:background="@drawable/editshape"
                 android:layout_height="wrap_content" android:layout_marginTop="10dp"/>
             <TextView android:text="添加图片:"

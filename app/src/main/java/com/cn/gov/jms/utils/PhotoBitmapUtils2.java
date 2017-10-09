@@ -8,6 +8,7 @@ import android.media.ExifInterface;
 import android.os.Environment;
 import android.util.Base64;
 
+import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
@@ -82,16 +83,6 @@ public class PhotoBitmapUtils2{
         String dir = FileUtil.getSDCardPath()+"TestImage/imagePic/"; //定义一个文件夹储存图片
         FileUtil.checkDir(dir); //判断文件夹是否存在，不存在创建
 
-//        File file = new File(getPhoneRootPath(context) + FILES_NAME);
-//        // 判断文件是否已经存在，不存在则创建
-//        if (!file.exists()) {
-//            file.mkdirs();
-//        }
-//        // 设置图片文件名称
-//        SimpleDateFormat format = new SimpleDateFormat(TIME_STYLE, Locale.getDefault());
-//        Date date = new Date(System.currentTimeMillis());
-//        String time = format.format(date);
-
         // 设置图片文件名称
         String strRand="";
         for(int i=0;i<3;i++){
@@ -130,7 +121,7 @@ public class PhotoBitmapUtils2{
         try {
             outStream = new FileOutputStream(fileName);
             // 把数据写入文件，100表示不压缩
-            mbitmap.compress(Bitmap.CompressFormat.PNG, 100, outStream);
+            mbitmap.compress(Bitmap.CompressFormat.PNG, 40, outStream);
             return fileName;
         } catch (Exception e) {
             e.printStackTrace();
@@ -195,10 +186,49 @@ public class PhotoBitmapUtils2{
     public static Bitmap getCompressPhoto(String path) {
         BitmapFactory.Options options = new BitmapFactory.Options();
         options.inJustDecodeBounds = false;
-        options.inSampleSize = 1; // 图片的大小设置为原来的十分之一
+        options.inSampleSize = 1;
         Bitmap bmp = BitmapFactory.decodeFile(path, options);
         options = null;
         return bmp;
+    }
+
+    // 根据路径获得图片并压缩，返回bitmap用于显示
+    public static Bitmap getSmallBitmap(String filePath) {
+        final BitmapFactory.Options options = new BitmapFactory.Options();
+        options.inJustDecodeBounds = true;
+        BitmapFactory.decodeFile(filePath, options);
+
+        // Calculate inSampleSize
+        options.inSampleSize = calculateInSampleSize(options, 480, 480);
+
+        // Decode bitmap with inSampleSize set
+        options.inJustDecodeBounds = false;
+
+        return BitmapFactory.decodeFile(filePath, options);
+    }
+
+    //计算图片的缩放值
+    public static int calculateInSampleSize(BitmapFactory.Options options,int reqWidth, int reqHeight) {
+        final int height = options.outHeight;
+        final int width = options.outWidth;
+        int inSampleSize = 2;// inSampleSize为1表示宽度和高度不缩放，为2表示压缩后的宽度与高度为原来的1/2
+
+        if (height > reqHeight || width > reqWidth) {
+            final int heightRatio = Math.round((float) height/ (float) reqHeight);
+            final int widthRatio = Math.round((float) width / (float) reqWidth);
+            inSampleSize = heightRatio < widthRatio ? heightRatio : widthRatio;
+        }
+        return inSampleSize;
+    }
+
+    //把bitmap转换成String
+    public static String bitmapToString(String filePath) {
+
+        Bitmap bm = getSmallBitmap(filePath);
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        bm.compress(Bitmap.CompressFormat.JPEG, 40, baos);
+        byte[] b = baos.toByteArray();
+        return Base64.encodeToString(b, Base64.DEFAULT);
     }
 
     /**
@@ -207,6 +237,20 @@ public class PhotoBitmapUtils2{
     public static Bitmap getCompressPhoto(Bitmap bitmap) {
         ByteArrayOutputStream out = new ByteArrayOutputStream();
         bitmap.compress(Bitmap.CompressFormat.JPEG, 10, out);
+        return bitmap;
+    }
+
+    private static Bitmap compressBmpFromBmp(Bitmap image) {
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        int options = 100;
+        image.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+        while (baos.toByteArray().length / 1024 > 100) {
+            baos.reset();
+            options -= 10;
+            image.compress(Bitmap.CompressFormat.JPEG, options, baos);
+        }
+        ByteArrayInputStream isBm = new ByteArrayInputStream(baos.toByteArray());
+        Bitmap bitmap = BitmapFactory.decodeStream(isBm, null, null);
         return bitmap;
     }
 
@@ -222,7 +266,8 @@ public class PhotoBitmapUtils2{
         int angle = readPictureDegree(originpath);
 
         // 把原图压缩后得到Bitmap对象
-        Bitmap bmp = getCompressPhoto(originpath);
+        //Bitmap bmp = getCompressPhoto(originpath);
+        Bitmap bmp = compressBmpFromBmp(getSmallBitmap(originpath));
 
         // 修复图片被旋转的角度
         Bitmap bitmap = rotaingImageView(angle, bmp);size=bitmap.getByteCount()/1024;
@@ -233,7 +278,6 @@ public class PhotoBitmapUtils2{
 
     /**
      * 读取照片旋转角度
-     *
      * @param path 照片路径
      * @return 角度
      */
@@ -283,4 +327,5 @@ public class PhotoBitmapUtils2{
         }
         return returnBm;
     }
+
 }
