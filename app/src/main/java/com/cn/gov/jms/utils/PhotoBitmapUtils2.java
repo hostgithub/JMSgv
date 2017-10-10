@@ -92,7 +92,7 @@ public class PhotoBitmapUtils2{
         dateGeshi= DateUtil.getMillonDate(System.currentTimeMillis());//日期生成格式
 
         photoName="jms-"+number+"_"+dateStr+strRand+".jpg";
-        File file = new File(dir,"jms-"+number+"_"+dateStr+strRand+".jpg");  //为拍照图片命名规则
+        File file = new File(dir,"jms"+number+dateStr+strRand+".jpg");  //为拍照图片命名规则
         if (!file.exists()) {
             try {
                 file.createNewFile();

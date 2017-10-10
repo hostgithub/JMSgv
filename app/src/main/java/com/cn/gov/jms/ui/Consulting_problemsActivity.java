@@ -3,6 +3,7 @@ package com.cn.gov.jms.ui;
 import android.Manifest;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AlertDialog;
@@ -19,7 +20,6 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.bumptech.glide.Glide;
 import com.cn.gov.jms.Config;
 import com.cn.gov.jms.adapter.DeptAdapter;
 import com.cn.gov.jms.base.BaseActivity;
@@ -84,7 +84,6 @@ public class Consulting_problemsActivity extends BaseActivity {
     EditText edt_number;
 
     private List<DeptBean.ResultsBean> list;
-    private String fileName;
     private static final int REQUEST_TAKE_PHOTO = 1;
     private String mCurrentPhotoPath;
     private File file;
@@ -114,10 +113,15 @@ public class Consulting_problemsActivity extends BaseActivity {
                 // 4、当拍照或从图库选取图片成功后回调
                 //tv_imgUrl.setText(outputFile.getAbsolutePath());//图片路径
                 tv_imgUrl.setText(PhotoBitmapUtils2.amendRotatePhoto(outputFile.getAbsolutePath(),Consulting_problemsActivity.this,""));//修复后的图片路径
+                Log.e("======上传的路径BASE64===",PhotoBitmapUtils2.bitmapToString(outputFile.getAbsolutePath()));
                 file=new File(PhotoBitmapUtils2.amendRotatePhoto(outputFile.getAbsolutePath(),Consulting_problemsActivity.this,""));
                 Log.e("======上传的文件名===",file.getName());
+                if(file!=null){//上传一张5.26kb测试后台成功接收  换一张压缩完500kb 后台崩溃了 需要后台更改什么serverlet
+                    upLoadFile(PhotoBitmapUtils2.bitmapToBase64(BitmapFactory.decodeFile(outputFile.getAbsolutePath())),file.getName());
+                }
                 //mTvUri.setText(outputUri.toString());//图片Uri
-                Glide.with(Consulting_problemsActivity.this).load(outputUri).into(imageview);
+                //Glide.with(Consulting_problemsActivity.this).load(outputUri).into(imageview);
+                imageview.setImageBitmap(BitmapFactory.decodeFile(outputFile.getAbsolutePath()));
             }
         }, false);//true裁剪，false不裁剪
 
@@ -409,4 +413,32 @@ public class Consulting_problemsActivity extends BaseActivity {
             }
         });
     }
+
+    private void upLoadFile(String stringBase64,String fileName){
+        Retrofit retrofit=new Retrofit.Builder()
+                .baseUrl(Config.BANNER_BASE_URL)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+        Api api =retrofit.create(Api.class);
+        //RequestBody body=RequestBody.create(okhttp3.MediaType.parse("file/*"),file);
+        //RequestBody body=RequestBody.create(okhttp3.MediaType.parse("multipart/form-data"),file);
+        Call<ResponseBean> call=api.upload(stringBase64,fileName);
+        call.enqueue(new Callback<ResponseBean>() {
+            @Override
+            public void onResponse(Call<ResponseBean> call, Response<ResponseBean> response) {
+//                if(response!=null){
+//                    Log.e("============","-----------------------"+response.body().success);
+//                }else{
+//                    Log.e("============","-----------无响应值------------");
+//                }
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBean> call, Throwable t) {
+                Log.e("=============",t.getMessage());
+                Toast.makeText(Consulting_problemsActivity.this,"请求失败!",Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
 }
