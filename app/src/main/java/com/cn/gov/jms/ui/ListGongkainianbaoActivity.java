@@ -121,7 +121,7 @@ public class ListGongkainianbaoActivity extends BaseActivity implements SwipeRef
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         Api api =retrofit.create(Api.class);
-        Call<Gongzuonianbao> call=api.getGongzuonianbaoData("000100020023",pages);
+        Call<Gongzuonianbao> call=api.getZhiDuData("3",pages);
         call.enqueue(new Callback<Gongzuonianbao>() {
             @Override
             public void onResponse(Call<Gongzuonianbao> call, Response<Gongzuonianbao> response) {
@@ -151,7 +151,7 @@ public class ListGongkainianbaoActivity extends BaseActivity implements SwipeRef
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         Api api =retrofit.create(Api.class);
-        Call<Detail> call=api.getDetailData(id);
+        Call<Detail> call=api.getGuideAndReByIdData(id);
         call.enqueue(new Callback<Detail>() {
             @Override
             public void onResponse(Call<Detail> call, Response<Detail> response) {

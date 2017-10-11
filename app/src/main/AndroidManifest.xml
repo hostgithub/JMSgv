@@ -249,9 +249,11 @@
             android:name=".LeaderOfWindowListActivity"
             android:screenOrientation="portrait"
             android:theme="@style/activityAnimation" />
-        <activity android:name=".LeaderInfoDetailActivity"
+        <activity
+            android:name=".LeaderInfoDetailActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/activityAnimation"></activity>
+            android:theme="@style/activityAnimation" />
+        <activity android:name=".PublicDirectoryActivity"></activity>
     </application>
 
 </manifest>

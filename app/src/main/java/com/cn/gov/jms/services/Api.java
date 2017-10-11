@@ -53,9 +53,6 @@ public interface Api {    //retrofit方式
     @GET("app/publicNotice.do")
     Call<PublicNotice> getPublicNoticeData(@Query("id") String id, @Query("pages") int pages);
 
-    @GET("app/corGetzwgkData.do")
-    Call<Gongzuonianbao> getGongzuonianbaoData(@Query("id") String id, @Query("pages") int pages);
-
     //http://192.168.0.122:8080/app/singlePageData.do   获取市情概况json
     @GET("app/singlePageData.do")
     Call<Sqgk> getSqgkData();
@@ -127,7 +124,7 @@ public interface Api {    //retrofit方式
     Call<ResponseBean> upload(@Query("image") String image, @Query("filename") String filename);//上传文件
 
 
-    //http://192.168.0.115:8080/app/guidelinesAndReports.do?type=2&pages=1  公开制度列表
+    //http://192.168.0.115:8080/app/guidelinesAndReports.do?type=2&pages=1  公开制度列表  年报
     @GET("app/guidelinesAndReports.do")
     Call<Gongzuonianbao> getZhiDuData(@Query("type") String type, @Query("pages") int pages);
 
@@ -135,10 +132,26 @@ public interface Api {    //retrofit方式
     Call<Detail> getGuideAndReByIdData(@Query("id") int id);
 
 
-    //http://192.168.0.122:8080/app/leadershipWindow.do  领导之窗json
+    @GET("app/corGetzwgkData.do")
+    Call<Gongzuonianbao> getGongzuonianbaoData(@Query("id") String id, @Query("pages") int pages);//政府文件
+
+    @GET("app/publicBriefing.do")
+    Call<Gongzuonianbao> getPublicBriefingData(@Query("pages") int pages);//工作简报
+
+    @GET("app/briefingById.do")                           //工作简报详情页
+    Call<Detail> getBriefingByIdData(@Query("id") int id);
+
+
+    @GET("app/publicDirectory.do")
+    Call<Gongzuonianbao> getPublicDirectoryData(@Query("pages") int pages);//公开目录
+
+    @GET("app/directoryById.do")                           //公开目录详情页
+    Call<Detail> getDirectoryByIdData(@Query("id") int id);
+
+    //http://192.168.0.122:8080/app/leadershipWindow.do  领导之窗分类json
     @GET("app/leadershipWindow.do")
     Call<AboutAndContact> getLeaderOfWindowData();
 
-    @GET("app/leadershipWindowList.do")
+    @GET("app/leadershipWindowList.do")            //领导之窗列表json
     Call<AboutAndContact> getLeaderOfWindowListData(@Query("id") String id);
 }
