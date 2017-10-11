@@ -53,11 +53,6 @@ public interface Api {    //retrofit方式
     @GET("app/publicNotice.do")
     Call<PublicNotice> getPublicNoticeData(@Query("id") String id, @Query("pages") int pages);
 
-
-    //http://192.168.0.124:8080/app/corGetzwgkData.do?id=000100020022&pages=1  获取政务公开列表json  固定ID
-    @GET("app/corGetzwgkData.do")
-    Call<PublicNotice> getZhengwuPublicData(@Query("id") String id, @Query("pages") int pages);
-
     @GET("app/corGetzwgkData.do")
     Call<Gongzuonianbao> getGongzuonianbaoData(@Query("id") String id, @Query("pages") int pages);
 
@@ -81,7 +76,7 @@ public interface Api {    //retrofit方式
     @GET("app/fuzzyQuery.do")
     Call<Gongzuonianbao> getPersonThingInfoData(@Query("id") String id, @Query("pages") int pages);
 
-    //http://192.168.0.130:8080/app/corGetzwgkData.do?id=000100020012&pages=1   民生工程  直属机构
+    //http://192.168.0.130:8080/app/corGetzwgkData.do?id=000100020012&pages=1   民生工程  直属机构  热点回应
     @GET("app/corGetzwgkData.do")
     Call<Gongzuonianbao> getMinShengData(@Query("id") String id, @Query("pages") int pages);
 
@@ -130,4 +125,20 @@ public interface Api {    //retrofit方式
 
     @POST("app/uplodImg.do")
     Call<ResponseBean> upload(@Query("image") String image, @Query("filename") String filename);//上传文件
+
+
+    //http://192.168.0.115:8080/app/guidelinesAndReports.do?type=2&pages=1  公开制度列表
+    @GET("app/guidelinesAndReports.do")
+    Call<Gongzuonianbao> getZhiDuData(@Query("type") String type, @Query("pages") int pages);
+
+    @GET("app/guideAndReById.do")                           //详情页
+    Call<Detail> getGuideAndReByIdData(@Query("id") int id);
+
+
+    //http://192.168.0.122:8080/app/leadershipWindow.do  领导之窗json
+    @GET("app/leadershipWindow.do")
+    Call<AboutAndContact> getLeaderOfWindowData();
+
+    @GET("app/leadershipWindowList.do")
+    Call<AboutAndContact> getLeaderOfWindowListData(@Query("id") String id);
 }

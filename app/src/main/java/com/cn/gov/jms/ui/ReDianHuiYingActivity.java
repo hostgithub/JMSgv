@@ -29,14 +29,11 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-/**
- * 政府信息公开制度 列表
- */
-public class ListZwgkActivity extends BaseActivity implements SwipeRefreshLayout.OnRefreshListener {
-
+public class ReDianHuiYingActivity extends BaseActivity implements SwipeRefreshLayout.OnRefreshListener {
 
     @BindView(R.id.tv_title)
     TextView tv_title;
+
     //照片墙
     @BindView(R.id.refreshLayout)
     SwipeRefreshLayout refreshLayout;
@@ -55,7 +52,7 @@ public class ListZwgkActivity extends BaseActivity implements SwipeRefreshLayout
     @Override
     protected void initView() {
 
-        tv_title.setText("政府信息公开制度");
+        tv_title.setText("热点回应");
 
         //图文
         refreshLayout.setOnRefreshListener(this);
@@ -91,7 +88,6 @@ public class ListZwgkActivity extends BaseActivity implements SwipeRefreshLayout
         });
         mRecyclerView.setAdapter(picAdapter);
 
-        //mRecyclerView.setAdapter(picAdapter);
         if(list.size()>6){
             picAdapter.addFooterView(R.layout.view_footer);//添加脚布局
         }
@@ -102,9 +98,7 @@ public class ListZwgkActivity extends BaseActivity implements SwipeRefreshLayout
             public void onLoadMore() {
                 pages++;
                 initNewsData(pages);
-//                if(list.size()>6){
-//                    picAdapter.setFooterVisible(View.VISIBLE);
-//                }
+                //picAdapter.setFooterVisible(View.VISIBLE);---------------崩溃
             }
 
             @Override
@@ -127,12 +121,12 @@ public class ListZwgkActivity extends BaseActivity implements SwipeRefreshLayout
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         Api api =retrofit.create(Api.class);
-        Call<Gongzuonianbao> call=api.getZhiDuData("2",pages);
+        Call<Gongzuonianbao> call=api.getMinShengData("000100050004",pages);
         call.enqueue(new Callback<Gongzuonianbao>() {
             @Override
             public void onResponse(Call<Gongzuonianbao> call, Response<Gongzuonianbao> response) {
                 if(response.body().getResults().size()==0){
-                    Toast.makeText(ListZwgkActivity.this,"已经没有数据了!",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(ReDianHuiYingActivity.this,"已经没有数据了!",Toast.LENGTH_SHORT).show();
                 }else{
                     list.addAll(response.body().getResults());
                     Log.e("xxxxxx请求数据集合大小", String.valueOf(list.size()));
@@ -144,7 +138,7 @@ public class ListZwgkActivity extends BaseActivity implements SwipeRefreshLayout
 
             @Override
             public void onFailure(Call<Gongzuonianbao> call, Throwable t) {
-                Toast.makeText(ListZwgkActivity.this,"请求失败!",Toast.LENGTH_SHORT).show();
+                Toast.makeText(ReDianHuiYingActivity.this,"请求失败!",Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -157,25 +151,25 @@ public class ListZwgkActivity extends BaseActivity implements SwipeRefreshLayout
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         Api api =retrofit.create(Api.class);
-        Call<Detail> call=api.getGuideAndReByIdData(id);
+        Call<Detail> call=api.getDetailData(id);
         call.enqueue(new Callback<Detail>() {
             @Override
             public void onResponse(Call<Detail> call, Response<Detail> response) {
                 if(response!=null){
                     Detail detail=response.body();
                     Detail.ResultsBean resultsBean=detail.getResults().get(0);
-                    Intent intent = new Intent(ListZwgkActivity.this,DetailActivity.class);
+                    Intent intent = new Intent(ReDianHuiYingActivity.this,DetailActivity.class);
                     intent.putExtra(Config.NEWS,resultsBean);
                     startActivity(intent);
                     Log.e("xxxxxxx",resultsBean.content);
                 }else{
-                    Toast.makeText(ListZwgkActivity.this,"数据为空!",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(ReDianHuiYingActivity.this,"数据为空!",Toast.LENGTH_SHORT).show();
                 }
             }
 
             @Override
             public void onFailure(Call<Detail> call, Throwable t) {
-                Toast.makeText(ListZwgkActivity.this,"请求失败!",Toast.LENGTH_SHORT).show();
+                Toast.makeText(ReDianHuiYingActivity.this,"请求失败!",Toast.LENGTH_SHORT).show();
                 Log.e("-------------",t.getMessage().toString());
             }
         });

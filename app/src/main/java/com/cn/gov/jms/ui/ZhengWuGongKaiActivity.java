@@ -7,6 +7,7 @@ import android.widget.GridView;
 import android.widget.SimpleAdapter;
 import android.widget.Toast;
 
+import com.cn.gov.jms.adapter.LeaderOfWindowAdapter;
 import com.cn.gov.jms.base.BaseActivity;
 
 import java.util.ArrayList;
@@ -60,8 +61,8 @@ public class ZhengWuGongKaiActivity extends BaseActivity {
                     case 1://政策解读
                         startActivity(new Intent(ZhengWuGongKaiActivity.this,ZhengcejieduActivity.class));
                         break;
-                    case 2://热点回应 没有
-                        Toast.makeText(ZhengWuGongKaiActivity.this,"热点回应暂定",Toast.LENGTH_SHORT).show();
+                    case 2://热点回应
+                        startActivity(new Intent(ZhengWuGongKaiActivity.this,ReDianHuiYingActivity.class));
                         break;
                     case 3://人事信息
                         startActivity(new Intent(ZhengWuGongKaiActivity.this,PeronThingInfoActivity.class));
@@ -72,8 +73,8 @@ public class ZhengWuGongKaiActivity extends BaseActivity {
                     case 5://法规公文
                         startActivity(new Intent(ZhengWuGongKaiActivity.this,LawGuiwenActivity.class));
                         break;
-                    case 6://领导之窗 没有
-                        Toast.makeText(ZhengWuGongKaiActivity.this,"暂无",Toast.LENGTH_SHORT).show();
+                    case 6://领导之窗
+                        startActivity(new Intent(ZhengWuGongKaiActivity.this,LeaderOfWindowActivity.class));
                         break;
                     case 7://直属机构
                         startActivity(new Intent(ZhengWuGongKaiActivity.this,ZhishujigouActivity.class));
