@@ -155,7 +155,7 @@ public interface Api {    //retrofit方式
     Call<PublicGuideBean> getPublicGuideData();//公开指南
 
     @GET("app/publicGuide.do")                           //公开指南详情页
-    Call<PublicGuideDetailBean> getGuideBySourceData(@Query("source") int source);
+    Call<PublicGuideDetailBean> getGuideBySourceData(@Query("source") int source,@Query("genre") int genre);
 
     //http://192.168.0.122:8080/app/leadershipWindow.do  领导之窗分类json
     @GET("app/leadershipWindow.do")
@@ -163,4 +163,8 @@ public interface Api {    //retrofit方式
 
     @GET("app/leadershipWindowList.do")            //领导之窗列表json
     Call<AboutAndContact> getLeaderOfWindowListData(@Query("id") String id);
+
+
+    @GET("app/mayorSecretary.do")//书记 市长
+    Call<SqgkDetail> getMayorSecretaryData(@Query("name") String name);
 }

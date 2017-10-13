@@ -42,18 +42,15 @@ public class ZhengminHudongActivity extends BaseActivity {
         listview.setAdapter(adapter);
 
     }
-    @OnClick({ R.id.iv_back,R.id.system_of_government_information_publicity,R.id.government_information_public_directory,
-            R.id.guide_to_government_information_disclosure,R.id.open_in_accordance_with_the_application,R.id.government_information_public_briefing,
-            R.id.annual_report_on_government_information_work,R.id.important_area})
+    @OnClick({ R.id.iv_back,
+            R.id.guide_to_government_information_disclosure,R.id.open_in_accordance_with_the_application,
+            R.id.government_information_public_briefing, R.id.annual_report_on_government_information_work})
     public void onClick(View view) {
         switch (view.getId()){
             case R.id.iv_back:
                 finish();
-            case R.id.system_of_government_information_publicity:finish();
-                break;
-            case R.id.government_information_public_directory:finish();
-                break;
-            case R.id.guide_to_government_information_disclosure:finish();
+            case R.id.guide_to_government_information_disclosure:
+                startActivity(new Intent(ZhengminHudongActivity.this,OnlineTalkActivity.class));//在线访谈
                 break;
             case R.id.open_in_accordance_with_the_application:
                 startActivity(new Intent(ZhengminHudongActivity.this,FanyingQuestionListActivity.class));//反映问题列表
@@ -64,8 +61,6 @@ public class ZhengminHudongActivity extends BaseActivity {
                 break;
             case R.id.annual_report_on_government_information_work:
                 startActivity(new Intent(ZhengminHudongActivity.this,ZixunQuestionListActivity.class));//咨询问题列表
-                break;
-            case R.id.important_area:finish();
                 break;
             default:
                 break;

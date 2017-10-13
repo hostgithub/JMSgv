@@ -6,7 +6,7 @@
 
     <RelativeLayout
         android:layout_width="match_parent" android:id="@+id/about_us"
-        android:layout_height="80dp" android:background="#ffff">
+        android:layout_height="80dp" android:background="#FFD700">
         <TextView
             android:gravity="center_vertical|left"
             android:textSize="20sp" android:id="@+id/tv_title"

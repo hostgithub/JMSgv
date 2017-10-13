@@ -131,7 +131,7 @@ public class PublicGuideActivity extends BaseActivity {
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         Api api =retrofit.create(Api.class);
-        Call<PublicGuideDetailBean> call=api.getGuideBySourceData(source);
+        Call<PublicGuideDetailBean> call=api.getGuideBySourceData(source,1);
         call.enqueue(new Callback<PublicGuideDetailBean>() {
             @Override
             public void onResponse(Call<PublicGuideDetailBean> call, Response<PublicGuideDetailBean> response) {
@@ -141,7 +141,7 @@ public class PublicGuideActivity extends BaseActivity {
                     Intent intent = new Intent(PublicGuideActivity.this,PublicGuideDetailActivity.class);
                     intent.putExtra(Config.NEWS,resultsBean);
                     startActivity(intent);
-                    Log.e("xxxxxxx",resultsBean.content);
+                    Log.e("xxxxxxx",resultsBean.title);
                 }else{
                     Toast.makeText(PublicGuideActivity.this,"数据为空!",Toast.LENGTH_SHORT).show();
                 }

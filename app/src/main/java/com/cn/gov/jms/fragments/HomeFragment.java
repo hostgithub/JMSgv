@@ -31,14 +31,14 @@ import com.cn.gov.jms.model.Detail;
 import com.cn.gov.jms.model.NewCenter;
 import com.cn.gov.jms.presenter.NewsPresenterImpl;
 import com.cn.gov.jms.services.Api;
-import com.cn.gov.jms.ui.Convenience_ServicesActivity;
 import com.cn.gov.jms.ui.DetailActivity;
+import com.cn.gov.jms.ui.LeaderOfWindowActivity;
 import com.cn.gov.jms.ui.NewsCenterActivity;
-import com.cn.gov.jms.ui.Online_servicesActivity;
 import com.cn.gov.jms.ui.PublicNoticeActivity;
 import com.cn.gov.jms.ui.R;
 import com.cn.gov.jms.ui.ShiQingGaiKuangActivity;
-import com.cn.gov.jms.ui.Some_suggestionsActivity;
+import com.cn.gov.jms.ui.ShiZhangDetailActivity;
+import com.cn.gov.jms.ui.ShuJiDetailActivity;
 import com.cn.gov.jms.ui.ZhengWuGongKaiActivity;
 import com.cn.gov.jms.ui.ZhengminHudongActivity;
 import com.cn.gov.jms.utils.CacheUtil;
@@ -111,11 +111,11 @@ public class HomeFragment extends BaseFragment implements SwipeRefreshLayout.OnR
     private List<Map<String, Object>> data_list;
     private SimpleAdapter sim_adapter;
     // 图片封装为一个数组
-    private int[] icon = { R.drawable.icon_01, R.drawable.icon_02,
-            R.drawable.icon_03, R.drawable.icon_04, R.drawable.icon_05,
+    private int[] icon = { R.drawable.icon_shuji, R.drawable.icon_shizhang,
+            R.drawable.icon_leader, R.drawable.icon_04, R.drawable.icon_05,
             R.drawable.icon_06, R.drawable.icon_07, R.drawable.icon_08,};
-    private String[] iconName = { "市情概况", "新闻中心", "公告公示", "政务公开",
-            "在线服务", "便民服务", "政民互动", "投资指南"};
+    private String[] iconName = { "书记之窗", "市长之窗", "领导介绍", "公告公示",
+            "市情概况", "新闻中心", "政务公开", "政民互动"};
 
     private Unbinder mUnbinder;
     private BaseRecyclerAdapter<Datas.ResultBean.DataBean> mAdapter;
@@ -164,29 +164,28 @@ public class HomeFragment extends BaseFragment implements SwipeRefreshLayout.OnR
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 switch (i){
                     case 0:
-                        getActivity().startActivity(new Intent(getActivity(), ShiQingGaiKuangActivity.class));
+                        getActivity().startActivity(new Intent(getActivity(), ShuJiDetailActivity.class));
                         break;
                     case 1:
-                        getActivity().startActivity(new Intent(getActivity(), NewsCenterActivity.class));
+                        getActivity().startActivity(new Intent(getActivity(), ShiZhangDetailActivity.class));
                         break;
                     case 2:
-                        getActivity().startActivity(new Intent(getActivity(), PublicNoticeActivity.class));
+                        getActivity().startActivity(new Intent(getActivity(), LeaderOfWindowActivity.class));
                         break;
                     case 3:
-                        getActivity().startActivity(new Intent(getActivity(), ZhengWuGongKaiActivity.class));
+                        getActivity().startActivity(new Intent(getActivity(), PublicNoticeActivity.class));
                         break;
                     case 4:
-                        getActivity().startActivity(new Intent(getActivity(), Online_servicesActivity.class));
+                        getActivity().startActivity(new Intent(getActivity(), ShiQingGaiKuangActivity.class));
                         break;
                     case 5:
-                        getActivity().startActivity(new Intent(getActivity(), Convenience_ServicesActivity.class));
+                        getActivity().startActivity(new Intent(getActivity(), NewsCenterActivity.class));
                         break;
                     case 6:
-                        getActivity().startActivity(new Intent(getActivity(), ZhengminHudongActivity.class));
+                        getActivity().startActivity(new Intent(getActivity(), ZhengWuGongKaiActivity.class));
                         break;
                     case 7:
-                        getActivity().startActivity(new Intent(getActivity(), Some_suggestionsActivity.class));
-                        //Toast.makeText(getActivity(),"投资指南待定",Toast.LENGTH_SHORT).show();
+                        getActivity().startActivity(new Intent(getActivity(), ZhengminHudongActivity.class));
                         break;
                     default:
                         break;

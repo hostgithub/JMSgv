@@ -19,9 +19,8 @@ import com.cn.gov.jms.adapter.TopAdapter;
 import com.cn.gov.jms.base.BaseFragment;
 import com.cn.gov.jms.model.Banners;
 import com.cn.gov.jms.services.Api;
-import com.cn.gov.jms.ui.Convenience_ServicesActivity;
+import com.cn.gov.jms.ui.LeaderOfWindowActivity;
 import com.cn.gov.jms.ui.NewsCenterActivity;
-import com.cn.gov.jms.ui.Online_servicesActivity;
 import com.cn.gov.jms.ui.PublicNoticeActivity;
 import com.cn.gov.jms.ui.R;
 import com.cn.gov.jms.ui.ShiQingGaiKuangActivity;
@@ -195,23 +194,21 @@ public class LanmuFragment extends BaseFragment
                 //Toast.makeText(getActivity(),"政务公开",Toast.LENGTH_SHORT).show();
                 break;
             case R.id.announcement:
-                getActivity().startActivity(new Intent(getActivity(), PublicNoticeActivity.class));
-                //Toast.makeText(getActivity(),"公告公示",Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(),"书记之窗",Toast.LENGTH_SHORT).show();
                 break;
             case R.id.online_services:
-                getActivity().startActivity(new Intent(getActivity(), Online_servicesActivity.class));
-                //Toast.makeText(getActivity(),"在线服务",Toast.LENGTH_SHORT).show();
+                //getActivity().startActivity(new Intent(getActivity(), Online_servicesActivity.class));
+                Toast.makeText(getActivity(),"市长之窗",Toast.LENGTH_SHORT).show();
                 break;
             case R.id.convenience_services:
-                getActivity().startActivity(new Intent(getActivity(), Convenience_ServicesActivity.class));
-                //Toast.makeText(getActivity(),"便民服务",Toast.LENGTH_SHORT).show();
+                getActivity().startActivity(new Intent(getActivity(), LeaderOfWindowActivity.class));
                 break;
             case R.id.interaction:
                 getActivity().startActivity(new Intent(getActivity(), ZhengminHudongActivity.class));
                 //Toast.makeText(getActivity(),"政民互动",Toast.LENGTH_SHORT).show();
                 break;
             case R.id.investment_guide:
-                Toast.makeText(getActivity(),"投资指南待定",Toast.LENGTH_SHORT).show();
+                getActivity().startActivity(new Intent(getActivity(), PublicNoticeActivity.class));
                 break;
             default:
                 break;

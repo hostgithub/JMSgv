@@ -59,7 +59,6 @@ public class SearchListActivity extends BaseActivity implements SwipeRefreshLayo
         //图文
         refreshLayout.setOnRefreshListener(this);
         list=new ArrayList();
-        initNewsData(intent.getStringExtra(Config.NEWS),1);
         linearLayoutManager=new LinearLayoutManager(this);
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         mRecyclerView.setLayoutManager(linearLayoutManager);
@@ -76,6 +75,7 @@ public class SearchListActivity extends BaseActivity implements SwipeRefreshLayo
         //stringIntegerHashMap.put(RecyclerViewSpacesItemDecoration.RIGHT_DECORATION,10);//右间距
 
         mRecyclerView.addItemDecoration(new RecyclerViewSpacesItemDecoration(stringIntegerHashMap));
+        initNewsData(intent.getStringExtra(Config.NEWS),1);
 
         searchListAdapter=new SearchListAdapter(this,list);
 
