@@ -2,27 +2,23 @@ package com.cn.gov.jms.ui;
 
 import android.content.Context;
 import android.content.Intent;
-import android.content.res.AssetManager;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
-import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.cn.gov.jms.Config;
-import com.cn.gov.jms.adapter.SQGKAdapter;
+import com.cn.gov.jms.adapter.PublicGuideBeanAdapter;
 import com.cn.gov.jms.base.BaseActivity;
-import com.cn.gov.jms.model.LocalJsonFile;
-import com.cn.gov.jms.model.Sqgk;
-import com.cn.gov.jms.model.SqgkDetail;
+import com.cn.gov.jms.model.PublicGuideBean;
+import com.cn.gov.jms.model.PublicGuideDetailBean;
 import com.cn.gov.jms.services.Api;
 import com.cn.gov.jms.utils.RecyclerViewSpacesItemDecoration;
 
-import java.io.IOException;
-import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -35,16 +31,14 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class ShiQingGaiKuangActivity extends BaseActivity {
+public class PublicGuideActivity extends BaseActivity {
 
-    @BindView(R.id.iv_back)
-    ImageView imageView;
-
+    @BindView(R.id.tv_title)
+    TextView tv_title;
     @BindView(R.id.recyerview)
     RecyclerView mRecyclerView;
-    private List<LocalJsonFile.DynamicBean> resultsBeanList;
-    private List<Sqgk.ResultsBean> list;
-    private SQGKAdapter sqgkAdapter;
+    private List<PublicGuideBean.ResultsBean> list;
+    private PublicGuideBeanAdapter publicGuideBeanAdapter;
     LinearLayoutManager linearLayoutManager;
     private boolean connect = false;//判断网络是否连接正常
 
@@ -57,7 +51,7 @@ public class ShiQingGaiKuangActivity extends BaseActivity {
     @Override
     protected void initView() {
 
-        resultsBeanList = new ArrayList<>();
+        tv_title.setText("政府信息公开指南");
         list = new ArrayList<>();
         checkNet();
         linearLayoutManager=new LinearLayoutManager(this);
@@ -84,37 +78,6 @@ public class ShiQingGaiKuangActivity extends BaseActivity {
         }
     }
 
-    /**
-     * 获取Assets路径下的文件
-     *
-     * @param context
-     * @return
-     */
-    public static String getJson(Context context) {
-
-        String json = "";
-
-        try {
-
-            AssetManager s = context.getAssets();
-            try {
-                InputStream is = s.open("dynamic.json");
-                byte[] buffer = new byte[is.available()];
-                is.read(buffer);
-                json = new String(buffer, "utf-8");
-                is.close();
-
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        System.out.println(json);
-        return json;
-
-    }
-
     public void checkNet()//网络是否已经连接上
     {
         ConnectivityManager manager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
@@ -131,62 +94,62 @@ public class ShiQingGaiKuangActivity extends BaseActivity {
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         Api api =retrofit.create(Api.class);
-        Call<Sqgk> call=api.getSqgkData();
-        call.enqueue(new Callback<Sqgk>() {
+        Call<PublicGuideBean> call=api.getPublicGuideData();
+        call.enqueue(new Callback<PublicGuideBean>() {
             @Override
-            public void onResponse(Call<Sqgk> call, Response<Sqgk> response) {
-                if(response.body()!=null){
-                    Sqgk banners=response.body();
+            public void onResponse(Call<PublicGuideBean> call, Response<PublicGuideBean> response) {
+                if(response!=null){
+                    PublicGuideBean banners=response.body();
                     list=banners.getResults();
                     //sqgkAdapter = new SQGKAdapter(ShiQingGaiKuangActivity.this, resultsBeanList);
-                    sqgkAdapter = new SQGKAdapter(ShiQingGaiKuangActivity.this, list);
-                    mRecyclerView.setAdapter(sqgkAdapter);
+                    publicGuideBeanAdapter = new PublicGuideBeanAdapter(PublicGuideActivity.this, list);
+                    mRecyclerView.setAdapter(publicGuideBeanAdapter);
 
-                    sqgkAdapter.setOnItemClickLitener(new SQGKAdapter.OnItemClickListener() {
+                    publicGuideBeanAdapter.setOnItemClickLitener(new PublicGuideBeanAdapter.OnItemClickListener() {
                         @Override
                         public void onItemClick(int position) {
-                            getData(Integer.parseInt(list.get(position).id));
+                            getData(Integer.parseInt(list.get(position).source));
                         }
                     });
                 }else{
-                    Toast.makeText(ShiQingGaiKuangActivity.this,"服务器暂时未响应!",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(PublicGuideActivity.this,"数据为空!",Toast.LENGTH_SHORT).show();
                 }
             }
 
             @Override
-            public void onFailure(Call<Sqgk> call, Throwable t) {
-                Toast.makeText(ShiQingGaiKuangActivity.this,"请求失败!",Toast.LENGTH_SHORT).show();
+            public void onFailure(Call<PublicGuideBean> call, Throwable t) {
+                Toast.makeText(PublicGuideActivity.this,"请求失败!",Toast.LENGTH_SHORT).show();
             }
         });
     }
 
 
-    private void getData(int id){
+    private void getData(int source){        //json格式有问题 解析失败
         //使用retrofit配置api
         Retrofit retrofit=new Retrofit.Builder()
                 .baseUrl(Config.BANNER_BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         Api api =retrofit.create(Api.class);
-        Call<SqgkDetail> call=api.getSqgkDetailData(id);
-        call.enqueue(new Callback<SqgkDetail>() {
+        Call<PublicGuideDetailBean> call=api.getGuideBySourceData(source);
+        call.enqueue(new Callback<PublicGuideDetailBean>() {
             @Override
-            public void onResponse(Call<SqgkDetail> call, Response<SqgkDetail> response) {
-                if(response.body()!=null){
-                    SqgkDetail detail=response.body();
-                    SqgkDetail.ResultsBean resultsBean=detail.getResults().get(0);
-                    Intent intent = new Intent(ShiQingGaiKuangActivity.this,ShiqinggaikuangListDetailActivity.class);
+            public void onResponse(Call<PublicGuideDetailBean> call, Response<PublicGuideDetailBean> response) {
+                if(response!=null){
+                    PublicGuideDetailBean detail=response.body();
+                    PublicGuideDetailBean.ResultsBean resultsBean=detail.getResults().get(0);
+                    Intent intent = new Intent(PublicGuideActivity.this,PublicGuideDetailActivity.class);
                     intent.putExtra(Config.NEWS,resultsBean);
                     startActivity(intent);
                     Log.e("xxxxxxx",resultsBean.content);
                 }else{
-                    Toast.makeText(ShiQingGaiKuangActivity.this,"服务器暂时未响应!",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(PublicGuideActivity.this,"数据为空!",Toast.LENGTH_SHORT).show();
                 }
             }
 
             @Override
-            public void onFailure(Call<SqgkDetail> call, Throwable t) {
-                Toast.makeText(ShiQingGaiKuangActivity.this,"请求失败!",Toast.LENGTH_SHORT).show();
+            public void onFailure(Call<PublicGuideDetailBean> call, Throwable t) {
+                Toast.makeText(PublicGuideActivity.this,"请求失败!",Toast.LENGTH_SHORT).show();
                 Log.e("-------------",t.getMessage().toString());
             }
         });

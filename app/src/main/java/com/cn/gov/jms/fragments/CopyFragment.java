@@ -236,7 +236,7 @@ public class CopyFragment extends BaseFragment implements SwipeRefreshLayout.OnR
         call.enqueue(new Callback<Banners>() {
             @Override
             public void onResponse(Call<Banners> call, Response<Banners> response) {
-                if(response!=null){
+                if(response.body()!=null){
                     Banners banners=response.body();
                     Log.e("++++++++++",banners.success);
                     resultsBeanList=banners.getResults();
@@ -252,7 +252,7 @@ public class CopyFragment extends BaseFragment implements SwipeRefreshLayout.OnR
                     mHomeViewpager.startAutoScroll();
                     mHomeIndicator.setViewPager(mHomeViewpager);
                 }else{
-                    Toast.makeText(getActivity(),"数据为空!",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(),"服务器暂时未响应!",Toast.LENGTH_SHORT).show();
                 }
             }
 
@@ -278,10 +278,12 @@ public class CopyFragment extends BaseFragment implements SwipeRefreshLayout.OnR
         call.enqueue(new Callback<NewCenter>() {
             @Override
             public void onResponse(Call<NewCenter> call, Response<NewCenter> response) {
-                list.addAll(response.body().results);
-                Log.e("xxxxxx",response.body().toString());
-                picAdapter.notifyDataSetChanged();
-                refreshLayout.setRefreshing(false);
+                if(response.body()!=null){
+                    list.addAll(response.body().results);
+                    Log.e("xxxxxx",response.body().toString());
+                    picAdapter.notifyDataSetChanged();
+                    refreshLayout.setRefreshing(false);
+                }
             }
 
             @Override
@@ -318,7 +320,6 @@ public class CopyFragment extends BaseFragment implements SwipeRefreshLayout.OnR
 
             @Override
             public void onFailure(Call<Detail> call, Throwable t) {
-                Toast.makeText(getActivity(),"请求失败!",Toast.LENGTH_SHORT).show();
                 Log.e("-------------",t.getMessage().toString());
             }
         });

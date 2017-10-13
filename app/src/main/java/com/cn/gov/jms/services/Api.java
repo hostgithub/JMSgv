@@ -7,6 +7,8 @@ import com.cn.gov.jms.model.DeptBean;
 import com.cn.gov.jms.model.Detail;
 import com.cn.gov.jms.model.Gongzuonianbao;
 import com.cn.gov.jms.model.NewCenter;
+import com.cn.gov.jms.model.PublicGuideBean;
+import com.cn.gov.jms.model.PublicGuideDetailBean;
 import com.cn.gov.jms.model.PublicNotice;
 import com.cn.gov.jms.model.ResponseBean;
 import com.cn.gov.jms.model.Search;
@@ -147,6 +149,13 @@ public interface Api {    //retrofit方式
 
     @GET("app/directoryById.do")                           //公开目录详情页
     Call<Detail> getDirectoryByIdData(@Query("id") int id);
+
+
+    @GET("app/getDepartmentAll.do")
+    Call<PublicGuideBean> getPublicGuideData();//公开指南
+
+    @GET("app/publicGuide.do")                           //公开指南详情页
+    Call<PublicGuideDetailBean> getGuideBySourceData(@Query("source") int source);
 
     //http://192.168.0.122:8080/app/leadershipWindow.do  领导之窗分类json
     @GET("app/leadershipWindow.do")

@@ -7,7 +7,6 @@ import android.widget.GridView;
 import android.widget.SimpleAdapter;
 import android.widget.Toast;
 
-import com.cn.gov.jms.adapter.LeaderOfWindowAdapter;
 import com.cn.gov.jms.base.BaseActivity;
 
 import java.util.ArrayList;
@@ -153,10 +152,10 @@ public class ZhengWuGongKaiActivity extends BaseActivity {
                 startActivity(new Intent(ZhengWuGongKaiActivity.this,ListZwgkActivity.class));
                 break;
             case R.id.government_information_public_directory:
-                finish();//政府信息公开目录
+                startActivity(new Intent(ZhengWuGongKaiActivity.this,PublicDirectoryActivity.class));//政府信息公开目录
                 break;
             case R.id.guide_to_government_information_disclosure://政府信息公开指南
-               finish();
+                startActivity(new Intent(ZhengWuGongKaiActivity.this,PublicGuideActivity.class));
                 break;
             case R.id.open_in_accordance_with_the_application:
                 finish();//依申请公开

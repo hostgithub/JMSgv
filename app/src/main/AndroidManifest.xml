@@ -253,7 +253,16 @@
             android:name=".LeaderInfoDetailActivity"
             android:screenOrientation="portrait"
             android:theme="@style/activityAnimation" />
-        <activity android:name=".PublicDirectoryActivity"></activity>
+        <activity
+            android:name=".PublicDirectoryActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/activityAnimation" />
+        <activity android:name=".PublicGuideActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/activityAnimation"></activity>
+        <activity android:name=".PublicGuideDetailActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/activityAnimation"></activity>
     </application>
 
 </manifest>

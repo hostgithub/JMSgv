@@ -141,24 +141,27 @@ public class LanmuFragment extends BaseFragment
         call.enqueue(new Callback<Banners>() {
             @Override
             public void onResponse(Call<Banners> call, Response<Banners> response) {
-                Banners banners=response.body();
-                Log.e("++++++++++",banners.success);
-                resultsBeanList=banners.getResults();
-                Log.e("++++++++++",resultsBeanList.get(0).get_id());
-                Log.e("++++++++++",resultsBeanList.get(0).getTitle());
-                Log.e("++++++++++",resultsBeanList.get(0).getUrl());
-                Log.e("++++++++++",resultsBeanList.size()+"");
+                if(response.body()!=null){
+                    Banners banners=response.body();
+                    resultsBeanList=banners.getResults();
+                    Log.e("++++++++++",resultsBeanList.get(0).get_id());
+                    Log.e("++++++++++",resultsBeanList.get(0).getTitle());
+                    Log.e("++++++++++",resultsBeanList.get(0).getUrl());
+                    Log.e("++++++++++",resultsBeanList.size()+"");
 
-                TopAdapter adapter = new TopAdapter(getActivity(), resultsBeanList,banner_url);
-                mHomeViewpager.setAdapter(adapter);
-                mHomeViewpager.setAutoScrollTime(3000);
-                mHomeViewpager.startAutoScroll();
-                mHomeIndicator.setViewPager(mHomeViewpager);
+                    TopAdapter adapter = new TopAdapter(getActivity(), resultsBeanList,banner_url);
+                    mHomeViewpager.setAdapter(adapter);
+                    mHomeViewpager.setAutoScrollTime(3000);
+                    mHomeViewpager.startAutoScroll();
+                    mHomeIndicator.setViewPager(mHomeViewpager);
+                }else{
+                    Toast.makeText(getActivity(),"服务器暂时未响应!",Toast.LENGTH_SHORT).show();
+                }
             }
 
             @Override
             public void onFailure(Call<Banners> call, Throwable t) {
-
+                Toast.makeText(getActivity(),"请求失败!",Toast.LENGTH_SHORT).show();
             }
         });
     }

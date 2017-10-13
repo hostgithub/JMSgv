@@ -265,11 +265,10 @@ public class HomeFragment extends BaseFragment implements SwipeRefreshLayout.OnR
         call.enqueue(new Callback<Banners>() {
             @Override
             public void onResponse(Call<Banners> call, Response<Banners> response) {
-                if(response!=null){
+                if(response.body()!=null){
                     Banners banners=response.body();
                     CacheUtil cacheUtil=CacheUtil.get(getActivity());
                     cacheUtil.put(Config.CACHE,banners);
-                    Log.e("++++++++++",banners.success);
                     resultsBeanList=banners.getResults();
                     Log.e("++++++++++",resultsBeanList.get(0).get_id());
                     Log.e("++++++++++",resultsBeanList.get(0).getTitle());
@@ -283,7 +282,7 @@ public class HomeFragment extends BaseFragment implements SwipeRefreshLayout.OnR
                     mHomeViewpager.startAutoScroll();
                     mHomeIndicator.setViewPager(mHomeViewpager);
                 }else{
-                    Toast.makeText(getActivity(),"数据为空!",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(),"服务器暂时未响应!",Toast.LENGTH_SHORT).show();
                 }
             }
 
@@ -298,7 +297,7 @@ public class HomeFragment extends BaseFragment implements SwipeRefreshLayout.OnR
      * 图片瀑布流 初始化 网络请求第一页数据
      * @param pages
      */
-    private void initData(int pages) {
+    private void initData(int pages) {     //json格式有问题 返回的success字段为false
         //使用retrofit配置api
         Retrofit retrofit=new Retrofit.Builder()
                 .baseUrl(Config.BANNER_BASE_URL)
@@ -309,10 +308,11 @@ public class HomeFragment extends BaseFragment implements SwipeRefreshLayout.OnR
         call.enqueue(new Callback<NewCenter>() {
             @Override
             public void onResponse(Call<NewCenter> call, Response<NewCenter> response) {
-                list.addAll(response.body().results);
-                Log.e("xxxxxx",response.body().toString());
-                picAdapter.notifyDataSetChanged();
-                refreshLayout.setRefreshing(false);
+                if(response.body()!=null){
+                    list.addAll(response.body().results);
+                    picAdapter.notifyDataSetChanged();
+                    refreshLayout.setRefreshing(false);
+                }
             }
 
             @Override
@@ -341,7 +341,6 @@ public class HomeFragment extends BaseFragment implements SwipeRefreshLayout.OnR
                     Intent intent = new Intent(getActivity(), DetailActivity.class);
                     intent.putExtra(Config.NEWS,resultsBean);
                     startActivity(intent);
-                    Log.e("xxxxxxx",resultsBean.content);
                 }else{
                     Toast.makeText(getActivity(),"数据为空!",Toast.LENGTH_SHORT).show();
                 }

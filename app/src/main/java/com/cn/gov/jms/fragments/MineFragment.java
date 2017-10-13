@@ -114,7 +114,7 @@ public class MineFragment extends BaseFragment
         call.enqueue(new Callback<AboutAndContact>() {
             @Override
             public void onResponse(Call<AboutAndContact> call, Response<AboutAndContact> response) {
-                if(response!=null){
+                if(response.body()!=null){
                     AboutAndContact detail=response.body();
                     AboutAndContact.ResultsBean resultsBean=detail.getResults().get(0);
                     Intent intent = new Intent(getActivity(),AboutusActivity.class);
@@ -123,7 +123,7 @@ public class MineFragment extends BaseFragment
                     Log.e("xxxxxxx",resultsBean.id);
                     Log.e("xxxxxxx",resultsBean.title);
                 }else{
-                    Toast.makeText(getActivity(),"数据为空!",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(),"服务器暂时未响应!",Toast.LENGTH_SHORT).show();
                 }
             }
 
@@ -147,7 +147,7 @@ public class MineFragment extends BaseFragment
         call.enqueue(new Callback<AboutAndContact>() {
             @Override
             public void onResponse(Call<AboutAndContact> call, Response<AboutAndContact> response) {
-                if(response!=null){
+                if(response.body()!=null){
                     AboutAndContact detail=response.body();
                     AboutAndContact.ResultsBean resultsBean=detail.getResults().get(1);
                     Intent intent = new Intent(getActivity(),ContactusActivity.class);
@@ -156,7 +156,7 @@ public class MineFragment extends BaseFragment
                     Log.e("xxxxxxx",resultsBean.id);
                     Log.e("xxxxxxx",resultsBean.title);
                 }else{
-                    Toast.makeText(getActivity(),"数据为空!",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(),"服务器暂时未响应!",Toast.LENGTH_SHORT).show();
                 }
             }
 
