@@ -39,7 +39,7 @@ public class JsoupShiZhangActivity extends BaseActivity {
 
     @Override
     protected int getLayoutId() {
-        return R.layout.activity_jsoup_shuji;
+        return R.layout.activity_jsoup_shi_zhang;
     }
 
     @Override
