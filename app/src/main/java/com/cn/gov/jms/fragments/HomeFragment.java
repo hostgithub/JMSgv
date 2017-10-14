@@ -32,13 +32,13 @@ import com.cn.gov.jms.model.NewCenter;
 import com.cn.gov.jms.presenter.NewsPresenterImpl;
 import com.cn.gov.jms.services.Api;
 import com.cn.gov.jms.ui.DetailActivity;
+import com.cn.gov.jms.ui.JsoupShiZhangActivity;
+import com.cn.gov.jms.ui.JsoupShujiActivity;
 import com.cn.gov.jms.ui.LeaderOfWindowActivity;
 import com.cn.gov.jms.ui.NewsCenterActivity;
 import com.cn.gov.jms.ui.PublicNoticeActivity;
 import com.cn.gov.jms.ui.R;
 import com.cn.gov.jms.ui.ShiQingGaiKuangActivity;
-import com.cn.gov.jms.ui.ShiZhangDetailActivity;
-import com.cn.gov.jms.ui.ShuJiDetailActivity;
 import com.cn.gov.jms.ui.ZhengWuGongKaiActivity;
 import com.cn.gov.jms.ui.ZhengminHudongActivity;
 import com.cn.gov.jms.utils.CacheUtil;
@@ -164,10 +164,10 @@ public class HomeFragment extends BaseFragment implements SwipeRefreshLayout.OnR
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 switch (i){
                     case 0:
-                        getActivity().startActivity(new Intent(getActivity(), ShuJiDetailActivity.class));
+                        getActivity().startActivity(new Intent(getActivity(), JsoupShujiActivity.class));
                         break;
                     case 1:
-                        getActivity().startActivity(new Intent(getActivity(), ShiZhangDetailActivity.class));
+                        getActivity().startActivity(new Intent(getActivity(), JsoupShiZhangActivity.class));
                         break;
                     case 2:
                         getActivity().startActivity(new Intent(getActivity(), LeaderOfWindowActivity.class));

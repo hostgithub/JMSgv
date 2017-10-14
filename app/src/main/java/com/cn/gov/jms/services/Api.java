@@ -7,6 +7,8 @@ import com.cn.gov.jms.model.DeptBean;
 import com.cn.gov.jms.model.Detail;
 import com.cn.gov.jms.model.Gongzuonianbao;
 import com.cn.gov.jms.model.NewCenter;
+import com.cn.gov.jms.model.OnlineTalk;
+import com.cn.gov.jms.model.OnlineTalkDetail;
 import com.cn.gov.jms.model.PublicGuideBean;
 import com.cn.gov.jms.model.PublicGuideDetailBean;
 import com.cn.gov.jms.model.PublicNotice;
@@ -14,6 +16,7 @@ import com.cn.gov.jms.model.ResponseBean;
 import com.cn.gov.jms.model.Search;
 import com.cn.gov.jms.model.Sqgk;
 import com.cn.gov.jms.model.SqgkDetail;
+import com.cn.gov.jms.model.Video;
 import com.cn.gov.jms.model.ZixunFanyingDetailBean;
 
 import java.util.Map;
@@ -167,4 +170,14 @@ public interface Api {    //retrofit方式
 
     @GET("app/mayorSecretary.do")//书记 市长
     Call<SqgkDetail> getMayorSecretaryData(@Query("name") String name);
+
+
+    @GET("client/interview/show.do")            //服务器 在线访谈 视频  测试json
+    Call<Video> getInterviewData(@Query("id") int id,@Query("upId") String upId);
+
+    @GET("app/interview.do")            //在线访谈 列表
+    Call<OnlineTalk> getInterviewListData(@Query("pages") int pages);
+
+    @GET("app/getViewByid.do")            //在线访谈 详情
+    Call<OnlineTalkDetail> getOnlineTalkByIdData(@Query("id") int id, @Query("upId") String upId);
 }

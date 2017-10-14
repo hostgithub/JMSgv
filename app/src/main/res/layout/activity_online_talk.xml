@@ -17,14 +17,129 @@
             android:textSize="20sp" android:layout_marginLeft="5dp"/>
     </RelativeLayout>
 
-
-    <RelativeLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent" android:padding="10dp">
-        <fm.jiecao.jcvideoplayer_lib.JCVideoPlayerStandard
-            android:id="@+id/videoplayer"
-            android:layout_width="match_parent"
-            android:layout_height="200dp"/>
-    </RelativeLayout>
+        android:layout_height="wrap_content">
 
+        <LinearLayout
+            android:layout_width="match_parent" android:orientation="vertical"
+            android:layout_height="match_parent">
+
+            <TextView android:text="访谈视频" android:textColor="#EE3B3B"
+                android:layout_width="wrap_content" android:textSize="20sp"
+                android:layout_height="wrap_content" android:layout_marginTop="10dp"
+                android:layout_marginLeft="10dp"/>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="200dp" android:padding="10dp">
+                <fm.jiecao.jcvideoplayer_lib.JCVideoPlayerStandard
+                    android:id="@+id/videoplayer"
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"/>
+            </RelativeLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" android:orientation="vertical">
+
+                <TextView android:text="图片" android:textColor="#EE3B3B"
+                    android:layout_width="wrap_content" android:textSize="20sp"
+                    android:layout_height="wrap_content" android:layout_marginTop="10dp"
+                    android:layout_marginLeft="10dp"/>
+
+                <ImageView android:id="@+id/imageview"
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp" />
+
+                <TextView android:text="本期访谈" android:textColor="#EE3B3B"
+                    android:layout_width="wrap_content" android:textSize="20sp"
+                    android:layout_height="wrap_content" android:layout_marginTop="10dp"
+                    android:layout_marginLeft="10dp"/>
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" android:orientation="horizontal">
+                    <TextView android:text="单   位 :" android:textColor="#000"
+                        android:layout_width="wrap_content" android:textSize="20sp"
+                        android:layout_height="wrap_content" android:layout_marginTop="10dp"
+                        android:layout_marginLeft="10dp"/>
+
+                    <TextView android:text="单   位 :"
+                        android:textColor="#000" android:id="@+id/tv_dept"
+                        android:layout_width="wrap_content" android:textSize="20sp"
+                        android:layout_height="wrap_content" android:layout_marginTop="10dp"
+                        android:layout_marginLeft="10dp"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" android:orientation="horizontal">
+                    <TextView android:text="主   题 :" android:textColor="#000"
+                        android:layout_width="wrap_content" android:textSize="20sp"
+                        android:layout_height="wrap_content" android:layout_marginTop="10dp"
+                        android:layout_marginLeft="10dp"/>
+
+                    <TextView android:text="主   题 :"
+                        android:textColor="#000" android:id="@+id/tv_theme"
+                        android:layout_width="wrap_content" android:textSize="20sp"
+                        android:layout_height="wrap_content" android:layout_marginTop="10dp"
+                        android:layout_marginLeft="10dp"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" android:orientation="horizontal">
+                    <TextView android:text="嘉   宾 :" android:textColor="#000"
+                        android:layout_width="wrap_content" android:textSize="20sp"
+                        android:layout_height="wrap_content" android:layout_marginTop="10dp"
+                        android:layout_marginLeft="10dp"/>
+
+                    <TextView android:text="嘉   宾"
+                        android:textColor="#000" android:id="@+id/tv_jiabin"
+                        android:layout_width="wrap_content" android:textSize="20sp"
+                        android:layout_height="wrap_content" android:layout_marginTop="10dp"
+                        android:layout_marginLeft="10dp"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" android:orientation="horizontal">
+                    <TextView android:text="主持人 :" android:textColor="#000"
+                        android:layout_width="wrap_content" android:textSize="20sp"
+                        android:layout_height="wrap_content" android:layout_marginTop="10dp"
+                        android:layout_marginLeft="10dp"/>
+
+                    <TextView android:text="主持人 :"
+                        android:textColor="#000" android:id="@+id/tv_zhuchiren"
+                        android:layout_width="wrap_content" android:textSize="20sp"
+                        android:layout_height="wrap_content" android:layout_marginTop="10dp"
+                        android:layout_marginLeft="10dp"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" android:orientation="horizontal">
+                    <TextView android:text="时  间 :" android:textColor="#000"
+                        android:layout_width="wrap_content" android:textSize="20sp"
+                        android:layout_height="wrap_content" android:layout_marginTop="10dp"
+                        android:layout_marginLeft="10dp"/>
+
+                    <TextView android:text="时  间 :"
+                        android:textColor="#000" android:id="@+id/tv_time"
+                        android:layout_width="wrap_content" android:textSize="20sp"
+                        android:layout_height="wrap_content" android:layout_marginTop="10dp"
+                        android:layout_marginLeft="10dp"/>
+                </LinearLayout>
+            </LinearLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" android:padding="20dp">
+                <android.support.v7.widget.RecyclerView
+                    android:layout_width="match_parent" android:id="@+id/recyerview"
+                    android:layout_height="wrap_content">
+                </android.support.v7.widget.RecyclerView>
+            </RelativeLayout>
+        </LinearLayout>
+    </ScrollView>
 </LinearLayout>

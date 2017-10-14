@@ -1,7 +1,6 @@
 package com.cn.gov.jms.ui;
 
 import android.content.Intent;
-import android.text.Html;
 import android.view.View;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
@@ -39,7 +38,8 @@ public class PublicGuideDetailActivity extends BaseActivity
         Intent intent = getIntent();
         PublicGuideDetailBean.ResultsBean resultsBean= (PublicGuideDetailBean.ResultsBean) intent.getSerializableExtra(Config.NEWS);
         webView.loadDataWithBaseURL(Config.BANNER_BASE_URL, resultsBean.content, "text/html", "utf-8", null);
-        action_bar_title.setText(Html.fromHtml(resultsBean.title));
+//        action_bar_title.setText(Html.fromHtml(resultsBean.title));
+        action_bar_title.setText("信息详情");
     }
 
     @OnClick({ R.id.iv_back})

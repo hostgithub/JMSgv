@@ -11,8 +11,12 @@ public class Config
     public static final String NEWS = "news";
     public static final String LIST_ID = "list_id";
 
-//       public static final String BANNER_BASE_URL = "http://221.210.9.87:8080/";
-      public static final String BANNER_BASE_URL = "http://192.168.0.119:8080/";
+    public static final String RESULT_BEAN = "result_bean";
+    public static final String LIST_HOST = "list_host";
+    public static final String LIST_ANSWER = "list_answer";
+
+       public static final String BANNER_BASE_URL = "http://221.210.9.87:8080/";
+//      public static final String BANNER_BASE_URL = "http://192.168.0.125:8080/";
     //http://192.168.0.110:8080/app/corNewsListImg.do   获取json
     public static final String CACHE = "cache";
 

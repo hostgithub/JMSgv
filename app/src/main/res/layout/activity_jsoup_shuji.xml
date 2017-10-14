@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp" android:background="#EE3B3B">
+        <ImageView android:id="@+id/iv_back"
+            android:layout_width="50dp" android:src="@drawable/back"
+            android:layout_height="wrap_content" android:layout_marginLeft="10dp"/>
+        <TextView android:layout_centerInParent="true"
+            android:layout_width="wrap_content" android:text="市长之窗"
+            android:layout_height="wrap_content" android:id="@+id/action_bar_title"
+            android:textColor="@color/colorWhite" android:layout_marginTop="20dp"
+            android:textSize="20sp" android:layout_marginLeft="5dp"/>
+    </RelativeLayout>
+
+    <TextView android:id="@+id/tv_title" android:text="郭冀平同志简历"
+        android:textColor="#000" android:textSize="20sp"
+        android:layout_width="wrap_content" android:layout_gravity="center_horizontal"
+        android:layout_height="wrap_content" android:layout_marginTop="15dp"/>
+    <ImageView android:id="@+id/image"
+        android:layout_width="100dp" android:layout_gravity="center_horizontal"
+        android:layout_height="100dp" android:layout_marginTop="15dp"/>
+    <WebView android:id="@+id/webView"
+        android:layout_width="match_parent" android:layout_marginTop="15dp"
+        android:layout_height="match_parent"></WebView>
+
+</LinearLayout>

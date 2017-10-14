@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="wrap_content" android:background="@color/colorToolWhite"
+    android:padding="10dp">
+
+    <TextView
+        android:layout_width="wrap_content" android:textSize="20sp"
+        android:layout_height="wrap_content" android:text="主持人:"
+        android:textColor="@color/title"/>
+    <TextView
+        android:layout_width="wrap_content" android:textSize="17sp"
+        android:layout_height="wrap_content"
+        android:textColor="#000" android:text="佳木斯概况佳木斯概况佳木斯概况佳木斯概况佳木斯概况佳木斯概况佳木斯概况"
+        android:layout_marginTop="10dp" android:id="@+id/tv_zhuchiren"/>
+    <View
+        android:layout_width="wrap_content" android:layout_marginTop="10dp"
+        android:layout_height="2dp" android:background="@drawable/virtualline"/>
+
+    <TextView
+        android:layout_width="wrap_content" android:textSize="20sp"
+        android:layout_height="wrap_content" android:text="嘉 宾:"
+        android:textColor="@color/title"/>
+    <TextView
+        android:layout_width="wrap_content" android:textSize="17sp"
+        android:layout_height="wrap_content"
+        android:textColor="#000" android:text="佳木斯概况佳木斯概况佳木斯概况佳木斯概况佳木斯概况佳木斯概况佳木斯概况"
+        android:layout_marginTop="10dp" android:id="@+id/tv_jiabin"/>
+    <View
+        android:layout_width="wrap_content" android:layout_marginTop="10dp"
+        android:layout_height="2dp" android:background="@drawable/virtualline"/>
+</LinearLayout>

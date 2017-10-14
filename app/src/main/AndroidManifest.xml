@@ -265,15 +265,25 @@
             android:name=".PublicGuideDetailActivity"
             android:screenOrientation="portrait"
             android:theme="@style/activityAnimation" />
-        <activity android:name=".OnlineTalkActivity"
+        <activity
+            android:name=".OnlineTalkActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/activityAnimation" ></activity>
-        <activity android:name=".ShuJiDetailActivity"
+            android:theme="@style/activityAnimation" />
+        <activity
+            android:name=".ShuJiDetailActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/activityAnimation" ></activity>
-        <activity android:name=".ShiZhangDetailActivity"
+            android:theme="@style/activityAnimation" />
+        <activity
+            android:name=".ShiZhangDetailActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/activityAnimation" ></activity>
+            android:theme="@style/activityAnimation" />
+        <activity
+            android:name=".JsoupShujiActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/activityAnimation" />
+        <activity android:name=".JsoupShiZhangActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/activityAnimation"></activity>
     </application>
 
 </manifest>
