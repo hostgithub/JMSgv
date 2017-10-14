@@ -121,8 +121,8 @@ public class ZhengminHudongActivity extends BaseActivity implements SwipeRefresh
                 finish();
                 break;
             case R.id.guide_to_government_information_disclosure:
-                startActivity(new Intent(ZhengminHudongActivity.this,OnlineTalkActivity.class));//在线访谈
-//                startActivity(new Intent(ZhengminHudongActivity.this,JsoupShujiActivity.class));//测试jsoup
+                //startActivity(new Intent(ZhengminHudongActivity.this,OnlineTalkActivity.class));//在线访谈
+                Toast.makeText(ZhengminHudongActivity.this,"xxxxxxx",Toast.LENGTH_SHORT).show();
                 break;
             case R.id.open_in_accordance_with_the_application:
                 startActivity(new Intent(ZhengminHudongActivity.this,FanyingQuestionListActivity.class));//反映问题列表
