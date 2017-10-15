@@ -170,7 +170,7 @@ public class OnlineTalkListActivity extends BaseActivity implements SwipeRefresh
 
             @Override
             public void onFailure(Call<OnlineTalkDetail> call, Throwable t) {
-                Toast.makeText(OnlineTalkListActivity.this,"请求失败!",Toast.LENGTH_SHORT).show();
+                Toast.makeText(OnlineTalkListActivity.this,"抱歉可能还未添加信息!",Toast.LENGTH_SHORT).show();
                 Log.e("-------------",t.getMessage().toString());
             }
         });

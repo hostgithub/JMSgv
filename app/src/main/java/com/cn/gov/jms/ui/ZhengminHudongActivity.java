@@ -163,7 +163,7 @@ public class ZhengminHudongActivity extends BaseActivity implements SwipeRefresh
 
             @Override
             public void onFailure(Call<OnlineTalk> call, Throwable t) {
-                Toast.makeText(ZhengminHudongActivity.this,"请求失败!",Toast.LENGTH_SHORT).show();
+                Toast.makeText(ZhengminHudongActivity.this,"抱歉可能还未添加信息!",Toast.LENGTH_SHORT).show();
                 refreshLayout.setRefreshing(false);
             }
         });
@@ -195,7 +195,7 @@ public class ZhengminHudongActivity extends BaseActivity implements SwipeRefresh
 
             @Override
             public void onFailure(Call<OnlineTalkDetail> call, Throwable t) {
-                Toast.makeText(ZhengminHudongActivity.this,"请求失败!",Toast.LENGTH_SHORT).show();
+                Toast.makeText(ZhengminHudongActivity.this,"抱歉可能还未添加信息!",Toast.LENGTH_SHORT).show();
                 Log.e("-------------",t.getMessage().toString());
             }
         });
