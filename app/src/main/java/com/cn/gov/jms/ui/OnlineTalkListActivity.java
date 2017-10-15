@@ -29,7 +29,7 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class ZhengminHudongActivity extends BaseActivity implements SwipeRefreshLayout.OnRefreshListener {
+public class OnlineTalkListActivity extends BaseActivity implements SwipeRefreshLayout.OnRefreshListener {
 
 //    private ListView listview;
 //    private ArrayList<String> list;
@@ -47,7 +47,7 @@ public class ZhengminHudongActivity extends BaseActivity implements SwipeRefresh
 
     @Override
     protected int getLayoutId() {
-        return R.layout.activity_zhengmin_hudong;
+        return R.layout.activity_online_talk_list;
     }
 
     @Override
@@ -112,31 +112,6 @@ public class ZhengminHudongActivity extends BaseActivity implements SwipeRefresh
         });
 
     }
-    @OnClick({ R.id.iv_back,
-            R.id.guide_to_government_information_disclosure,R.id.open_in_accordance_with_the_application,
-            R.id.government_information_public_briefing, R.id.annual_report_on_government_information_work})
-    public void onClick(View view) {
-        switch (view.getId()){
-            case R.id.iv_back:
-                finish();
-                break;
-            case R.id.guide_to_government_information_disclosure:
-                startActivity(new Intent(ZhengminHudongActivity.this,OnlineTalkListActivity.class));//在线访谈列表
-                break;
-            case R.id.open_in_accordance_with_the_application:
-                startActivity(new Intent(ZhengminHudongActivity.this,FanyingQuestionListActivity.class));//反映问题列表
-                break;
-            case R.id.government_information_public_briefing:
-                //startActivity(new Intent(ZhengminHudongActivity.this,Some_suggestionsActivity.class));//进言献策
-                startActivity(new Intent(ZhengminHudongActivity.this,SomeSuggestionsListActivity.class));//进言献策列表
-                break;
-            case R.id.annual_report_on_government_information_work:
-                startActivity(new Intent(ZhengminHudongActivity.this,ZixunQuestionListActivity.class));//咨询问题列表
-                break;
-            default:
-                break;
-        }
-    }
 
     /**
      * 图片瀑布流 初始化 网络请求第一页数据
@@ -163,7 +138,7 @@ public class ZhengminHudongActivity extends BaseActivity implements SwipeRefresh
 
             @Override
             public void onFailure(Call<OnlineTalk> call, Throwable t) {
-                Toast.makeText(ZhengminHudongActivity.this,"请求失败!",Toast.LENGTH_SHORT).show();
+                Toast.makeText(OnlineTalkListActivity.this,"请求失败!",Toast.LENGTH_SHORT).show();
                 refreshLayout.setRefreshing(false);
             }
         });
@@ -184,23 +159,26 @@ public class ZhengminHudongActivity extends BaseActivity implements SwipeRefresh
                     OnlineTalkDetail onlineTalkDetail=response.body();
                     Log.e("-onlineTalkDetail---",onlineTalkDetail.getResults().toString());
                     Log.e("----host---",onlineTalkDetail.getHost().toString());
-                    Intent intent=new Intent(ZhengminHudongActivity.this,OnlineTalkActivity.class);
+                    Intent intent=new Intent(OnlineTalkListActivity.this,OnlineTalkActivity.class);
                     intent.putExtra(Config.RESULT_BEAN, (Serializable) onlineTalkDetail.getResults());
                     intent.putExtra(Config.LIST_HOST, (Serializable) onlineTalkDetail.getHost());
                     startActivity(intent);
                 }else{
-                    Toast.makeText(ZhengminHudongActivity.this,"数据为空!",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(OnlineTalkListActivity.this,"数据为空!",Toast.LENGTH_SHORT).show();
                 }
             }
 
             @Override
             public void onFailure(Call<OnlineTalkDetail> call, Throwable t) {
-                Toast.makeText(ZhengminHudongActivity.this,"请求失败!",Toast.LENGTH_SHORT).show();
+                Toast.makeText(OnlineTalkListActivity.this,"请求失败!",Toast.LENGTH_SHORT).show();
                 Log.e("-------------",t.getMessage().toString());
             }
         });
     }
-
+    @OnClick({ R.id.iv_back})
+    public void onClick(View view) {
+        finish();
+    }
     @Override
     public void onRefresh() {
         picAdapter.setFooterVisible(View.GONE);

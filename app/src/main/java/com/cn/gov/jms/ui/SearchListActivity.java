@@ -131,8 +131,6 @@ public class SearchListActivity extends BaseActivity implements SwipeRefreshLayo
                     Toast.makeText(SearchListActivity.this,"已经没有数据了!",Toast.LENGTH_SHORT).show();
                 }else{
                     list.addAll(response.body().results);
-                    Log.e("xxxxxx请求数据集合大小", String.valueOf(list.size()));
-                    Log.e("xxxxxx请求数据response", String.valueOf(response.body().results.size()));
                     searchListAdapter.notifyDataSetChanged();
                     refreshLayout.setRefreshing(false);
                 }
@@ -140,7 +138,7 @@ public class SearchListActivity extends BaseActivity implements SwipeRefreshLayo
 
             @Override
             public void onFailure(Call<Search> call, Throwable t) {
-                Toast.makeText(SearchListActivity.this,"请求失败!",Toast.LENGTH_SHORT).show();
+                Toast.makeText(SearchListActivity.this,"网络不好请上滑试一试!",Toast.LENGTH_SHORT).show();
             }
         });
     }

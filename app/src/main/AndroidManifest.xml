@@ -289,9 +289,17 @@
             android:name=".ApplyPublicActivity"
             android:screenOrientation="portrait"
             android:theme="@style/activityAnimation" />
-        <activity android:name=".ApplyPublicDetailActivity"
+        <activity
+            android:name=".ApplyPublicDetailActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/activityAnimation"></activity>
+            android:theme="@style/activityAnimation" />
+        <activity
+            android:name=".SimpleOnlineTalkActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/activityAnimation" />
+        <activity android:name=".OnlineTalkListActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/activityAnimation" ></activity>
     </application>
 
 </manifest>
