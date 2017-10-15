@@ -13,7 +13,7 @@ import com.cn.gov.jms.adapter.ApplyPublicAdapter;
 import com.cn.gov.jms.base.BaseActivity;
 import com.cn.gov.jms.base.EndLessOnScrollListener;
 import com.cn.gov.jms.model.ApplyPublic;
-import com.cn.gov.jms.model.Detail;
+import com.cn.gov.jms.model.ApplyPublicDetail;
 import com.cn.gov.jms.services.Api;
 import com.cn.gov.jms.utils.RecyclerViewSpacesItemDecoration;
 
@@ -74,8 +74,8 @@ public class ApplyPublicActivity extends BaseActivity implements SwipeRefreshLay
         picAdapter.setOnItemClickLitener(new ApplyPublicAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(int position) {
-                //getData(Integer.parseInt(list.get(position).getId()));
-                Toast.makeText(ApplyPublicActivity.this,"点击了"+position,Toast.LENGTH_SHORT).show();
+                getData(Integer.parseInt(list.get(position).getId()));
+                //Toast.makeText(ApplyPublicActivity.this,"点击了"+position,Toast.LENGTH_SHORT).show();
             }
         });
         mRecyclerView.setAdapter(picAdapter);
@@ -138,24 +138,24 @@ public class ApplyPublicActivity extends BaseActivity implements SwipeRefreshLay
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         Api api =retrofit.create(Api.class);
-        Call<Detail> call=api.getDetailData(id);
-        call.enqueue(new Callback<Detail>() {
+        Call<ApplyPublicDetail> call=api.getApplyPublicDetailData(id);
+        call.enqueue(new Callback<ApplyPublicDetail>() {
             @Override
-            public void onResponse(Call<Detail> call, Response<Detail> response) {
+            public void onResponse(Call<ApplyPublicDetail> call, Response<ApplyPublicDetail> response) {
                 if(response!=null){
-                    Detail detail=response.body();
-                    Detail.ResultsBean resultsBean=detail.getResults().get(0);
-                    Intent intent = new Intent(ApplyPublicActivity.this,PublicNoticeDetailActivity.class);
+                    ApplyPublicDetail detail=response.body();
+                    ApplyPublicDetail.ResultsBean resultsBean=detail.getResults().get(0);
+                    Intent intent = new Intent(ApplyPublicActivity.this,ApplyPublicDetailActivity.class);
                     intent.putExtra(Config.NEWS,resultsBean);
                     startActivity(intent);
-                    Log.e("xxxxxxx",resultsBean.content);
+                    Log.e("-----dept_name-------",resultsBean.getDept_name());
                 }else{
                     Toast.makeText(ApplyPublicActivity.this,"数据为空!",Toast.LENGTH_SHORT).show();
                 }
             }
 
             @Override
-            public void onFailure(Call<Detail> call, Throwable t) {
+            public void onFailure(Call<ApplyPublicDetail> call, Throwable t) {
                 Toast.makeText(ApplyPublicActivity.this,"请求失败!",Toast.LENGTH_SHORT).show();
                 Log.e("-------------",t.getMessage().toString());
             }

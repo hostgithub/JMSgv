@@ -2,6 +2,7 @@ package com.cn.gov.jms.services;
 
 import com.cn.gov.jms.model.AboutAndContact;
 import com.cn.gov.jms.model.ApplyPublic;
+import com.cn.gov.jms.model.ApplyPublicDetail;
 import com.cn.gov.jms.model.Banners;
 import com.cn.gov.jms.model.DataInfo;
 import com.cn.gov.jms.model.DeptBean;
@@ -184,4 +185,8 @@ public interface Api {    //retrofit方式
 
     @GET("app/publicApplication.do")            //依申请公开 列表
     Call<ApplyPublic> getPublicApplicationData(@Query("pages") int pages);
+
+    @GET("app/getPublicById.do")            //依申请公开 列表详情
+    Call<ApplyPublicDetail> getApplyPublicDetailData(@Query("id") int id);
+
 }
