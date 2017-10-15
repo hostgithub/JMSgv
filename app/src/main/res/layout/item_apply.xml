@@ -6,6 +6,7 @@
                 android:layout_height="120dp">
 
     <RelativeLayout
+        android:layout_marginTop="5dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_toLeftOf="@id/thumbnail"
@@ -24,12 +25,11 @@
             android:id="@+id/apply_name"
             android:layout_width="wrap_content"
             android:layout_height="25dp"
-            android:background="@drawable/author_bg"
             android:gravity="left|center_vertical"
             android:layout_toRightOf="@+id/author_name"
             android:layout_marginLeft="5dp"
             android:padding="5dp" android:text="womendoushi"
-            android:textColor="@color/colorBG"
+            android:textColor="#000"
             android:textSize="10sp"/>
 
         <TextView
@@ -40,48 +40,113 @@
             android:gravity="left|center_vertical"
             android:layout_toRightOf="@+id/apply_name"
             android:layout_marginLeft="5dp"
-            android:padding="5dp" android:text="womendoushi"
+            android:padding="5dp" android:text="申请标题"
             android:textColor="@color/colorBG"
             android:textSize="10sp"/>
 
         <TextView
-            android:id="@+id/tv_dept"
+            android:id="@+id/apply_title"
             android:layout_width="wrap_content"
             android:layout_height="25dp"
-            android:background="@drawable/author_bg"
             android:gravity="left|center_vertical"
             android:layout_toRightOf="@+id/dept"
             android:layout_marginLeft="5dp"
             android:padding="5dp" android:text="womendoushi"
-            android:textColor="@color/colorBG"
-            android:textSize="10sp"/>
-        <TextView
-            android:id="@+id/text_title"
-            android:layout_below="@id/author_name"
-            android:textSize="12sp"
-            android:padding="10dp"
             android:textColor="#000"
-            android:layout_width="match_parent"
-            android:layout_height="60dp"/>
+            android:textSize="10sp"/>
         <LinearLayout
-            android:layout_below="@id/text_title"
+            android:id="@+id/ll2"
+            android:layout_below="@id/apply_title"
             android:layout_width="match_parent"
             android:orientation="horizontal"
-            android:layout_height="20dp">
+            android:layout_marginTop="10dp"
+            android:layout_height="25dp">
             <TextView
-                android:id="@+id/realtype"
+                android:text="申请人工作单位"
                 android:textSize="10sp"
-                android:gravity="left"
-                android:paddingLeft="20dp"
-                android:layout_width="80dp"
-                android:layout_height="wrap_content"/>
+                android:padding="5dp"
+                android:textColor="@color/colorBG"
+                android:gravity="left|center_vertical"
+                android:background="@drawable/author_bg"
+                android:layout_width="wrap_content"
+                android:layout_height="25dp"/>
             <TextView
-                android:id="@+id/date"
+                android:id="@+id/tv_danwei"
+                android:text="申请人工作单位"
                 android:textSize="10sp"
-                android:gravity="left"
-                android:layout_width="match_parent"
-                android:layout_height="20dp"/>
+                android:padding="5dp"
+                android:textColor="#000"
+                android:gravity="left|center_vertical"
+                android:layout_width="wrap_content"
+                android:layout_height="25dp"/>
+            <TextView
+                android:text="处理结果"
+                android:textSize="10sp"
+                android:padding="5dp"
+                android:background="@drawable/author_bg"
+                android:textColor="@color/colorBG"
+                android:gravity="left|center_vertical"
+                android:layout_width="wrap_content"
+                android:layout_height="25dp"/>
+            <TextView
+                android:id="@+id/tv_result"
+                android:text="申请人工作单位"
+                android:textSize="10sp"
+                android:padding="5dp"
+                android:textColor="#000"
+                android:gravity="left|center_vertical"
+                android:layout_width="wrap_content"
+                android:layout_height="25dp"/>
         </LinearLayout>
+        <LinearLayout
+            android:layout_below="@id/ll2"
+            android:id="@+id/ll_bottom"
+            android:layout_width="match_parent"
+            android:orientation="horizontal"
+            android:layout_marginTop="10dp"
+            android:layout_height="25dp">
+            <TextView
+               android:text="申请时间"
+                android:textSize="10sp"
+                android:padding="5dp"
+                android:textColor="@color/colorBG"
+                android:gravity="left|center_vertical"
+                android:background="@drawable/author_bg"
+                android:layout_width="wrap_content"
+                android:layout_height="25dp"/>
+            <TextView
+                android:id="@+id/tv_shenqing_time"
+                android:text="申请时间"
+                android:textSize="10sp"
+                android:padding="5dp"
+                android:textColor="#000"
+                android:gravity="left|center_vertical"
+                android:layout_width="wrap_content"
+                android:layout_height="25dp"/>
+            <TextView
+                android:text="回复时间"
+                android:textSize="10sp"
+                android:padding="5dp"
+                android:textColor="@color/colorBG"
+                android:gravity="left|center_vertical"
+                android:background="@drawable/author_bg"
+                android:layout_width="wrap_content"
+                android:layout_height="25dp"/>
+            <TextView
+                android:id="@+id/reply_time"
+                android:text="申请时间"
+                android:textSize="10sp"
+                android:padding="5dp"
+                android:textColor="#000"
+                android:gravity="left|center_vertical"
+                android:layout_width="wrap_content"
+                android:layout_height="25dp"/>
+        </LinearLayout>
+
+        <View android:layout_below="@+id/ll_bottom"
+            android:layout_width="match_parent"
+            android:layout_marginTop="3dp"
+            android:layout_height="2dp" android:background="@drawable/realline"/>
 
     </RelativeLayout>
 

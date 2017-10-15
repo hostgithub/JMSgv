@@ -8,6 +8,7 @@ import android.widget.SimpleAdapter;
 import android.widget.Toast;
 
 import com.cn.gov.jms.base.BaseActivity;
+import com.cn.gov.jms.model.ApplyPublic;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -158,7 +159,7 @@ public class ZhengWuGongKaiActivity extends BaseActivity {
                 startActivity(new Intent(ZhengWuGongKaiActivity.this,PublicGuideActivity.class));
                 break;
             case R.id.open_in_accordance_with_the_application:
-                finish();//依申请公开
+                startActivity(new Intent(ZhengWuGongKaiActivity.this,ApplyPublicActivity.class));
                 break;
             case R.id.government_information_public_briefing:
                 startActivity(new Intent(ZhengWuGongKaiActivity.this,GongkaijianbaoActivity.class));//政府信息公开简报

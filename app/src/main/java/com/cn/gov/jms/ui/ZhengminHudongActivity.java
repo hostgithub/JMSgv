@@ -184,12 +184,10 @@ public class ZhengminHudongActivity extends BaseActivity implements SwipeRefresh
                 if(response.body()!=null){
                     OnlineTalkDetail onlineTalkDetail=response.body();
                     Log.e("-onlineTalkDetail---",onlineTalkDetail.getResults().toString());
-                    Log.e("----answer---",onlineTalkDetail.getAnswer().toString());
                     Log.e("----host---",onlineTalkDetail.getHost().toString());
                     Intent intent=new Intent(ZhengminHudongActivity.this,OnlineTalkActivity.class);
                     intent.putExtra(Config.RESULT_BEAN, (Serializable) onlineTalkDetail.getResults());
                     intent.putExtra(Config.LIST_HOST, (Serializable) onlineTalkDetail.getHost());
-                    intent.putExtra(Config.LIST_ANSWER, (Serializable) onlineTalkDetail.getAnswer());
                     startActivity(intent);
                 }else{
                     Toast.makeText(ZhengminHudongActivity.this,"数据为空!",Toast.LENGTH_SHORT).show();

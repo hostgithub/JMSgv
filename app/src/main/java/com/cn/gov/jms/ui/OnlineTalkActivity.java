@@ -16,6 +16,7 @@ import com.cn.gov.jms.base.BaseActivity;
 import com.cn.gov.jms.model.OnlineTalkDetail;
 import com.cn.gov.jms.model.Video;
 import com.cn.gov.jms.services.Api;
+import com.cn.gov.jms.utils.FullyLinearLayoutManager;
 import com.cn.gov.jms.utils.RecyclerViewSpacesItemDecoration;
 
 import java.util.ArrayList;
@@ -53,10 +54,9 @@ public class OnlineTalkActivity extends BaseActivity {
     @BindView(R.id.recyerview)
     RecyclerView mRecyclerView;
     private List<OnlineTalkDetail.HostBean> hostBeanList;
-    private List<OnlineTalkDetail.AnswerBean> answerBeanList;
     private List<OnlineTalkDetail.ResultsBean> resultsBeanList;
     private OnlineTalkDetailAdapter onlineTalkDetailAdapter;
-    LinearLayoutManager linearLayoutManager;
+    FullyLinearLayoutManager linearLayoutManager;
 
     @Override
     protected int getLayoutId() {
@@ -68,9 +68,8 @@ public class OnlineTalkActivity extends BaseActivity {
 
         Intent intent=getIntent();
         hostBeanList = new ArrayList<>();
-        answerBeanList = new ArrayList<>();
         resultsBeanList = new ArrayList<>();
-        linearLayoutManager=new LinearLayoutManager(this);
+        linearLayoutManager=new FullyLinearLayoutManager(this);
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         mRecyclerView.setLayoutManager(linearLayoutManager);
         mRecyclerView.setHasFixedSize(true);
@@ -83,19 +82,19 @@ public class OnlineTalkActivity extends BaseActivity {
 
         if(intent!=null){
             hostBeanList= (List<OnlineTalkDetail.HostBean>) intent.getSerializableExtra(Config.LIST_HOST);
-            answerBeanList= (List<OnlineTalkDetail.AnswerBean>) intent.getSerializableExtra(Config.LIST_ANSWER);
-            onlineTalkDetailAdapter = new OnlineTalkDetailAdapter(OnlineTalkActivity.this,hostBeanList,answerBeanList);
+            Log.e("----host------",hostBeanList.toString());
+            onlineTalkDetailAdapter = new OnlineTalkDetailAdapter(OnlineTalkActivity.this,hostBeanList);
             mRecyclerView.setAdapter(onlineTalkDetailAdapter);
             resultsBeanList= (List<OnlineTalkDetail.ResultsBean>) intent.getSerializableExtra(Config.RESULT_BEAN);
 
             Glide.with(OnlineTalkActivity.this)
                     .load("http://221.210.9.87:8080/"+resultsBeanList.get(0).getPicName())
                     .into(imageview);
-//            mJcVideoPlayerStandard.setUp("http://www.jms.gov.cn/data/interview/0814.flv"
-//                            , JCVideoPlayerStandard.SCREEN_LAYOUT_NORMAL, "视频播放");
+            mJcVideoPlayerStandard.setUp("http://221.210.9.87:8080/"+resultsBeanList.get(0).getVideoName()
+                            , JCVideoPlayerStandard.SCREEN_LAYOUT_NORMAL, "视频播放");
 
-            mJcVideoPlayerStandard.setUp("http://221.210.9.87:8080/data/interview/0814.flv"
-                    , JCVideoPlayerStandard.SCREEN_LAYOUT_NORMAL, "视频播放");
+//            mJcVideoPlayerStandard.setUp("http://221.210.9.87:8080/data/interview/video/1435194398872.mp4"
+//                    , JCVideoPlayerStandard.SCREEN_LAYOUT_NORMAL, "视频播放");
             Log.e("------------",resultsBeanList.get(0).getVideoName());
             tv_dept.setText(resultsBeanList.get(0).getDeptName());
             tv_theme.setText(resultsBeanList.get(0).getTitle());

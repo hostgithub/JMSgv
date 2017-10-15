@@ -1,6 +1,7 @@
 package com.cn.gov.jms.services;
 
 import com.cn.gov.jms.model.AboutAndContact;
+import com.cn.gov.jms.model.ApplyPublic;
 import com.cn.gov.jms.model.Banners;
 import com.cn.gov.jms.model.DataInfo;
 import com.cn.gov.jms.model.DeptBean;
@@ -180,4 +181,7 @@ public interface Api {    //retrofit方式
 
     @GET("app/getViewByid.do")            //在线访谈 详情
     Call<OnlineTalkDetail> getOnlineTalkByIdData(@Query("id") int id, @Query("upId") String upId);
+
+    @GET("app/publicApplication.do")            //依申请公开 列表
+    Call<ApplyPublic> getPublicApplicationData(@Query("pages") int pages);
 }
