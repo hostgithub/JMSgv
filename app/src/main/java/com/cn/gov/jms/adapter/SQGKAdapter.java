@@ -81,7 +81,14 @@ public class SQGKAdapter extends RecyclerView.Adapter<BaseViewHolder> {
             //holder.setText(R.id.tv_title, datas.get(position).getTitle());
             holder.setText(R.id.tv_title, datas.get(position).title);
            // String content=datas.get(position).text;
-            holder.setText(R.id.tv_content, datas.get(position).text);
+            if(datas.get(position).text.startsWith("?")){
+                String str=datas.get(position).text.replace('?', ' ');
+                holder.setText(R.id.tv_content, str);
+            }else{
+                holder.setText(R.id.tv_content, datas.get(position).text);
+            }
+
+
             //String strSub=content.substring(0,15);//截取字符串
             //String str=content.substring(0,30)+"....查看详情";   //http://blog.csdn.net/xuwenneng/article/details/51027625?locationNum=10&fps=1  还没有成功
 

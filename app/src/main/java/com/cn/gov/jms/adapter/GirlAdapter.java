@@ -81,7 +81,13 @@ public class GirlAdapter extends RecyclerView.Adapter<BaseViewHolder> {
             }
             //CircleImageView avatar = holder.getView(R.id.avatar);
             holder.setText(R.id.title, item.title);
-            holder.setText(R.id.content, item.text);
+            //holder.setText(R.id.content, item.text);
+            if(item.text.startsWith(";")){
+                String str=item.text.replace(';', ' ');
+                holder.setText(R.id.content, str);
+            }else{
+                holder.setText(R.id.content, item.text);
+            }
 
 //            holder.setText(R.id.author, item.getAuthor());
 //            holder.setText(R.id.seeNum, item.getWatch());

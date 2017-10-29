@@ -80,7 +80,12 @@ public class NewsCenterAdapter extends RecyclerView.Adapter<BaseViewHolder> {
             ImageLoaderUtils.loadingImg(mContext, (ImageView) holder.getView(R.id.cover), Config.BANNER_BASE_URL+item.picName);
 
             //CircleImageView avatar = holder.getView(R.id.avatar);
-            holder.setText(R.id.title, item.text);
+            if(item.text.startsWith(";")){
+                String str=item.text.replace(';', ' ');
+                holder.setText(R.id.title, str);
+            }else{
+                holder.setText(R.id.title, item.text);
+            }
             holder.setText(R.id.content, item.addTime);
 
 //            holder.setText(R.id.author, item.getAuthor());
