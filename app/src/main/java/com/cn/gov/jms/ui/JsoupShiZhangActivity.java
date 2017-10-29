@@ -8,6 +8,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.cn.gov.jms.Config;
 import com.cn.gov.jms.base.BaseActivity;
 
 import org.jsoup.Jsoup;
@@ -44,13 +45,16 @@ public class JsoupShiZhangActivity extends BaseActivity {
 
     @Override
     protected void initView() {
+        tv_title.setVisibility(View.GONE);
+        image.setVisibility(View.GONE);
+
         WebSettings webSettings = webView .getSettings();
         webSettings.setLoadsImagesAutomatically(true);  //支持自动加载图片  用于加载网络 本地不适用
         webView.getSettings().setDefaultTextEncodingName("UTF -8");//设置默认为utf-8
 
         tpl = getFromAssets("shizhang.html");
-        //webView.loadDataWithBaseURL(null, tpl, "text/html", "utf-8", null);
-        getData();
+        webView.loadDataWithBaseURL(null, tpl, "text/html", "utf-8", null);
+        //getData();
     }
 
     @OnClick({ R.id.iv_back})
@@ -65,7 +69,7 @@ public class JsoupShiZhangActivity extends BaseActivity {
             public void run() {
                 // TODO Auto-generated method stub
                 try {
-                    Document doc = Jsoup.connect("http://221.210.9.87:8080/html/index/alone/000100010002000100030018.html").get();
+                    Document doc = Jsoup.connect(Config.BANNER_BASE_URL+"html/index/alone/000100010002000100030018.html").get();
 
                     Elements elements = doc.select("div.detail");
 

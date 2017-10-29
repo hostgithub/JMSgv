@@ -88,13 +88,11 @@ public class OnlineTalkActivity extends BaseActivity {
             resultsBeanList= (List<OnlineTalkDetail.ResultsBean>) intent.getSerializableExtra(Config.RESULT_BEAN);
 
             Glide.with(OnlineTalkActivity.this)
-                    .load("http://221.210.9.87:8080/"+resultsBeanList.get(0).getPicName())
+                    .load(Config.BANNER_BASE_URL+resultsBeanList.get(0).getPicName())
                     .into(imageview);
-            mJcVideoPlayerStandard.setUp("http://221.210.9.87:8080/"+resultsBeanList.get(0).getVideoName()
+            mJcVideoPlayerStandard.setUp(Config.BANNER_BASE_URL+resultsBeanList.get(0).getVideoName()
                             , JCVideoPlayerStandard.SCREEN_LAYOUT_NORMAL, "视频播放");
 
-//            mJcVideoPlayerStandard.setUp("http://221.210.9.87:8080/data/interview/video/1435194398872.mp4"
-//                    , JCVideoPlayerStandard.SCREEN_LAYOUT_NORMAL, "视频播放");
             Log.e("------------",resultsBeanList.get(0).getVideoName());
             tv_dept.setText(resultsBeanList.get(0).getDeptName());
             tv_theme.setText(resultsBeanList.get(0).getTitle());
