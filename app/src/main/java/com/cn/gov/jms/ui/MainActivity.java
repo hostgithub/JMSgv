@@ -13,12 +13,19 @@ import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.Toast;
 
+import com.cn.gov.jms.App;
 import com.cn.gov.jms.base.BaseActivity;
 import com.cn.gov.jms.fragments.CollectFragment;
 import com.cn.gov.jms.fragments.CopyFragment;
 import com.cn.gov.jms.fragments.HomeFragment;
 import com.cn.gov.jms.fragments.LanmuFragment;
 import com.cn.gov.jms.fragments.MineFragment;
+import com.cn.gov.jms.model.ApplicationEntity;
+import com.cn.gov.jms.presenter.MainContract;
+import com.cn.gov.jms.presenter.MainPresenter;
+import com.cn.gov.jms.utils.AppInfoUtil;
+import com.cn.gov.jms.utils.LogUtil;
+import com.cn.gov.jms.utils.UpdateDialog;
 
 import java.util.Timer;
 import java.util.TimerTask;
@@ -26,7 +33,7 @@ import java.util.TimerTask;
 import butterknife.BindView;
 import butterknife.OnClick;
 
-public class MainActivity extends BaseActivity
+public class MainActivity extends BaseActivity implements MainContract.View
 {
 
     @BindView(R.id.edt_search)
@@ -56,6 +63,9 @@ public class MainActivity extends BaseActivity
     private CopyFragment copyFragment;
     private boolean isExit;
 
+
+    private MainContract.Presenter mPresenter;
+
 //    @Override
 //    protected void onCreate(Bundle savedInstanceState)
 //    {
@@ -75,10 +85,13 @@ public class MainActivity extends BaseActivity
 
     @Override
     protected void initView() {
+
+        mPresenter = new MainPresenter(this);
         //ButterKnife.bind(this);          //BaseActivity已经绑定了
         mContext = this;
         fm = getSupportFragmentManager();
         initBottom();
+        mPresenter.checkUpdate("http://api.fir.im/apps/latest/58f87d50959d6904280005a3?api_token=9f2408863ff25abccca986e5d4d9d6ba");
     }
 
     private void initBottom()
@@ -283,6 +296,48 @@ public class MainActivity extends BaseActivity
         }else{
             finish();
             System.exit(0);
+        }
+    }
+
+    @Override
+    public void showLoading() {
+        startProgressDialog();
+    }
+
+    @Override
+    public void stopLoading() {
+        stopProgressDialog();
+    }
+
+    @Override
+    public void showErrorTip(String msg) {
+        showErrorHint(msg);
+    }
+
+    @Override
+    public void retureResult(String result) {
+        showToast(result);
+    }
+
+    @Override
+    public void retureUpdateResult(final ApplicationEntity entity) {
+        try {
+            if (AppInfoUtil.getVersionCode(App.application) < Integer.parseInt(entity.getVersion())) {
+                String content = String.format("最新版本：%1$s\napp名字：%2$s\n\n更新内容\n%3$s", entity.getVersionShort(), entity.getName(), entity.getChangelog());
+                UpdateDialog.show(MainActivity.this, content, new UpdateDialog.OnUpdate() {
+                    @Override
+                    public void cancel() {
+
+                    }
+
+                    @Override
+                    public void ok() {
+                        mPresenter.update(entity);
+                    }
+                });
+            }
+        } catch (Exception e) {
+            LogUtil.d("数字转化出错");
         }
     }
 }
