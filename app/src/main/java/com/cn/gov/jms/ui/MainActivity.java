@@ -91,7 +91,8 @@ public class MainActivity extends BaseActivity implements MainContract.View
         mContext = this;
         fm = getSupportFragmentManager();
         initBottom();
-        mPresenter.checkUpdate("http://api.fir.im/apps/latest/58f87d50959d6904280005a3?api_token=9f2408863ff25abccca986e5d4d9d6ba");
+//        mPresenter.checkUpdate("http://api.fir.im/apps/latest/58f87d50959d6904280005a3?api_token=9f2408863ff25abccca986e5d4d9d6ba");
+        mPresenter.checkUpdate("http://www.jms.gov.cn/app/update.json");
     }
 
     private void initBottom()

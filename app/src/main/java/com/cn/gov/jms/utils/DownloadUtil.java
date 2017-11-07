@@ -33,7 +33,9 @@ public class DownloadUtil {
         //无线网状态下下载
         request.setAllowedNetworkTypes(DownloadManager.Request.NETWORK_WIFI);
         //设置漫游状态下不下载
-        request.setAllowedOverRoaming(false);
+        //request.setAllowedOverRoaming(false);
+        //设置漫游状态下也下载
+        request.setAllowedOverRoaming(true);
         request.setMimeType("application/vnd.android.package-archive");
         //HONEYCOMB版本是11
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
@@ -45,6 +47,7 @@ public class DownloadUtil {
 
         //指定下载后的存储位置
         request.setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS, storeApk);
+
         DownloadManager manager = (DownloadManager) context.getSystemService(Context.DOWNLOAD_SERVICE);
         long id = manager.enqueue(request);
         //存储下载的序列号，用于自动更新

@@ -189,4 +189,10 @@ public interface Api {    //retrofit方式
     @GET("app/getPublicById.do")            //依申请公开 列表详情
     Call<ApplyPublicDetail> getApplyPublicDetailData(@Query("id") int id);
 
+
+    @GET("app/corGetzfwjData.do")            //新的政府文件
+    Call<Gongzuonianbao> getNewGovFileData(@Query("id") String id, @Query("pages") int pages);
+
+    @GET("app/singlezfwjById.do")
+    Call<Detail> getNewDetailData(@Query("id") int id);
 }

@@ -121,7 +121,8 @@ public class GovFileActivity extends BaseActivity implements SwipeRefreshLayout.
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         Api api =retrofit.create(Api.class);
-        Call<Gongzuonianbao> call=api.getGongzuonianbaoData("0001000200030001",pages);
+//        Call<Gongzuonianbao> call=api.getGongzuonianbaoData("0001000200030001",pages);//老表里面的
+        Call<Gongzuonianbao> call=api.getNewGovFileData("50",pages);//新表里面的
         call.enqueue(new Callback<Gongzuonianbao>() {
             @Override
             public void onResponse(Call<Gongzuonianbao> call, Response<Gongzuonianbao> response) {
@@ -151,7 +152,8 @@ public class GovFileActivity extends BaseActivity implements SwipeRefreshLayout.
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         Api api =retrofit.create(Api.class);
-        Call<Detail> call=api.getDetailData(id);
+//        Call<Detail> call=api.getDetailData(id);
+        Call<Detail> call=api.getNewDetailData(id);
         call.enqueue(new Callback<Detail>() {
             @Override
             public void onResponse(Call<Detail> call, Response<Detail> response) {
