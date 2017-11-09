@@ -113,7 +113,7 @@ public class HomeFragment extends BaseFragment implements SwipeRefreshLayout.OnR
     // 图片封装为一个数组
     private int[] icon = { R.drawable.icon_shuji, R.drawable.icon_shizhang,
             R.drawable.icon_leader, R.drawable.icon_04, R.drawable.icon_05,
-            R.drawable.icon_06, R.drawable.icon_07, R.drawable.icon_08,};
+            R.drawable.icon_06, R.drawable.icon_07, R.drawable.icon_08};
     private String[] iconName = { "书记之窗", "市长之窗", "领导介绍", "公告公示",
             "市情概况", "新闻中心", "政务公开", "政民互动"};
 

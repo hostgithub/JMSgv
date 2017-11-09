@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.text.Html;
 import android.view.View;
 import android.webkit.WebView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.cn.gov.jms.Config;
@@ -23,6 +24,9 @@ public class DetailActivity extends BaseActivity
     TextView tv_time;
     @BindView(R.id.tv_content)
     WebView webView;
+
+    @BindView(R.id.linear)
+    LinearLayout linear;
 
     @Override
     protected int getLayoutId() {
@@ -44,8 +48,9 @@ public class DetailActivity extends BaseActivity
         //tv_content.setText(Html.fromHtml(resultsBean.content));
         webView.loadDataWithBaseURL(Config.BANNER_BASE_URL, resultsBean.content, "text/html", "utf-8", null);
         tv_title.setText(Html.fromHtml(resultsBean.title));
-        tv_from.setText(Html.fromHtml("来源:"+resultsBean.source));
-        tv_time.setText(Html.fromHtml("发布时间:"+resultsBean.addTime));
+        //tv_from.setText(Html.fromHtml("来源:"+resultsBean.source));
+        //tv_time.setText(Html.fromHtml("发布时间:"+resultsBean.addTime));
+        linear.setVisibility(View.GONE);
     }
 
     @OnClick({ R.id.iv_back})

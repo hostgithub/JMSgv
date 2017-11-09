@@ -76,16 +76,14 @@ public class ConsultDetailActivity extends BaseActivity {
         }else{
             tv_content.setText(resultsBean.content);
         }
-        if(resultsBean.state=="1"){
+        if(resultsBean.replyContent.equals("")){
             tv_state.setText("正在办理");
-        }if(resultsBean.state=="2"){
+        }else {
             tv_state.setText("办理完毕");
-        }if(resultsBean.state.equals("null")){
-            tv_state.setText("正在办理");
         }
 
-        if(resultsBean.replyContent.equals("null")){
-            tv_reply.setText("无");
+        if(resultsBean.replyContent.equals("")){
+            tv_reply.setText("");
         }else{
             tv_reply.setText(resultsBean.replyContent);
         }

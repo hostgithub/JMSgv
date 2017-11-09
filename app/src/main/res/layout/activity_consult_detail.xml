@@ -99,7 +99,7 @@
             <View android:background="@drawable/realline"
                 android:layout_width="match_parent"
                 android:layout_height="2dp" android:layout_marginTop="10dp"/>
-            <TextView android:text="正在办理"
+            <TextView android:text=""
                 android:layout_width="wrap_content" android:id="@+id/tv_state"
                 android:layout_height="wrap_content"  android:textSize="18sp"
                 android:layout_marginLeft="5dp"
