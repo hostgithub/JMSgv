@@ -8,7 +8,6 @@ import android.widget.SimpleAdapter;
 import android.widget.Toast;
 
 import com.cn.gov.jms.base.BaseActivity;
-import com.cn.gov.jms.model.ApplyPublic;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -29,7 +28,7 @@ public class ZhengWuGongKaiActivity extends BaseActivity {
     private int[] icon = { R.drawable.icon_a01, R.drawable.icon_a02, R.drawable.icon_a03, R.drawable.icon_a04, R.drawable.icon_a05,
             R.drawable.icon_a06, R.drawable.icon_a07, R.drawable.icon_a08,R.drawable.icon_a09,R.drawable.icon_a10,R.drawable.icon_a11,
             R.drawable.icon_a12,R.drawable.icon_a13,R.drawable.icon_a14,R.drawable.icon_a15,R.drawable.icon_a16,R.drawable.icon_a17,
-            R.drawable.icon_a18,R.drawable.icon_a19,R.drawable.icon_a20,R.drawable.icon_a21};
+            R.drawable.icon_a18,R.drawable.icon_a19,R.drawable.icon_a20,R.drawable.icon_shichangjiandu};
     private String[] iconName = { "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", ""};
 
     @Override

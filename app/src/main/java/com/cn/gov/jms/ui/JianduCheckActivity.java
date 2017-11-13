@@ -52,7 +52,7 @@ public class JianduCheckActivity extends BaseActivity implements SwipeRefreshLay
     @Override
     protected void initView() {
 
-        tv_title.setText("监督检查");
+        tv_title.setText(getString(R.string.shichangjianguan));
 
         //图文
         refreshLayout.setOnRefreshListener(this);
@@ -121,7 +121,7 @@ public class JianduCheckActivity extends BaseActivity implements SwipeRefreshLay
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         Api api =retrofit.create(Api.class);
-        Call<Gongzuonianbao> call=api.getMinShengData("000100020006",pages);
+        Call<Gongzuonianbao> call=api.getNewGovFileData("37",pages);
         call.enqueue(new Callback<Gongzuonianbao>() {
             @Override
             public void onResponse(Call<Gongzuonianbao> call, Response<Gongzuonianbao> response) {
@@ -151,7 +151,7 @@ public class JianduCheckActivity extends BaseActivity implements SwipeRefreshLay
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         Api api =retrofit.create(Api.class);
-        Call<Detail> call=api.getDetailData(id);
+        Call<Detail> call=api.getNewDetailData(id);
         call.enqueue(new Callback<Detail>() {
             @Override
             public void onResponse(Call<Detail> call, Response<Detail> response) {

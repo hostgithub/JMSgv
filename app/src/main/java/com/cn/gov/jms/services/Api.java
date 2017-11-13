@@ -84,7 +84,7 @@ public interface Api {    //retrofit方式
     @GET("app/corGetzwgkData.do")
     Call<Gongzuonianbao> getMinShengData(@Query("id") String id, @Query("pages") int pages);
 
-    //http://192.168.0.130:8080/app/keyAreas.do?pages=1   民生工程  直属机构
+    //http://192.168.0.130:8080/app/keyAreas.do?pages=1   重点领域
     @GET("app/keyAreas.do")
     Call<Gongzuonianbao> getKeyAreasData(@Query("pages") int pages);
 
@@ -190,9 +190,12 @@ public interface Api {    //retrofit方式
     Call<ApplyPublicDetail> getApplyPublicDetailData(@Query("id") int id);
 
 
+    //http://www.jms.gov.cn/app/corGetzfwjData.do?id=id&pages=1
+
     @GET("app/corGetzfwjData.do")            //新的政府文件
     Call<Gongzuonianbao> getNewGovFileData(@Query("id") String id, @Query("pages") int pages);
 
+    //http://www.jms.gov.cn/app/app/singlezfwjById.do?id=id
     @GET("app/singlezfwjById.do")
     Call<Detail> getNewDetailData(@Query("id") int id);
 }
