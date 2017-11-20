@@ -5,7 +5,6 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.SimpleAdapter;
-import android.widget.Toast;
 
 import com.cn.gov.jms.base.BaseActivity;
 
@@ -27,9 +26,9 @@ public class ZhengWuGongKaiActivity extends BaseActivity {
     // 图片封装为一个数组
     private int[] icon = { R.drawable.icon_a01, R.drawable.icon_a02, R.drawable.icon_a03, R.drawable.icon_a04, R.drawable.icon_a05,
             R.drawable.icon_a06, R.drawable.icon_a07, R.drawable.icon_a08,R.drawable.icon_a09,R.drawable.icon_a10,R.drawable.icon_a11,
-            R.drawable.icon_a12,R.drawable.icon_a13,R.drawable.icon_a14,R.drawable.icon_a15,R.drawable.icon_a16,R.drawable.icon_a17,
-            R.drawable.icon_a18,R.drawable.icon_a19,R.drawable.icon_a20,R.drawable.icon_shichangjiandu};
-    private String[] iconName = { "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", ""};
+            R.drawable.icon_a17,
+            R.drawable.icon_a19,R.drawable.icon_a20,R.drawable.icon_shichangjiandu};
+    private String[] iconName = { "", "", "", "", "", "", "", "", "", "", "", "", "", "", ""};
 
     @Override
     protected int getLayoutId() {
@@ -87,34 +86,34 @@ public class ZhengWuGongKaiActivity extends BaseActivity {
                     case 10://财经信息
                         startActivity(new Intent(ZhengWuGongKaiActivity.this,MoneyInfoActivity.class));
                         break;
-                    case 11://保障住房
-                        startActivity(new Intent(ZhengWuGongKaiActivity.this,BaoZhangZhuFangActivity.class));
-                        break;
-                    case 12://食药安全
-                        startActivity(new Intent(ZhengWuGongKaiActivity.this,ShiYaoAnQuanActivity.class));
-                        break;
-                    case 13://环境保护
-                        startActivity(new Intent(ZhengWuGongKaiActivity.this,EnviromentProtectActivity.class));
-                        break;
-                    case 14://安全生产
-                        startActivity(new Intent(ZhengWuGongKaiActivity.this,SafeProductActivity.class));
-                        break;
-                    case 15://政府采购
-                        Toast.makeText(ZhengWuGongKaiActivity.this,"暂无",Toast.LENGTH_SHORT).show();
-                        break;
-                    case 16://应急管理
+//                    case 11://保障住房
+//                        startActivity(new Intent(ZhengWuGongKaiActivity.this,BaoZhangZhuFangActivity.class));
+//                        break;
+//                    case 12://食药安全
+//                        startActivity(new Intent(ZhengWuGongKaiActivity.this,ShiYaoAnQuanActivity.class));
+//                        break;
+//                    case 13://环境保护
+//                        startActivity(new Intent(ZhengWuGongKaiActivity.this,EnviromentProtectActivity.class));
+//                        break;
+//                    case 14://安全生产
+//                        startActivity(new Intent(ZhengWuGongKaiActivity.this,SafeProductActivity.class));
+//                        break;
+//                    case 15://政府采购
+//                        Toast.makeText(ZhengWuGongKaiActivity.this,"暂无",Toast.LENGTH_SHORT).show();
+//                        break;
+                    case 11://应急管理
                         startActivity(new Intent(ZhengWuGongKaiActivity.this,YingjiGuanliActivity.class));
                         break;
-                    case 17://拆迁征地
-                        startActivity(new Intent(ZhengWuGongKaiActivity.this,ChaiqianZhengdiActivity.class));
-                        break;
-                    case 18://公益救助
+//                    case 17://拆迁征地
+//                        startActivity(new Intent(ZhengWuGongKaiActivity.this,ChaiqianZhengdiActivity.class));
+//                        break;
+                    case 12://公益救助
                         startActivity(new Intent(ZhengWuGongKaiActivity.this,GongyiJiuzhuActivity.class));
                         break;
-                    case 19://城乡建设
+                    case 13://城乡建设
                         startActivity(new Intent(ZhengWuGongKaiActivity.this,CityBuildActivity.class));
                         break;
-                    case 20://监督检查
+                    case 14://监督检查
                         startActivity(new Intent(ZhengWuGongKaiActivity.this,JianduCheckActivity.class));
                         break;
                     default:
@@ -122,7 +121,6 @@ public class ZhengWuGongKaiActivity extends BaseActivity {
                 }
             }
         });
-
     }
 
     /**

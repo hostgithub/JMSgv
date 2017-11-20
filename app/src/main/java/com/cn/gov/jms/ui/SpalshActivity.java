@@ -71,7 +71,8 @@ public class SpalshActivity extends BaseActivity implements EasyPermissions.Perm
             @Override
             public void onAnimationEnd(Animation animation)
             {
-                Intent it = new Intent(SpalshActivity.this, MainActivity.class);
+//                Intent it = new Intent(SpalshActivity.this, MainActivity.class);
+                Intent it = new Intent(SpalshActivity.this, HomePageActivity.class);
                 startActivity(it);
                 SpalshActivity.this.finish();
             }
@@ -131,7 +132,8 @@ public class SpalshActivity extends BaseActivity implements EasyPermissions.Perm
             public void run() {
                 int maxMemory = (int) (Runtime.getRuntime().maxMemory() / 1024);
                 LogUtil.d("最高可用内存:" + maxMemory);
-                startThenKill(MainActivity.class);//-------------------------------------------------------------------
+//                startThenKill(MainActivity.class);//-------------------------------------------------------------------
+                startThenKill(HomePageActivity.class);//-------------------------------------------------------------------
                 SpalshActivity.this.overridePendingTransition(R.anim.scale_in, R.anim.shrink_out);
             }
         }, 1000 * 2);

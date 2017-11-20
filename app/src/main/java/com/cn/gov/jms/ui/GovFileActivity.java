@@ -126,8 +126,8 @@ public class GovFileActivity extends BaseActivity implements SwipeRefreshLayout.
         call.enqueue(new Callback<Gongzuonianbao>() {
             @Override
             public void onResponse(Call<Gongzuonianbao> call, Response<Gongzuonianbao> response) {
-                if(response.body().getResults().size()==0){
-                    Toast.makeText(GovFileActivity.this,"已经没有数据了!",Toast.LENGTH_SHORT).show();
+                if(response.body()==null){
+                    Toast.makeText(GovFileActivity.this,"可能发生了网络错误!",Toast.LENGTH_SHORT).show();
                 }else{
                     list.addAll(response.body().getResults());
                     Log.e("xxxxxx请求数据集合大小", String.valueOf(list.size()));

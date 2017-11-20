@@ -125,7 +125,10 @@ public class JianduCheckActivity extends BaseActivity implements SwipeRefreshLay
         call.enqueue(new Callback<Gongzuonianbao>() {
             @Override
             public void onResponse(Call<Gongzuonianbao> call, Response<Gongzuonianbao> response) {
-                if(response.body().getResults().size()==0){
+                if(response.body()==null){
+                    Toast.makeText(JianduCheckActivity.this,"可能发生了网络错误!",Toast.LENGTH_SHORT).show();
+                }
+                else if(response.body().getResults().size()==0){
                     Toast.makeText(JianduCheckActivity.this,"已经没有数据了!",Toast.LENGTH_SHORT).show();
                 }else{
                     list.addAll(response.body().getResults());
