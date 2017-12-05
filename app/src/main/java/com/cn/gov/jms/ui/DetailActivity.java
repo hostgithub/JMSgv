@@ -3,6 +3,7 @@ package com.cn.gov.jms.ui;
 import android.content.Intent;
 import android.text.Html;
 import android.view.View;
+import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -41,6 +42,8 @@ public class DetailActivity extends BaseActivity
 //                LinearLayout.LayoutParams.FILL_PARENT);
         //mDetailWebView.setLayoutParams(mWebViewLP);
         //mDetailWebView.setInitialScale(100);
+        WebSettings webSettings = webView .getSettings();
+        webSettings.setLoadsImagesAutomatically(true);  //支持自动加载图片  用于加载网络 本地不适用
 
         Intent intent = getIntent();
         //mDetailWebView.loadUrl(it.getStringExtra(Config.NEWS));

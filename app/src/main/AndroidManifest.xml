@@ -298,14 +298,18 @@
             android:name=".SimpleOnlineTalkActivity"
             android:screenOrientation="portrait"
             android:theme="@style/activityAnimation" />
-        <activity android:name=".OnlineTalkListActivity"
+        <activity
+            android:name=".OnlineTalkListActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/activityAnimation" ></activity>
-        <activity android:name=".HomePageActivity"
+            android:theme="@style/activityAnimation" />
+        <activity
+            android:name=".HomePageActivity"
             android:configChanges="orientation|keyboardHidden"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.Design.Light.NoActionBar"
-            android:windowSoftInputMode="adjustPan|stateHidden"  ></activity>
+            android:windowSoftInputMode="adjustPan|stateHidden" />
+        <activity android:name=".XinWenCenterActivity" android:screenOrientation="portrait"
+            android:theme="@style/activityAnimation" ></activity>
     </application>
 
 </manifest>

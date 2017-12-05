@@ -41,4 +41,18 @@ public class Config
                     "http://www.jianshu.com/p/fef9771435a0"
 
             };
+    public static final String[] XINWEN_TITLE =
+            {
+                    "本地要闻",
+                    "领导活动",
+                    "区县动态",
+                    "部门动态",
+                    "图片新闻",
+                    "公告公示",
+                    "中国政府网要闻",
+                    "省政府网要闻",
+                    "佳木斯电视台",
+                    "佳木斯日报"
+
+            };
 }

@@ -35,10 +35,10 @@ import com.cn.gov.jms.ui.DetailActivity;
 import com.cn.gov.jms.ui.JsoupShiZhangActivity;
 import com.cn.gov.jms.ui.JsoupShujiActivity;
 import com.cn.gov.jms.ui.LeaderOfWindowActivity;
-import com.cn.gov.jms.ui.NewsCenterActivity;
 import com.cn.gov.jms.ui.PublicNoticeActivity;
 import com.cn.gov.jms.ui.R;
 import com.cn.gov.jms.ui.ShiQingGaiKuangActivity;
+import com.cn.gov.jms.ui.XinWenCenterActivity;
 import com.cn.gov.jms.ui.ZhengWuGongKaiActivity;
 import com.cn.gov.jms.ui.ZhengminHudongActivity;
 import com.cn.gov.jms.utils.CacheUtil;
@@ -179,7 +179,8 @@ public class HomeFragment extends BaseFragment implements SwipeRefreshLayout.OnR
                         getActivity().startActivity(new Intent(getActivity(), ShiQingGaiKuangActivity.class));
                         break;
                     case 5:
-                        getActivity().startActivity(new Intent(getActivity(), NewsCenterActivity.class));
+//                        getActivity().startActivity(new Intent(getActivity(), NewsCenterActivity.class));
+                        getActivity().startActivity(new Intent(getActivity(), XinWenCenterActivity.class));
                         break;
                     case 6:
                         getActivity().startActivity(new Intent(getActivity(), ZhengWuGongKaiActivity.class));
