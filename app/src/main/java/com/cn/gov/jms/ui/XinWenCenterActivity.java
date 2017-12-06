@@ -85,6 +85,7 @@ public class XinWenCenterActivity extends BaseActivity {
                     case 8:
                         break;
                     case 9:
+                        startActivity(new Intent(XinWenCenterActivity.this, JmsDayReportActivity.class));
                         break;
                     default:
                         break;
