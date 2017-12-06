@@ -56,6 +56,8 @@ public interface Api {    //retrofit方式
     @GET("app/corTabloid.do")
     Call<NewCenter> getNewCenterData(@Query("id") String id,@Query("pages") int pages);
 
+
+
     //http://192.168.0.124:8080/app/publicNotice.do?id=000100050009&pages=1  获取公告公示列表json  固定ID
     @GET("app/publicNotice.do")
     Call<PublicNotice> getPublicNoticeData(@Query("id") String id, @Query("pages") int pages);

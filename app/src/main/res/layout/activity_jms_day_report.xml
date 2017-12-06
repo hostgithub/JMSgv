@@ -5,7 +5,7 @@
     android:layout_height="match_parent">
 
     <RelativeLayout
-        android:layout_width="match_parent"
+        android:layout_width="match_parent" android:id="@+id/title_bar"
         android:layout_height="50dp" android:background="#EE3B3B">
         <ImageView android:id="@+id/iv_back"
             android:layout_width="50dp" android:src="@drawable/back"
@@ -51,8 +51,8 @@
     <!--显示网页区域-->
     <WebView
         android:id="@+id/webView1"
-        android:layout_below="@+id/text_endLoading"
+        android:layout_below="@+id/title_bar"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:layout_marginTop="10dp" />
+        android:layout_marginTop="2dp" />
 </RelativeLayout>

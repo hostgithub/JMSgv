@@ -63,28 +63,58 @@ public class XinWenCenterActivity extends BaseActivity {
                 switch (position){
                     case 0:
                         Toast.makeText(XinWenCenterActivity.this,new_title.get(position),Toast.LENGTH_SHORT).show();
+                        Intent intent=new Intent(XinWenCenterActivity.this, LocalNewsActivity.class);
+                        intent.putExtra("position","0");
+                        startActivity(intent);
                         break;
                     case 1:
                         Toast.makeText(XinWenCenterActivity.this,new_title.get(position),Toast.LENGTH_SHORT).show();
+                        Intent intent1=new Intent(XinWenCenterActivity.this, LocalNewsActivity.class);
+                        intent1.putExtra("position","1");
+                        startActivity(intent1);
                         break;
                     case 2:
                         Toast.makeText(XinWenCenterActivity.this,new_title.get(position),Toast.LENGTH_SHORT).show();
+                        Intent intent2=new Intent(XinWenCenterActivity.this, LocalNewsActivity.class);
+                        intent2.putExtra("position","2");
+                        startActivity(intent2);
                         break;
                     case 3:
                         Toast.makeText(XinWenCenterActivity.this,new_title.get(position),Toast.LENGTH_SHORT).show();
+                        Intent intent3=new Intent(XinWenCenterActivity.this, LocalNewsActivity.class);
+                        intent3.putExtra("position","3");
+                        startActivity(intent3);
                         break;
                     case 4:
+                        Toast.makeText(XinWenCenterActivity.this,new_title.get(position),Toast.LENGTH_SHORT).show();
                         startActivity(new Intent(XinWenCenterActivity.this, NewsCenterActivity.class));
                         break;
                     case 5:
+                        Toast.makeText(XinWenCenterActivity.this,new_title.get(position),Toast.LENGTH_SHORT).show();
+                        Intent intent4=new Intent(XinWenCenterActivity.this, LocalNewsActivity.class);
+                        intent4.putExtra("position","4");
+                        startActivity(intent4);
                         break;
                     case 6:
+                        Toast.makeText(XinWenCenterActivity.this,new_title.get(position),Toast.LENGTH_SHORT).show();
+                        Intent intent5=new Intent(XinWenCenterActivity.this, LocalNewsActivity.class);
+                        intent5.putExtra("position","5");
+                        startActivity(intent5);
                         break;
                     case 7:
+                        Toast.makeText(XinWenCenterActivity.this,new_title.get(position),Toast.LENGTH_SHORT).show();
+                        Intent intent6=new Intent(XinWenCenterActivity.this, LocalNewsActivity.class);
+                        intent6.putExtra("position","6");
+                        startActivity(intent6);
                         break;
                     case 8:
+                        Toast.makeText(XinWenCenterActivity.this,new_title.get(position),Toast.LENGTH_SHORT).show();
+                        Intent intent7=new Intent(XinWenCenterActivity.this, LocalNewsActivity.class);
+                        intent7.putExtra("position","7");
+                        startActivity(intent7);
                         break;
                     case 9:
+                        Toast.makeText(XinWenCenterActivity.this,new_title.get(position),Toast.LENGTH_SHORT).show();
                         startActivity(new Intent(XinWenCenterActivity.this, JmsDayReportActivity.class));
                         break;
                     default:

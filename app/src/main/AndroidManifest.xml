@@ -314,6 +314,8 @@
             android:theme="@style/activityAnimation" />
         <activity android:name=".JmsDayReportActivity" android:screenOrientation="portrait"
             android:theme="@style/activityAnimation"></activity>
+        <activity android:name=".LocalNewsActivity" android:screenOrientation="portrait"
+            android:theme="@style/activityAnimation"></activity>
     </application>
 
 </manifest>

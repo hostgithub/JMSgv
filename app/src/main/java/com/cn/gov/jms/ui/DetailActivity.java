@@ -44,12 +44,31 @@ public class DetailActivity extends BaseActivity
         //mDetailWebView.setInitialScale(100);
         WebSettings webSettings = webView .getSettings();
         webSettings.setLoadsImagesAutomatically(true);  //支持自动加载图片  用于加载网络 本地不适用
+////设置自适应屏幕，两者合用
+//        webSettings.setUseWideViewPort(true); //将图片调整到适合webview的大小
+//        webSettings.setLoadWithOverviewMode(true); // 缩放至屏幕的大小
+
+        //缩放操作
+        webSettings.setSupportZoom(true); //支持缩放，默认为true。是下面那个的前提。
+        webSettings.setBuiltInZoomControls(true); //设置内置的缩放控件。若为false，则该WebView不可缩放
+        webSettings.setDisplayZoomControls(false); //隐藏原生的缩放控件
+
+//其他细节操作
+        webSettings.setCacheMode(WebSettings.LOAD_CACHE_ELSE_NETWORK); //关闭webview中缓存
+        webSettings.setAllowFileAccess(true); //设置可以访问文件
+        webSettings.setJavaScriptCanOpenWindowsAutomatically(true); //支持通过JS打开新窗口
+        webSettings.setLoadsImagesAutomatically(true); //支持自动加载图片
+        webSettings.setDefaultTextEncodingName("utf-8");//设置编码格式
 
         Intent intent = getIntent();
         //mDetailWebView.loadUrl(it.getStringExtra(Config.NEWS));
         Detail.ResultsBean resultsBean= (Detail.ResultsBean) intent.getSerializableExtra(Config.NEWS);
         //tv_content.setText(Html.fromHtml(resultsBean.content));
-        webView.loadDataWithBaseURL(Config.BANNER_BASE_URL, resultsBean.content, "text/html", "utf-8", null);
+        if(resultsBean.content.startsWith("http")){
+            webView.loadUrl(resultsBean.content);
+        }else{
+            webView.loadDataWithBaseURL(Config.BANNER_BASE_URL, resultsBean.content, "text/html", "utf-8", null);
+        }
         tv_title.setText(Html.fromHtml(resultsBean.title));
         //tv_from.setText(Html.fromHtml("来源:"+resultsBean.source));
         //tv_time.setText(Html.fromHtml("发布时间:"+resultsBean.addTime));

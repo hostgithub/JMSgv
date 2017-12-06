@@ -16,7 +16,7 @@ public class Config
     public static final String LIST_ANSWER = "list_answer";
 
        public static final String BANNER_BASE_URL = "http://www.jms.gov.cn/";
-//      public static final String BANNER_BASE_URL = "http://192.168.0.129:8080/";
+//      public static final String BANNER_BASE_URL = "http://192.168.0.111:8080/";
     //http://192.168.0.110:8080/app/corNewsListImg.do   获取json
     public static final String CACHE = "cache";
 

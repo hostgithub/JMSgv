@@ -22,10 +22,10 @@ import com.cn.gov.jms.services.Api;
 import com.cn.gov.jms.ui.JsoupShiZhangActivity;
 import com.cn.gov.jms.ui.JsoupShujiActivity;
 import com.cn.gov.jms.ui.LeaderOfWindowActivity;
-import com.cn.gov.jms.ui.NewsCenterActivity;
 import com.cn.gov.jms.ui.PublicNoticeActivity;
 import com.cn.gov.jms.ui.R;
 import com.cn.gov.jms.ui.ShiQingGaiKuangActivity;
+import com.cn.gov.jms.ui.XinWenCenterActivity;
 import com.cn.gov.jms.ui.ZhengWuGongKaiActivity;
 import com.cn.gov.jms.ui.ZhengminHudongActivity;
 import com.zanlabs.widget.infiniteviewpager.InfiniteViewPager;
@@ -188,7 +188,7 @@ public class LanmuFragment extends BaseFragment
                 //Toast.makeText(getActivity(),"市情概况",Toast.LENGTH_SHORT).show();
                 break;
             case R.id.newcenter:
-                getActivity().startActivity(new Intent(getActivity(), NewsCenterActivity.class));
+                getActivity().startActivity(new Intent(getActivity(), XinWenCenterActivity.class));
                 //Toast.makeText(getActivity(),"新闻中心",Toast.LENGTH_SHORT).show();
                 break;
             case R.id.gove_public:
