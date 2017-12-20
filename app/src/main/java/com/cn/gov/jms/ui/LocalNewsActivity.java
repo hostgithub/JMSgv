@@ -199,7 +199,7 @@ public class LocalNewsActivity extends BaseActivity implements SwipeRefreshLayou
                 if(response!=null){
                     Detail detail=response.body();
                     Detail.ResultsBean resultsBean=detail.getResults().get(0);
-                    Intent intent = new Intent(LocalNewsActivity.this,DetailActivity.class);
+                    Intent intent = new Intent(LocalNewsActivity.this,WebViewDetailActivity.class);
                     intent.putExtra(Config.NEWS,resultsBean);
                     startActivity(intent);
                     Log.e("xxxxxxx",resultsBean.content);

@@ -15,7 +15,11 @@ import com.cn.gov.jms.base.BaseActivity;
 import butterknife.BindView;
 import butterknife.OnClick;
 
-public class JmsDayReportActivity extends BaseActivity {
+public class GovBuyActivity extends BaseActivity {
+
+    /**
+     * 政府采购
+     */
 
     @BindView(R.id.webView1)
     WebView mWebview;
@@ -38,7 +42,7 @@ public class JmsDayReportActivity extends BaseActivity {
     protected void initView() {
 
         mWebSettings = mWebview.getSettings();
-//设置支持js 可以加载出网站的轮播图 可能也不完全好使 此页面没好使
+//设置支持js 可以加载出网站的轮播图  可能也不完全好使
         mWebSettings.setJavaScriptEnabled(true);//支持js
         mWebSettings.setJavaScriptCanOpenWindowsAutomatically(true);//允许js弹出alert
         mWebview.requestFocusFromTouch();//支持获取手势焦点，输入用户名、密码或其他
@@ -60,7 +64,7 @@ public class JmsDayReportActivity extends BaseActivity {
         mWebSettings.setDefaultTextEncodingName("utf-8");//设置编码格式
 
 //        mWebview.loadUrl("http://www.baidu.com/");
-        mWebview.loadUrl("http://jiamusi.dbw.cn/");
+        mWebview.loadUrl("http://ggzy.jms.gov.cn/");
 
         //设置不用系统浏览器打开,直接显示在当前Webview
         mWebview.setWebViewClient(new WebViewClient() {
