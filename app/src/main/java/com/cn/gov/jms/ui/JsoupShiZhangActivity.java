@@ -52,7 +52,7 @@ public class JsoupShiZhangActivity extends BaseActivity {
         webSettings.setLoadsImagesAutomatically(true);  //支持自动加载图片  用于加载网络 本地不适用
         webView.getSettings().setDefaultTextEncodingName("UTF -8");//设置默认为utf-8
 
-        tpl = getFromAssets("shizhang.html");
+        tpl = getFromAssets("shizhang_sgq.html");
         webView.loadDataWithBaseURL(null, tpl, "text/html", "utf-8", null);
         //getData();
     }

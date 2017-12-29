@@ -19,7 +19,7 @@
             android:textSize="20sp" android:layout_marginLeft="5dp"/>
     </RelativeLayout>
 
-    <TextView android:id="@+id/tv_title" android:text="郭冀平同志简历"
+    <TextView android:id="@+id/tv_title" android:text=""
         android:textColor="#000" android:textSize="20sp"
         android:layout_width="wrap_content" android:layout_gravity="center_horizontal"
         android:layout_height="wrap_content" android:layout_marginTop="15dp"/>

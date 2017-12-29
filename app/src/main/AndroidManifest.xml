@@ -162,7 +162,7 @@
             android:screenOrientation="portrait"
             android:theme="@style/activityAnimation" />
         <activity
-            android:name=".BaoZhangZhuFangActivity"
+            android:name=".GuiHuaJiHuaActivity"
             android:screenOrientation="portrait"
             android:theme="@style/activityAnimation" />
         <activity
@@ -174,7 +174,7 @@
             android:screenOrientation="portrait"
             android:theme="@style/activityAnimation" />
         <activity
-            android:name=".SafeProductActivity"
+            android:name=".TongJiMessageActivity"
             android:screenOrientation="portrait"
             android:theme="@style/activityAnimation" />
         <activity

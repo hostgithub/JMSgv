@@ -78,7 +78,7 @@ public interface Api {    //retrofit方式
     @GET("app/singlePageManData.do")
     Call<AboutAndContact> getAboutAndContactData();
 
-    //http://192.168.0.130:8080/app/fuzzyQuery.do?id=000100020004&pages=1   人事信息  法规公文
+    //http://192.168.0.130:8080/app/fuzzyQuery.do?id=000100020004&pages=1   人事信息  法规公文 规划计划
     @GET("app/fuzzyQuery.do")
     Call<Gongzuonianbao> getPersonThingInfoData(@Query("id") String id, @Query("pages") int pages);
 

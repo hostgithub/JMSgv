@@ -29,7 +29,7 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class BaoZhangZhuFangActivity extends BaseActivity implements SwipeRefreshLayout.OnRefreshListener {
+public class TongJiMessageActivity extends BaseActivity implements SwipeRefreshLayout.OnRefreshListener {
 
     @BindView(R.id.tv_title)
     TextView tv_title;
@@ -52,7 +52,7 @@ public class BaoZhangZhuFangActivity extends BaseActivity implements SwipeRefres
     @Override
     protected void initView() {
 
-        tv_title.setText("保障住房");
+        tv_title.setText("统计信息");
 
         //图文
         refreshLayout.setOnRefreshListener(this);
@@ -121,12 +121,12 @@ public class BaoZhangZhuFangActivity extends BaseActivity implements SwipeRefres
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         Api api =retrofit.create(Api.class);
-        Call<Gongzuonianbao> call=api.getPersonThingInfoData("0001000200210004",pages);
+        Call<Gongzuonianbao> call=api.getPersonThingInfoData("0001000200070002",pages);
         call.enqueue(new Callback<Gongzuonianbao>() {
             @Override
             public void onResponse(Call<Gongzuonianbao> call, Response<Gongzuonianbao> response) {
                 if(response.body().getResults().size()==0){
-                    Toast.makeText(BaoZhangZhuFangActivity.this,"已经没有数据了!",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(TongJiMessageActivity.this,"已经没有数据了!",Toast.LENGTH_SHORT).show();
                 }else{
                     list.addAll(response.body().getResults());
                     Log.e("xxxxxx请求数据集合大小", String.valueOf(list.size()));
@@ -138,7 +138,7 @@ public class BaoZhangZhuFangActivity extends BaseActivity implements SwipeRefres
 
             @Override
             public void onFailure(Call<Gongzuonianbao> call, Throwable t) {
-                Toast.makeText(BaoZhangZhuFangActivity.this,"请求失败!",Toast.LENGTH_SHORT).show();
+                Toast.makeText(TongJiMessageActivity.this,"请求失败!",Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -158,18 +158,18 @@ public class BaoZhangZhuFangActivity extends BaseActivity implements SwipeRefres
                 if(response!=null){
                     Detail detail=response.body();
                     Detail.ResultsBean resultsBean=detail.getResults().get(0);
-                    Intent intent = new Intent(BaoZhangZhuFangActivity.this,DetailActivity.class);
+                    Intent intent = new Intent(TongJiMessageActivity.this,DetailActivity.class);
                     intent.putExtra(Config.NEWS,resultsBean);
                     startActivity(intent);
                     Log.e("xxxxxxx",resultsBean.content);
                 }else{
-                    Toast.makeText(BaoZhangZhuFangActivity.this,"数据为空!",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(TongJiMessageActivity.this,"数据为空!",Toast.LENGTH_SHORT).show();
                 }
             }
 
             @Override
             public void onFailure(Call<Detail> call, Throwable t) {
-                Toast.makeText(BaoZhangZhuFangActivity.this,"请求失败!",Toast.LENGTH_SHORT).show();
+                Toast.makeText(TongJiMessageActivity.this,"请求失败!",Toast.LENGTH_SHORT).show();
                 Log.e("-------------",t.getMessage().toString());
             }
         });

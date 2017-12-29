@@ -29,7 +29,7 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class SafeProductActivity extends BaseActivity implements SwipeRefreshLayout.OnRefreshListener {
+public class GuiHuaJiHuaActivity extends BaseActivity implements SwipeRefreshLayout.OnRefreshListener {
 
     @BindView(R.id.tv_title)
     TextView tv_title;
@@ -52,7 +52,7 @@ public class SafeProductActivity extends BaseActivity implements SwipeRefreshLay
     @Override
     protected void initView() {
 
-        tv_title.setText("安全生产");
+        tv_title.setText("规划计划");
 
         //图文
         refreshLayout.setOnRefreshListener(this);
@@ -121,12 +121,12 @@ public class SafeProductActivity extends BaseActivity implements SwipeRefreshLay
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         Api api =retrofit.create(Api.class);
-        Call<Gongzuonianbao> call=api.getPersonThingInfoData("0001000200210008",pages);
+        Call<Gongzuonianbao> call=api.getPersonThingInfoData("0001000200070001",pages);
         call.enqueue(new Callback<Gongzuonianbao>() {
             @Override
             public void onResponse(Call<Gongzuonianbao> call, Response<Gongzuonianbao> response) {
                 if(response.body().getResults().size()==0){
-                    Toast.makeText(SafeProductActivity.this,"已经没有数据了!",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(GuiHuaJiHuaActivity.this,"已经没有数据了!",Toast.LENGTH_SHORT).show();
                 }else{
                     list.addAll(response.body().getResults());
                     Log.e("xxxxxx请求数据集合大小", String.valueOf(list.size()));
@@ -138,7 +138,7 @@ public class SafeProductActivity extends BaseActivity implements SwipeRefreshLay
 
             @Override
             public void onFailure(Call<Gongzuonianbao> call, Throwable t) {
-                Toast.makeText(SafeProductActivity.this,"请求失败!",Toast.LENGTH_SHORT).show();
+                Toast.makeText(GuiHuaJiHuaActivity.this,"请求失败!",Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -158,18 +158,18 @@ public class SafeProductActivity extends BaseActivity implements SwipeRefreshLay
                 if(response!=null){
                     Detail detail=response.body();
                     Detail.ResultsBean resultsBean=detail.getResults().get(0);
-                    Intent intent = new Intent(SafeProductActivity.this,DetailActivity.class);
+                    Intent intent = new Intent(GuiHuaJiHuaActivity.this,DetailActivity.class);
                     intent.putExtra(Config.NEWS,resultsBean);
                     startActivity(intent);
                     Log.e("xxxxxxx",resultsBean.content);
                 }else{
-                    Toast.makeText(SafeProductActivity.this,"数据为空!",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(GuiHuaJiHuaActivity.this,"数据为空!",Toast.LENGTH_SHORT).show();
                 }
             }
 
             @Override
             public void onFailure(Call<Detail> call, Throwable t) {
-                Toast.makeText(SafeProductActivity.this,"请求失败!",Toast.LENGTH_SHORT).show();
+                Toast.makeText(GuiHuaJiHuaActivity.this,"请求失败!",Toast.LENGTH_SHORT).show();
                 Log.e("-------------",t.getMessage().toString());
             }
         });
