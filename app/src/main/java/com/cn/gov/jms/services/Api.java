@@ -82,7 +82,7 @@ public interface Api {    //retrofit方式
     @GET("app/fuzzyQuery.do")
     Call<Gongzuonianbao> getPersonThingInfoData(@Query("id") String id, @Query("pages") int pages);
 
-    //http://192.168.0.130:8080/app/corGetzwgkData.do?id=000100020012&pages=1   民生工程  直属机构  热点回应
+    //http://192.168.0.130:8080/app/corGetzwgkData.do?id=000100020012&pages=1   民生工程  直属机构  热点回应   城乡建设000100020016
     @GET("app/corGetzwgkData.do")
     Call<Gongzuonianbao> getMinShengData(@Query("id") String id, @Query("pages") int pages);
 
@@ -197,7 +197,35 @@ public interface Api {    //retrofit方式
     @GET("app/corGetzfwjData.do")            //新的政府文件
     Call<Gongzuonianbao> getNewGovFileData(@Query("id") String id, @Query("pages") int pages);
 
-    //http://www.jms.gov.cn/app/app/singlezfwjById.do?id=id
+    //http://www.jms.gov.cn/app/singlezfwjById.do?id=id
     @GET("app/singlezfwjById.do")
     Call<Detail> getNewDetailData(@Query("id") int id);
+
+    //http://www.jms.gov.cn/app/getOpenInforMationList.do?id=10062&pages=1
+    @GET("app/getOpenInforMationList.do")            //政策解读 10062  预决算公开 yjs
+    Call<Gongzuonianbao> getZhengceJieduData(@Query("id") String id, @Query("pages") int pages);
+
+    //http://www.jms.gov.cn/app/zwPageById.do?id=id
+    @GET("app/zwPageById.do")
+    Call<Detail> getZhengceJieduDetailData(@Query("id") int id);
+
+
+    //http://www.jms.gov.cn/app/getZdlyList.do?id= &pages=1
+    //公共服务  教育卫生3001002000040001 社会救助3001002000040002 社会保障3001002000040003 卫生计生3001002000040004
+                //环境保护 300100200005  教育卫生 3001002000040001 食药安全 300100200006 价格收费 3001002000080002
+    @GET("app/getZdlyList.do")
+    Call<Gongzuonianbao> getPublicServiceData(@Query("id") String id, @Query("pages") int pages);
+
+    //http://www.jms.gov.cn/app/getAggregateInfo.do?id=0
+    @GET("app/getAggregateInfo.do")
+    Call<Detail> getPublicServiceDetailData(@Query("id") int id);
+
+
+    //http://www.jms.gov.cn/app/getPowerList.do?id=2&pages=1
+    @GET("app/getPowerList.do")            //保留权力清单 1  清理权力清单 2
+    Call<Gongzuonianbao> getQuanliListData(@Query("id") String id, @Query("pages") int pages);
+
+    //http://www.jms.gov.cn/app/getPowerInfo.do?id=0
+    @GET("app/getPowerInfo.do")
+    Call<Detail> getQuanliListDetailData(@Query("id") int id);
 }

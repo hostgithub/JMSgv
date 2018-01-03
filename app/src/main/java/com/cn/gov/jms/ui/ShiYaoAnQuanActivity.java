@@ -121,7 +121,8 @@ public class ShiYaoAnQuanActivity extends BaseActivity implements SwipeRefreshLa
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         Api api =retrofit.create(Api.class);
-        Call<Gongzuonianbao> call=api.getPersonThingInfoData("0001000200210006",pages);
+//        Call<Gongzuonianbao> call=api.getPersonThingInfoData("0001000200210006",pages);
+        Call<Gongzuonianbao> call=api.getPublicServiceData("300100200006",pages);
         call.enqueue(new Callback<Gongzuonianbao>() {
             @Override
             public void onResponse(Call<Gongzuonianbao> call, Response<Gongzuonianbao> response) {
@@ -151,7 +152,7 @@ public class ShiYaoAnQuanActivity extends BaseActivity implements SwipeRefreshLa
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         Api api =retrofit.create(Api.class);
-        Call<Detail> call=api.getDetailData(id);
+        Call<Detail> call=api.getPublicServiceDetailData(id);
         call.enqueue(new Callback<Detail>() {
             @Override
             public void onResponse(Call<Detail> call, Response<Detail> response) {

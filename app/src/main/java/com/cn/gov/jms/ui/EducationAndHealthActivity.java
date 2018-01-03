@@ -29,7 +29,7 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class GongyiJiuzhuActivity extends BaseActivity implements SwipeRefreshLayout.OnRefreshListener {
+public class EducationAndHealthActivity extends BaseActivity implements SwipeRefreshLayout.OnRefreshListener {
 
     @BindView(R.id.tv_title)
     TextView tv_title;
@@ -52,7 +52,7 @@ public class GongyiJiuzhuActivity extends BaseActivity implements SwipeRefreshLa
     @Override
     protected void initView() {
 
-        tv_title.setText("公益救助");
+        tv_title.setText("教育卫生");
 
         //图文
         refreshLayout.setOnRefreshListener(this);
@@ -121,12 +121,13 @@ public class GongyiJiuzhuActivity extends BaseActivity implements SwipeRefreshLa
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         Api api =retrofit.create(Api.class);
-        Call<Gongzuonianbao> call=api.getMinShengData("000100020015",pages);
+//        Call<Gongzuonianbao> call=api.getMinShengData("000100020015",pages);
+        Call<Gongzuonianbao> call=api.getPublicServiceData("3001002000040001",pages);
         call.enqueue(new Callback<Gongzuonianbao>() {
             @Override
             public void onResponse(Call<Gongzuonianbao> call, Response<Gongzuonianbao> response) {
                 if(response.body().getResults().size()==0){
-                    Toast.makeText(GongyiJiuzhuActivity.this,"已经没有数据了!",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(EducationAndHealthActivity.this,"已经没有数据了!",Toast.LENGTH_SHORT).show();
                 }else{
                     list.addAll(response.body().getResults());
                     Log.e("xxxxxx请求数据集合大小", String.valueOf(list.size()));
@@ -138,7 +139,7 @@ public class GongyiJiuzhuActivity extends BaseActivity implements SwipeRefreshLa
 
             @Override
             public void onFailure(Call<Gongzuonianbao> call, Throwable t) {
-                Toast.makeText(GongyiJiuzhuActivity.this,"请求失败!",Toast.LENGTH_SHORT).show();
+                Toast.makeText(EducationAndHealthActivity.this,"请求失败!",Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -151,25 +152,25 @@ public class GongyiJiuzhuActivity extends BaseActivity implements SwipeRefreshLa
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         Api api =retrofit.create(Api.class);
-        Call<Detail> call=api.getDetailData(id);
+        Call<Detail> call=api.getPublicServiceDetailData(id);
         call.enqueue(new Callback<Detail>() {
             @Override
             public void onResponse(Call<Detail> call, Response<Detail> response) {
                 if(response!=null){
                     Detail detail=response.body();
                     Detail.ResultsBean resultsBean=detail.getResults().get(0);
-                    Intent intent = new Intent(GongyiJiuzhuActivity.this,DetailActivity.class);
+                    Intent intent = new Intent(EducationAndHealthActivity.this,DetailActivity.class);
                     intent.putExtra(Config.NEWS,resultsBean);
                     startActivity(intent);
                     Log.e("xxxxxxx",resultsBean.content);
                 }else{
-                    Toast.makeText(GongyiJiuzhuActivity.this,"数据为空!",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(EducationAndHealthActivity.this,"数据为空!",Toast.LENGTH_SHORT).show();
                 }
             }
 
             @Override
             public void onFailure(Call<Detail> call, Throwable t) {
-                Toast.makeText(GongyiJiuzhuActivity.this,"请求失败!",Toast.LENGTH_SHORT).show();
+                Toast.makeText(EducationAndHealthActivity.this,"请求失败!",Toast.LENGTH_SHORT).show();
                 Log.e("-------------",t.getMessage().toString());
             }
         });

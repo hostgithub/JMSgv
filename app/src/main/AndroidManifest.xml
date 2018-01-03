@@ -186,11 +186,11 @@
             android:screenOrientation="portrait"
             android:theme="@style/activityAnimation" />
         <activity
-            android:name=".GongyiJiuzhuActivity"
+            android:name=".EducationAndHealthActivity"
             android:screenOrientation="portrait"
             android:theme="@style/activityAnimation" />
         <activity
-            android:name=".CityBuildActivity"
+            android:name=".PriceChargedActivity"
             android:screenOrientation="portrait"
             android:theme="@style/activityAnimation" />
         <activity
