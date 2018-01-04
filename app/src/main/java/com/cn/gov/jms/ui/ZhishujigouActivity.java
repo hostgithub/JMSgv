@@ -52,7 +52,7 @@ public class ZhishujigouActivity extends BaseActivity implements SwipeRefreshLay
     @Override
     protected void initView() {
 
-        tv_title.setText("直属机构");
+        tv_title.setText("组织机构");
 
         //图文
         refreshLayout.setOnRefreshListener(this);

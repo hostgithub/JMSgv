@@ -24,10 +24,11 @@ public class ZhengWuGongKaiActivity extends BaseActivity {
     private List<Map<String, Object>> data_list;
     private SimpleAdapter sim_adapter;
     // 图片封装为一个数组
-    private int[] icon = { R.drawable.icon_a01, R.drawable.icon_a02, R.drawable.icon_a03, R.drawable.icon_a04, R.drawable.icon_a05,
-            R.drawable.icon_a06, R.drawable.icon_a07, R.drawable.icon_a08,R.drawable.icon_a09,R.drawable.icon_a10,R.drawable.icon_a14,
-            R.drawable.icon_ghjh,R.drawable.icon_tjxx,
-            R.drawable.icon_a16,R.drawable.icon_a13, R.drawable.icon_education_and_health,R.drawable.icon_price_charged,R.drawable.icon_shichangjiandu};
+    private int[] icon = { R.drawable.icon_a07, R.drawable.icon_a02, R.drawable.icon_a03, R.drawable.icon_a04, R.drawable.icon_public_services,
+            R.drawable.icon_open_accounts_open, R.drawable.icon_a01, R.drawable.icon_organizations,R.drawable.icon_a09,
+            R.drawable.market_surveillance,R.drawable.icon_a14, R.drawable.icon_ghjh,R.drawable.icon_tjxx,
+            R.drawable.icon_a16,R.drawable.icon_a13, R.drawable.icon_education_and_health,R.drawable.icon_price_charged,
+            R.drawable.icon_power_list};
     private String[] iconName = { "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", ""};
 
     @Override
@@ -53,8 +54,8 @@ public class ZhengWuGongKaiActivity extends BaseActivity {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 switch (i){
-                    case 0://政府文件
-                        startActivity(new Intent(ZhengWuGongKaiActivity.this,GovFileActivity.class));
+                    case 0://领导之窗
+                        startActivity(new Intent(ZhengWuGongKaiActivity.this,LeaderOfWindowActivity.class));
                         break;
                     case 1://政策解读
                         startActivity(new Intent(ZhengWuGongKaiActivity.this,ZhengcejieduActivity.class));
@@ -63,25 +64,27 @@ public class ZhengWuGongKaiActivity extends BaseActivity {
                         startActivity(new Intent(ZhengWuGongKaiActivity.this,ReDianHuiYingActivity.class));
                         break;
                     case 3://人事信息
-                        startActivity(new Intent(ZhengWuGongKaiActivity.this,PeronThingInfoActivity.class));
+                        Intent intent3=new Intent(ZhengWuGongKaiActivity.this,PeronThingInfoActivity.class);
+                        intent3.putExtra("info_id","000100020004");
+                        startActivity(intent3);
                         break;
-                    case 4://民生工程
-                        startActivity(new Intent(ZhengWuGongKaiActivity.this,MinShengProjectActivity.class));
+                    case 4://公共服务
+                        startActivity(new Intent(ZhengWuGongKaiActivity.this,PublicServicesListActivity.class));
                         break;
-                    case 5://法规公文
-                        startActivity(new Intent(ZhengWuGongKaiActivity.this,LawGuiwenActivity.class));
+                    case 5:// 法规公文 //预决算公开
+                        startActivity(new Intent(ZhengWuGongKaiActivity.this,OpenAccountsOpenActivity.class));
                         break;
-                    case 6://领导之窗
-                        startActivity(new Intent(ZhengWuGongKaiActivity.this,LeaderOfWindowActivity.class));
+                    case 6://政府文件
+                        startActivity(new Intent(ZhengWuGongKaiActivity.this,GovFileActivity.class));
                         break;
-                    case 7://直属机构
+                    case 7://组织机构
                         startActivity(new Intent(ZhengWuGongKaiActivity.this,ZhishujigouActivity.class));
                         break;
                     case 8://政府报告
                         startActivity(new Intent(ZhengWuGongKaiActivity.this,GovReportActivity.class));
                         break;
-                    case 9://领导讲话
-                        startActivity(new Intent(ZhengWuGongKaiActivity.this,LeaderSpeakingActivity.class));
+                    case 9://市场监管
+                        startActivity(new Intent(ZhengWuGongKaiActivity.this,JianduCheckActivity.class));
                         break;
                     case 10://环境保护
                         startActivity(new Intent(ZhengWuGongKaiActivity.this,EnviromentProtectActivity.class));
@@ -105,9 +108,14 @@ public class ZhengWuGongKaiActivity extends BaseActivity {
                     case 16://价格收费
                         startActivity(new Intent(ZhengWuGongKaiActivity.this,PriceChargedActivity.class));
                         break;
-                    case 17://监督检查
-                        startActivity(new Intent(ZhengWuGongKaiActivity.this,JianduCheckActivity.class));
+                    case 17://权力清单
+                        startActivity(new Intent(ZhengWuGongKaiActivity.this,PowerListActivity.class));
                         break;
+//                    case 18://专题信息
+//                        Intent intent=new Intent(ZhengWuGongKaiActivity.this,PeronThingInfoActivity.class);
+//                        intent.putExtra("info_id","000100020013");
+//                        startActivity(intent);
+//                        break;
                     default:
                         break;
                 }

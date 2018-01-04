@@ -29,11 +29,12 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class PeronThingInfoActivity extends BaseActivity implements SwipeRefreshLayout.OnRefreshListener {
+public class PowerListActivity extends BaseActivity implements SwipeRefreshLayout.OnRefreshListener {
 
     @BindView(R.id.tv_title)
     TextView tv_title;
-
+    @BindView(R.id.tv_clean)
+    TextView tv_clean;
     //照片墙
     @BindView(R.id.refreshLayout)
     SwipeRefreshLayout refreshLayout;
@@ -43,34 +44,27 @@ public class PeronThingInfoActivity extends BaseActivity implements SwipeRefresh
     private GovInfoAdapter picAdapter;
     private LinearLayoutManager linearLayoutManager;
     private int pages=1;
-    private String id;
 
     @Override
     protected int getLayoutId() {
-        return R.layout.activity_list_zwgk;
+        return R.layout.activity_power_list;
     }
 
     @Override
     protected void initView() {
 
+        tv_title.setText("保留权力清单");
+
+        tv_clean.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(PowerListActivity.this,CleanPowerListActivity.class));
+            }
+        });
+
         //图文
         refreshLayout.setOnRefreshListener(this);
         list=new ArrayList();
-
-        Intent intent=getIntent();
-        if(intent!=null){
-            id=intent.getStringExtra("info_id");
-            switch (id){
-                case "000100020004":
-                    tv_title.setText("人事信息");
-                    break;
-                case "000100020013":
-                    tv_title.setText("专题信息");
-                    break;
-                default:
-                    break;
-            }
-        }
         initNewsData(1);
         linearLayoutManager=new LinearLayoutManager(this);
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
@@ -135,12 +129,13 @@ public class PeronThingInfoActivity extends BaseActivity implements SwipeRefresh
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         Api api =retrofit.create(Api.class);
-        Call<Gongzuonianbao> call=api.getPersonThingInfoData(id,pages);
+//        Call<Gongzuonianbao> call=api.getMinShengData("000100050006",pages);
+        Call<Gongzuonianbao> call=api.getQuanliListData("1",pages);
         call.enqueue(new Callback<Gongzuonianbao>() {
             @Override
             public void onResponse(Call<Gongzuonianbao> call, Response<Gongzuonianbao> response) {
                 if(response.body().getResults().size()==0){
-                    Toast.makeText(PeronThingInfoActivity.this,"已经没有数据了!",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(PowerListActivity.this,"已经没有数据了!",Toast.LENGTH_SHORT).show();
                 }else{
                     list.addAll(response.body().getResults());
                     Log.e("xxxxxx请求数据集合大小", String.valueOf(list.size()));
@@ -152,7 +147,7 @@ public class PeronThingInfoActivity extends BaseActivity implements SwipeRefresh
 
             @Override
             public void onFailure(Call<Gongzuonianbao> call, Throwable t) {
-                Toast.makeText(PeronThingInfoActivity.this,"请求失败!",Toast.LENGTH_SHORT).show();
+                Toast.makeText(PowerListActivity.this,"请求失败!",Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -165,25 +160,25 @@ public class PeronThingInfoActivity extends BaseActivity implements SwipeRefresh
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         Api api =retrofit.create(Api.class);
-        Call<Detail> call=api.getDetailData(id);
+        Call<Detail> call=api.getQuanliListDetailData(id);
         call.enqueue(new Callback<Detail>() {
             @Override
             public void onResponse(Call<Detail> call, Response<Detail> response) {
                 if(response!=null){
                     Detail detail=response.body();
                     Detail.ResultsBean resultsBean=detail.getResults().get(0);
-                    Intent intent = new Intent(PeronThingInfoActivity.this,DetailActivity.class);
+                    Intent intent = new Intent(PowerListActivity.this,DetailActivity.class);
                     intent.putExtra(Config.NEWS,resultsBean);
                     startActivity(intent);
                     Log.e("xxxxxxx",resultsBean.content);
                 }else{
-                    Toast.makeText(PeronThingInfoActivity.this,"数据为空!",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(PowerListActivity.this,"数据为空!",Toast.LENGTH_SHORT).show();
                 }
             }
 
             @Override
             public void onFailure(Call<Detail> call, Throwable t) {
-                Toast.makeText(PeronThingInfoActivity.this,"请求失败!",Toast.LENGTH_SHORT).show();
+                Toast.makeText(PowerListActivity.this,"请求失败!",Toast.LENGTH_SHORT).show();
                 Log.e("-------------",t.getMessage().toString());
             }
         });

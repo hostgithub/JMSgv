@@ -134,7 +134,7 @@
             android:screenOrientation="portrait"
             android:theme="@style/activityAnimation" />
         <activity
-            android:name=".MinShengProjectActivity"
+            android:name=".PublicServicesActivity"
             android:screenOrientation="portrait"
             android:theme="@style/activityAnimation" />
         <activity
@@ -142,7 +142,7 @@
             android:screenOrientation="portrait"
             android:theme="@style/activityAnimation" />
         <activity
-            android:name=".LawGuiwenActivity"
+            android:name=".OpenAccountsOpenActivity"
             android:screenOrientation="portrait"
             android:theme="@style/activityAnimation" />
         <activity
@@ -154,7 +154,7 @@
             android:screenOrientation="portrait"
             android:theme="@style/activityAnimation" />
         <activity
-            android:name=".LeaderSpeakingActivity"
+            android:name=".PowerListActivity"
             android:screenOrientation="portrait"
             android:theme="@style/activityAnimation" />
         <activity
@@ -323,6 +323,10 @@
         <activity android:name=".WebViewDetailActivity"  android:screenOrientation="portrait"
             android:theme="@style/activityAnimation" ></activity>
         <activity android:name=".GovBuyActivity"  android:screenOrientation="portrait"
+            android:theme="@style/activityAnimation" ></activity>
+        <activity android:name=".CleanPowerListActivity"  android:screenOrientation="portrait"
+            android:theme="@style/activityAnimation" ></activity>
+        <activity android:name=".PublicServicesListActivity"  android:screenOrientation="portrait"
             android:theme="@style/activityAnimation" ></activity>
     </application>
 
