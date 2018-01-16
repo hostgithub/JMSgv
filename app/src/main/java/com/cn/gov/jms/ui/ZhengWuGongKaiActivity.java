@@ -112,7 +112,7 @@ public class ZhengWuGongKaiActivity extends BaseActivity {
                         startActivity(new Intent(ZhengWuGongKaiActivity.this,PowerListActivity.class));
                         break;
 //                    case 18://专题信息
-//                        Intent intent=new Intent(ZhengWuGongKaiActivity.this,PeronThingInfoActivity.class);
+//                        Intent intent=new Intent(ZhengWuGongKaiActivity.this,ProjectInfoActivity.class);
 //                        intent.putExtra("info_id","000100020013");
 //                        startActivity(intent);
 //                        break;

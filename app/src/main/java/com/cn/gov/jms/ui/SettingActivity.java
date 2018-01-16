@@ -7,16 +7,23 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.cn.gov.jms.App;
 import com.cn.gov.jms.base.BaseActivity;
+import com.cn.gov.jms.model.ApplicationEntity;
+import com.cn.gov.jms.presenter.MainContract;
+import com.cn.gov.jms.presenter.MainPresenter;
+import com.cn.gov.jms.utils.AppInfoUtil;
 import com.cn.gov.jms.utils.DataCleanManagerUtils;
 import com.cn.gov.jms.utils.FileUtil;
+import com.cn.gov.jms.utils.LogUtil;
+import com.cn.gov.jms.utils.UpdateDialog;
 
 import java.io.File;
 
 import butterknife.BindView;
 import butterknife.OnClick;
 
-public class SettingActivity extends BaseActivity {
+public class SettingActivity extends BaseActivity implements MainContract.View{
 
     @BindView(R.id.iv_back)
     ImageView imageView;
@@ -29,6 +36,8 @@ public class SettingActivity extends BaseActivity {
     @BindView(R.id.tv_size)
     TextView tv_size;
 
+    private MainContract.Presenter mPresenter;
+
     @Override
     protected int getLayoutId() {
         return R.layout.activity_setting;
@@ -36,6 +45,8 @@ public class SettingActivity extends BaseActivity {
 
     @Override
     protected void initView() {
+
+        mPresenter = new MainPresenter(this);
         try {
             tv_size.setText(DataCleanManagerUtils.getTotalCacheSize(this));
         } catch (Exception e) {
@@ -68,7 +79,8 @@ public class SettingActivity extends BaseActivity {
                }
                break;
            case R.id.update:
-               Toast.makeText(this,"已经是最新版本!", Toast.LENGTH_SHORT).show();
+               mPresenter.checkUpdate("http://www.jms.gov.cn/app/update.json");
+               //Toast.makeText(this,"已经是最新版本!", Toast.LENGTH_SHORT).show();
                break;
        }
     }
@@ -91,6 +103,50 @@ public class SettingActivity extends BaseActivity {
             file.delete();
         } else {
             //
+        }
+    }
+
+    @Override
+    public void showLoading() {
+        startProgressDialog();
+    }
+
+    @Override
+    public void stopLoading() {
+        stopProgressDialog();
+    }
+
+    @Override
+    public void showErrorTip(String msg) {
+        showErrorHint(msg);
+    }
+
+    @Override
+    public void retureResult(String result) {
+        showToast(result);
+    }
+
+    @Override
+    public void retureUpdateResult(final ApplicationEntity entity) {
+        try {
+            if (AppInfoUtil.getVersionCode(App.application) < Integer.parseInt(entity.getVersion())) {
+                String content = String.format("最新版本：%1$s\napp名字：%2$s\n\n更新内容\n%3$s", entity.getVersionShort(), entity.getName(), entity.getChangelog());
+                UpdateDialog.show(SettingActivity.this, content, new UpdateDialog.OnUpdate() {
+                    @Override
+                    public void cancel() {
+
+                    }
+
+                    @Override
+                    public void ok() {
+                        mPresenter.update(entity);
+                    }
+                });
+            }else {
+                Toast.makeText(this,"已经是最新版本!", Toast.LENGTH_SHORT).show();
+            }
+        } catch (Exception e) {
+            LogUtil.d("数字转化出错");
         }
     }
 }

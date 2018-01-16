@@ -119,6 +119,12 @@ public class HomePageActivity extends BaseHomeActivity implements MainContract.V
         mPresenter.checkUpdate("http://www.jms.gov.cn/app/update.json");
     }
 
+    @Override
+    protected void onResume() {
+        mPresenter.checkUpdate("http://www.jms.gov.cn/app/update.json");
+        super.onResume();
+    }
+
     private void initBottom()
     {
 

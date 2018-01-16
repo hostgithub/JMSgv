@@ -4,8 +4,10 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.net.http.SslError;
+import android.os.Build;
 import android.text.Html;
 import android.view.KeyEvent;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.JsResult;
@@ -62,6 +64,15 @@ public class WebViewDetailActivity extends BaseActivity {
 //        webSettings.setBuiltInZoomControls(true); //设置内置的缩放控件。若为false，则该WebView不可缩放
 //        webSettings.setDisplayZoomControls(false); //隐藏原生的缩放控件
 
+        /**
+         *  Webview在安卓5.0之前默认允许其加载混合网络协议内容
+         *  在安卓5.0之后，默认不允许加载http与https混合内容，需要设置webview允许其加载混合网络协议内容
+         */
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            webView.getSettings().setMixedContentMode(WebSettings.MIXED_CONTENT_ALWAYS_ALLOW);
+
+        }
+
         webSettings.setJavaScriptEnabled(true);//支持js
         webSettings.setJavaScriptCanOpenWindowsAutomatically(true);//允许js弹出alert
         webView.requestFocusFromTouch();//支持获取手势焦点，输入用户名、密码或其他
@@ -91,7 +102,17 @@ public class WebViewDetailActivity extends BaseActivity {
             //处理https请求
             @Override
             public void onReceivedSslError(WebView view, SslErrorHandler handler, SslError error) {
-                handler.proceed();//等待证书响应
+                //handler.proceed();//等待证书响应
+                if(error.getPrimaryError() ==  SslError.SSL_DATE_INVALID
+                        || error.getPrimaryError() == SslError.SSL_EXPIRED
+                        || error.getPrimaryError() == SslError.SSL_INVALID
+                        || error.getPrimaryError() == SslError.SSL_UNTRUSTED) {
+
+                    handler.proceed();
+
+                }else{
+                    handler.cancel();
+                }
             }
 
             @Override
@@ -144,6 +165,18 @@ public class WebViewDetailActivity extends BaseActivity {
             public boolean onJsAlert(WebView view, String url, String message, JsResult result) {
                 Toast.makeText(WebViewDetailActivity.this, message, Toast.LENGTH_LONG).show();
                 return true;
+            }
+        });
+
+        webView.setOnTouchListener(new View.OnTouchListener() {
+
+            @Override
+            public boolean onTouch(View v, MotionEvent ev) {
+
+                ((WebView)v).requestDisallowInterceptTouchEvent(true);
+
+
+                return false;
             }
         });
 
