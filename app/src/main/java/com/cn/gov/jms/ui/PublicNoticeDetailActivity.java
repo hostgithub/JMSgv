@@ -48,12 +48,16 @@ public class PublicNoticeDetailActivity extends BaseActivity
 //如果访问的页面中要与Javascript交互，则webview必须设置支持Javascript
         webSettings.setJavaScriptEnabled(true);
 
+//        int fontSize = (int) getResources().getDimension(R.dimen.y28);
+//        Log.i("------------", "initView: fontSize = " + fontSize);
+//        webSettings.setDefaultFontSize(fontSize);
+
 //支持插件
         //webSettings.setPluginsEnabled(true);
 
 //设置自适应屏幕，两者合用
-        //webSettings.setUseWideViewPort(true); //将图片调整到适合webview的大小
-        //webSettings.setLoadWithOverviewMode(true); // 缩放至屏幕的大小
+        webSettings.setUseWideViewPort(true); //将图片调整到适合webview的大小
+        webSettings.setLoadWithOverviewMode(true); // 缩放至屏幕的大小
 
 //缩放操作
         webSettings.setSupportZoom(true); //支持缩放，默认为true。是下面那个的前提。

@@ -108,6 +108,9 @@ public class LeaderOfWindowListActivity extends BaseActivity {
                     leaderOfWindowAdapter.setOnItemClickLitener(new LeaderOfWindowAdapter.OnItemClickListener() {
                         @Override
                         public void onItemClick(int position) {
+//                            if(getIntent().getStringExtra(Config.NEWS)=="0001000200010001"&&position==1){
+//                                startActivity(new Intent(LeaderOfWindowListActivity.this,JsoupShiZhangActivity.class));
+//                            }
                             getData(Integer.parseInt(list.get(position).id));
                         }
                     });

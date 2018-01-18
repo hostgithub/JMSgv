@@ -13,7 +13,7 @@
             android:layout_width="50dp" android:src="@drawable/back"
             android:layout_height="wrap_content" android:layout_marginLeft="10dp"/>
         <TextView android:layout_centerInParent="true"
-            android:layout_width="wrap_content" android:text="市长之窗"
+            android:layout_width="wrap_content" android:text=""
             android:layout_height="wrap_content" android:id="@+id/action_bar_title"
             android:textColor="@color/colorWhite" android:layout_marginTop="20dp"
             android:textSize="20sp" android:layout_marginLeft="5dp"/>

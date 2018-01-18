@@ -10,6 +10,7 @@ public class Config
     //http://v.juhe.cn/toutiao/index?type=top&key=988e51c45bbe88a33e032f8da38a61dd
     public static final String NEWS = "news";
     public static final String LIST_ID = "list_id";
+    public static final String PREFERENCE_DEFAULT_NAME = "preference_default_name";
 
     public static final String RESULT_BEAN = "result_bean";
     public static final String LIST_HOST = "list_host";

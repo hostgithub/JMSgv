@@ -228,4 +228,9 @@ public interface Api {    //retrofit方式
     //http://www.jms.gov.cn/app/getPowerInfo.do?id=0
     @GET("app/getPowerInfo.do")
     Call<Detail> getQuanliListDetailData(@Query("id") int id);
+
+    //http://www.jms.gov.cn/app/mayorSecretary.do?id=175 177 书记 市长 保留接口
+    @GET("app/mayorSecretary.do")
+    Call<Detail> getZhuanYeData(@Query("id") int id);
+
 }

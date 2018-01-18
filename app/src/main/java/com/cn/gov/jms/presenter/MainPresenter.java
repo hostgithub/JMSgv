@@ -43,6 +43,7 @@ public class MainPresenter implements MainContract.Presenter {
 
     @Override
     public void update(ApplicationEntity entity) {
-        DownloadUtil.downloadApk(App.application, entity.getInstall_url(), entity.getName(), entity.getChangelog(), "app-release-jms.gov.apk");
+       // DownloadUtil.downloadApk(App.application, entity.getInstall_url(), entity.getName(), entity.getChangelog(), "app-release-jms.gov.apk");
+        DownloadUtil.downLoadAPK(App.application, entity.getInstall_url());
     }
 }

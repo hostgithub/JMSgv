@@ -330,6 +330,14 @@
             android:theme="@style/activityAnimation" ></activity>
         <activity android:name=".ProjectInfoActivity"  android:screenOrientation="portrait"
             android:theme="@style/activityAnimation" ></activity>
+
+
+        <receiver android:name="com.cn.gov.jms.services.UpdataBroadcastReceiver">
+            <intent-filter>
+                <action android:name="android.intent.action.DOWNLOAD_COMPLETE" />
+                <!--<action android:name="android.intent.action.PACKAGE_INSTALL" />-->
+            </intent-filter>
+        </receiver>
     </application>
 
 </manifest>
