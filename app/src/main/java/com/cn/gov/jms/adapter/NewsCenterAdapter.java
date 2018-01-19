@@ -80,7 +80,7 @@ public class NewsCenterAdapter extends RecyclerView.Adapter<BaseViewHolder> {
             ImageLoaderUtils.loadingImg(mContext, (ImageView) holder.getView(R.id.cover), Config.BANNER_BASE_URL+item.picName);
 
             //CircleImageView avatar = holder.getView(R.id.avatar);
-            if(item.text.startsWith(";")){
+            if(item.text.contains(";")){//返回的json中含有分号 一开始用的是startWith方法 结果有两个分号 只能去掉一个
                 String str=item.text.replace(';', ' ');
                 holder.setText(R.id.title, str);
             }else{

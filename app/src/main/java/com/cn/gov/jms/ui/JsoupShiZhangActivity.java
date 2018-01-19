@@ -58,7 +58,6 @@ public class JsoupShiZhangActivity extends BaseActivity {
 
     @Override
     protected void initView() {
-        tv_title.setVisibility(View.GONE);
         image.setVisibility(View.GONE);
 
         WebSettings webSettings = webView .getSettings();
@@ -194,7 +193,7 @@ public class JsoupShiZhangActivity extends BaseActivity {
                     Log.e("xxxxxxx",resultsBean.content);
                     webView.loadDataWithBaseURL(Config.BANNER_BASE_URL, resultsBean.content, "text/html", "utf-8", null);
                     action_bar_title.setText(Html.fromHtml(resultsBean.title));
-
+                    tv_title.setText(resultsBean.title+"同志简历");
                 }else{
                     Toast.makeText(JsoupShiZhangActivity.this,"数据为空!",Toast.LENGTH_SHORT).show();
                 }

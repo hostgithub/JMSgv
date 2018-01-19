@@ -109,13 +109,17 @@ public class XinWenCenterActivity extends BaseActivity {
                         break;
                     case 8:
                         Toast.makeText(XinWenCenterActivity.this,new_title.get(position),Toast.LENGTH_SHORT).show();
-                        Intent intent7=new Intent(XinWenCenterActivity.this, LocalNewsActivity.class);
+//                        Intent intent7=new Intent(XinWenCenterActivity.this, LocalNewsActivity.class);
+                        Intent intent7 =new Intent(XinWenCenterActivity.this, JmsDayReportActivity.class);
                         intent7.putExtra("position","7");
                         startActivity(intent7);
                         break;
                     case 9:
                         Toast.makeText(XinWenCenterActivity.this,new_title.get(position),Toast.LENGTH_SHORT).show();
-                        startActivity(new Intent(XinWenCenterActivity.this, JmsDayReportActivity.class));
+                        Intent intent8 =new Intent(XinWenCenterActivity.this, JmsDayReportActivity.class);
+                        intent8.putExtra("position","8");
+                        startActivity(intent8);
+//                        startActivity(new Intent(XinWenCenterActivity.this, JmsDayReportActivity.class));
                         break;
                     default:
                         break;

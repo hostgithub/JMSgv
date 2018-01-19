@@ -192,6 +192,7 @@ public class JsoupShujiActivity extends BaseActivity {
                     Log.e("xxxxxxx",resultsBean.content);
                     webView.loadDataWithBaseURL(Config.BANNER_BASE_URL, resultsBean.content, "text/html", "utf-8", null);
                     action_bar_title.setText(Html.fromHtml(resultsBean.title));
+//                    tv_title.setText(resultsBean.title+"同志简历");
 
                 }else{
                     Toast.makeText(JsoupShujiActivity.this,"数据为空!",Toast.LENGTH_SHORT).show();

@@ -1,5 +1,6 @@
 package com.cn.gov.jms.ui;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.view.KeyEvent;
 import android.view.View;
@@ -28,6 +29,7 @@ public class JmsDayReportActivity extends BaseActivity {
     TextView loading;
     @BindView(R.id.action_bar_title)
     TextView action_bar_title;
+    private String position;
 
     @Override
     protected int getLayoutId() {
@@ -36,6 +38,9 @@ public class JmsDayReportActivity extends BaseActivity {
 
     @Override
     protected void initView() {
+
+        Intent intent=getIntent();
+        position=intent.getStringExtra("position");
 
         mWebSettings = mWebview.getSettings();
 //设置支持js 可以加载出网站的轮播图 可能也不完全好使 此页面没好使
@@ -60,7 +65,18 @@ public class JmsDayReportActivity extends BaseActivity {
         mWebSettings.setDefaultTextEncodingName("utf-8");//设置编码格式
 
 //        mWebview.loadUrl("http://www.baidu.com/");
-        mWebview.loadUrl("http://jiamusi.dbw.cn/");
+        switch (position){
+            case "7":
+                mWebview.loadUrl("http://www.jmstv.cc/");
+                break;
+
+            case "8":
+                mWebview.loadUrl("http://jiamusi.dbw.cn/");
+                break;
+            default:
+                break;
+        }
+
 
         //设置不用系统浏览器打开,直接显示在当前Webview
         mWebview.setWebViewClient(new WebViewClient() {
